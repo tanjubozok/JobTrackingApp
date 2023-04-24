@@ -20,7 +20,7 @@ public class WorkingConfiguration : IEntityTypeConfiguration<Working>
             .HasMaxLength(500);
 
         builder.Property(x => x.Description)
-            .HasColumnType("ntext");
+            .HasColumnType("text");
 
         builder.HasMany(x => x.Reportings)
             .WithOne(x => x.Working)

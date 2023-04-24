@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
 using FluentValidation;
+using JobTracking.Common.Abstract;
+using JobTracking.Common.ComplextTypes;
+using JobTracking.Common.ResponseObjects;
 using JobTracking.Dtos.CategoryDtos;
 using JobTracking.Entities.Models;
 using JobTracking.Repositories.Abstract;
@@ -23,38 +26,87 @@ public class CategoryManager : ICategoryService
         _categoryUpdateDtoValidator = categoryUpdateDtoValidator;
     }
 
-    public Task<CategoryCreateDto> CreateAsync(CategoryCreateDto dto)
+    public async Task<IResponse<CategoryCreateDto>> CreateAsync(CategoryCreateDto dto)
+    {
+        var validationResult = _categoryCreateDtoValidator.Validate(dto);
+        if (validationResult.IsValid)
+        {
+            var category = _mapper.Map<Category>(dto);
+            await _categoryRepository.CreateAsync(category);
+
+            return new Response<CategoryCreateDto>(ResponseType.Success, dto);
+        }
+        return new Response<CategoryCreateDto>(ResponseType.ValidationError, validationResult.CustomValidationErrors());
+    }
+
+    public async Task<IResponse<List<CategoryListDto>>> GetAllAsync()
+    {
+        var categories = await _categoryRepository.GetAllAsync(x => x.IsActive & !x.IsDeleted);
+        var categoryDto = _mapper.Map<List<CategoryListDto>>(categories);
+
+        return new Response<List<CategoryListDto>>(ResponseType.Success, categoryDto);
+    }
+
+    public async Task<IResponse<CategoryUpdateDto>> GetByIdAsync(int id)
+    {
+        var category = await _categoryRepository.GetByIdAsync(id);
+        if (category is null)
+            return new Response<CategoryUpdateDto>(ResponseType.NotFound, "Kategori bulunamadı");
+
+        if (category.IsActive && !category.IsDeleted)
+        {
+            var categoryDto = _mapper.Map<CategoryUpdateDto>(category);
+
+            return new Response<CategoryUpdateDto>(ResponseType.Success, categoryDto);
+        }
+
+        return new Response<CategoryUpdateDto>(ResponseType.NotFound, "Kategori bulunamadı");
+    }
+
+    public async Task<IResponse<CategoryUpdateDto>> GetByIdPassiveAsync(int id)
+    {
+        var category = await _categoryRepository.GetByIdAsync(id);
+        if (category is null)
+            return new Response<CategoryUpdateDto>(ResponseType.NotFound, "Kategori bulunamadı");
+
+        if (!category.IsActive && !category.IsDeleted)
+        {
+            var categoryDto = _mapper.Map<CategoryUpdateDto>(category);
+
+            return new Response<CategoryUpdateDto>(ResponseType.Success, categoryDto);
+        }
+
+        return new Response<CategoryUpdateDto>(ResponseType.NotFound, "Kategori bulunamadı");
+    }
+
+    public async Task<IResponse<List<CategoryListDto>>> GetNotActiveAllList()
+    {
+        var categories = await _categoryRepository.GetAllAsync(x => !x.IsActive & !x.IsDeleted);
+        var categoryDto = _mapper.Map<List<CategoryListDto>>(categories);
+        return new Response<List<CategoryListDto>>(ResponseType.Success, categoryDto);
+    }
+
+    public Task<IResponse> RemoveAsync(int id)
     {
         throw new NotImplementedException();
     }
 
-    public Task<List<CategoryListDto>> GetAllAsync()
+    public async Task<IResponse<CategoryUpdateDto>> UpdateAsync(CategoryUpdateDto dto)
     {
-        throw new NotImplementedException();
-    }
+        var validResult = _categoryUpdateDtoValidator.Validate(dto);
+        if (validResult.IsValid)
+        {
+            var updatedEntity = await _categoryRepository.GetByIdAsync(dto.Id);
+            if (updatedEntity is not null)
+            {
+                var category = _mapper.Map<Category>(dto);
+                category.ModifiedDate = DateTime.UtcNow;
+                await _categoryRepository.Update(category, updatedEntity);
 
-    public Task<CategoryUpdateDto> GetByIdAsync(int id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<CategoryUpdateDto> GetByIdPassiveAsync(int id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<List<CategoryListDto>> GetNotActiveAllList()
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task RemoveAsync(int id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<CategoryUpdateDto> UpdateAsync(CategoryUpdateDto dto)
-    {
-        throw new NotImplementedException();
+                return new Response<CategoryUpdateDto>(ResponseType.Success, dto);
+            }
+            return new Response<CategoryUpdateDto>(ResponseType.NotFound, "Kategori bulunamdı");
+        }
+        return new Response<CategoryUpdateDto>(ResponseType.ValidationError, validResult.CustomValidationErrors());
     }
 }

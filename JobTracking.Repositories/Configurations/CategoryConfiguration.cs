@@ -20,7 +20,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
             .HasMaxLength(200);
 
         builder.Property(x => x.Description)
-            .HasColumnType("ntext");
+            .HasColumnType("text");
 
         builder.HasMany(x => x.Workings)
             .WithOne(x => x.Category)

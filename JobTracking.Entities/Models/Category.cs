@@ -9,7 +9,7 @@ public class Category : IBaseEntity
     public string? Description { get; set; }
     public bool IsActive { get; set; }
     public bool IsDeleted { get; set; } = false;
-    public DateTime CreatedDate { get; set; } = DateTime.Now;
+    public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
     public DateTime ModifiedDate { get; set; }
 
     public List<Working>? Workings { get; set; }

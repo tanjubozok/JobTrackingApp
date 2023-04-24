@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JobTracking.Servives", "Job
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JobTracking.WebUI", "JobTracking.WebUI\JobTracking.WebUI.csproj", "{833825BF-EB3D-45AB-9BD7-FEFFBBBFB51F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobTracking.Common", "JobTracking.Common\JobTracking.Common.csproj", "{12A5F66C-4B4A-4A8E-9DBB-A6EDB6612334}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JobTracking.Common", "JobTracking.Common\JobTracking.Common.csproj", "{12A5F66C-4B4A-4A8E-9DBB-A6EDB6612334}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

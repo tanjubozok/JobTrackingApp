@@ -1,0 +1,70 @@
+﻿@model List<CategoryListDto>
+@{
+    TempData["Title"] = "Kategoriler";
+    int counter = 0;
+}
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4">
+        <span class="text-muted fw-light">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index">
+                Dashboard /
+            </a>
+        </span>
+        Kategoriler
+    </h4>
+
+    <div class="card">
+        <div class="card-header">
+            <a asp-area="Admin" asp-controller="Category" asp-action="Create" class="btn btn-primary">
+                <i class="bx bx-plus"></i>
+                Kategori Ekle
+            </a>
+        </div>
+        <div class="table-responsive text-nowrap">
+            <table class="table table-hover table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th class="col-1 text-center">Id</th>
+                        <th>Tanım</th>
+                        <th class="col-1 text-center">Aktif</th>
+                        <th class="col-1 text-center">Oluşturma Tarihi</th>
+                        <th class="col-2 text-center">İşlem</th>
+                    </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                    @foreach (var item in Model)
+                    {
+                        counter++;
+                        <tr>
+                            <td class="text-center">@counter</td>
+                            <td>@item.Definition</td>
+                            <td class="text-center">
+                                @{
+                                    if (@item.IsActive)
+                                    {
+                                        <span class="badge bg-label-primary">Aktif</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-label-danger">Pasif</span>
+                                    }
+                                }
+                            </td>
+                            <td class="text-center">@item.CreatedDate.ToString("dd.MM.yyyy HH:mm")</td>
+                            <td class="text-center">
+                                <a asp-area="Admin" asp-controller="Category" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">
+                                    <i class="bx bx-edit-alt"></i>
+                                    Düzenle
+                                </a>
+                                <a asp-area="Admin" asp-controller="Category" asp-action="Remove" asp-route-id="@item.Id" class="btn btn-danger">
+                                    <i class="bx bx-trash"></i>
+                                    Sil
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -20,6 +20,6 @@ public class ReportingConfiguration : IEntityTypeConfiguration<Reporting>
             .HasMaxLength(200);
 
         builder.Property(x => x.Detail)
-            .HasColumnType("ntext");
+            .HasColumnType("text");
     }
 }
