@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobTracking.Entities", "JobTracking.Entities\JobTracking.Entities.csproj", "{8EB6478C-497C-4F0B-8370-6940333B35C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JobTracking.Entities", "JobTracking.Entities\JobTracking.Entities.csproj", "{8EB6478C-497C-4F0B-8370-6940333B35C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobTracking.Dtos", "JobTracking.Dtos\JobTracking.Dtos.csproj", "{73A55D8F-206F-42AA-8F05-43080181C712}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JobTracking.Dtos", "JobTracking.Dtos\JobTracking.Dtos.csproj", "{73A55D8F-206F-42AA-8F05-43080181C712}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobTracking.Repositories", "JobTracking.Repositories\JobTracking.Repositories.csproj", "{90FC88E9-CB6F-485F-AE34-3CAFFA4C3975}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JobTracking.Repositories", "JobTracking.Repositories\JobTracking.Repositories.csproj", "{90FC88E9-CB6F-485F-AE34-3CAFFA4C3975}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobTracking.Servives", "JobTracking.Servives\JobTracking.Servives.csproj", "{2C06786B-FB8E-4A40-8475-B6FE05A00792}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JobTracking.Servives", "JobTracking.Servives\JobTracking.Servives.csproj", "{2C06786B-FB8E-4A40-8475-B6FE05A00792}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobTracking.WebUI", "JobTracking.WebUI\JobTracking.WebUI.csproj", "{833825BF-EB3D-45AB-9BD7-FEFFBBBFB51F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JobTracking.WebUI", "JobTracking.WebUI\JobTracking.WebUI.csproj", "{833825BF-EB3D-45AB-9BD7-FEFFBBBFB51F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobTracking.Common", "JobTracking.Common\JobTracking.Common.csproj", "{12A5F66C-4B4A-4A8E-9DBB-A6EDB6612334}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{833825BF-EB3D-45AB-9BD7-FEFFBBBFB51F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{833825BF-EB3D-45AB-9BD7-FEFFBBBFB51F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{833825BF-EB3D-45AB-9BD7-FEFFBBBFB51F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12A5F66C-4B4A-4A8E-9DBB-A6EDB6612334}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12A5F66C-4B4A-4A8E-9DBB-A6EDB6612334}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12A5F66C-4B4A-4A8E-9DBB-A6EDB6612334}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12A5F66C-4B4A-4A8E-9DBB-A6EDB6612334}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

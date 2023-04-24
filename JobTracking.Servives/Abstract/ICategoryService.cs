@@ -1,14 +1,15 @@
-﻿using JobTracking.Dtos.CategoryDtos;
+﻿using JobTracking.Common.Abstract;
+using JobTracking.Dtos.CategoryDtos;
 
 namespace JobTracking.Servives.Abstract;
 
 public interface ICategoryService
 {
-    Task<List<CategoryListDto>> GetAllAsync();
-    Task<List<CategoryListDto>> GetNotActiveAllList();
-    Task<CategoryUpdateDto> GetByIdAsync(int id);
-    Task<CategoryUpdateDto> GetByIdPassiveAsync(int id);
-    Task<CategoryCreateDto> CreateAsync(CategoryCreateDto dto);
-    Task<CategoryUpdateDto> UpdateAsync(CategoryUpdateDto dto);
-    Task RemoveAsync(int id);
+    Task<IResponse<List<CategoryListDto>>> GetAllAsync();
+    Task<IResponse<List<CategoryListDto>>> GetNotActiveAllList();
+    Task<IResponse<CategoryUpdateDto>> GetByIdAsync(int id);
+    Task<IResponse<CategoryUpdateDto>> GetByIdPassiveAsync(int id);
+    Task<IResponse<CategoryCreateDto>> CreateAsync(CategoryCreateDto dto);
+    Task<IResponse<CategoryUpdateDto>> UpdateAsync(CategoryUpdateDto dto);
+    Task<IResponse> RemoveAsync(int id);
 }

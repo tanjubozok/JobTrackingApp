@@ -1,4 +1,5 @@
 ﻿using FluentValidation.Results;
+using JobTracking.Common.ResponseObjects;
 
 namespace JobTracking.Servives.Extensions;
 

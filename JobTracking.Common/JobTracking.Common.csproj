@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\JobTracking.Common\JobTracking.Common.csproj" />
+    <ProjectReference Include="..\JobTracking.Entities\JobTracking.Entities.csproj" />
   </ItemGroup>
 
 </Project>
