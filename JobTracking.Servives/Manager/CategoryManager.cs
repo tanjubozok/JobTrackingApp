@@ -103,7 +103,7 @@ public class CategoryManager : ICategoryService
                 category.ModifiedDate = DateTime.UtcNow;
                 await _categoryRepository.Update(category, updatedEntity);
 
-                return new Response<CategoryUpdateDto>(ResponseType.Success, dto);
+                return new Response<CategoryUpdateDto>(ResponseType.Success);
             }
             return new Response<CategoryUpdateDto>(ResponseType.NotFound, "Kategori bulunamdı");
         }

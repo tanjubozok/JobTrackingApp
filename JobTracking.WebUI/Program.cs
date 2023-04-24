@@ -1,5 +1,7 @@
+using AspNetCoreHero.ToastNotification.Extensions;
 using FluentValidation.AspNetCore;
 using JobTracking.Servives.DependencyResolvers;
+using JobTracking.WebUI.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +10,7 @@ builder.Services
     .AddFluentValidation();
 
 builder.Services.AddDependencies(builder.Configuration);
+builder.Services.ToastrExtension();
 
 
 var app = builder.Build();
@@ -17,6 +20,8 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
     app.UseStatusCodePages();
 }
+
+app.UseNotyf();
 
 app.UseStaticFiles();
 app.UseRouting();

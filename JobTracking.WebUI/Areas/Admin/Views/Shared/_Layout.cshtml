@@ -174,5 +174,9 @@
     <script src="/admin-theme/assets/vendor/libs/apex-charts/apexcharts.js"></script>
     <script src="/admin-theme/assets/js/main.js"></script>
     <script src="/admin-theme/assets/js/dashboards-analytics.js"></script>
+    
+    @await Component.InvokeAsync("Notyf")
+
+    @await RenderSectionAsync("Scripts",false)
 </body>
 </html>
