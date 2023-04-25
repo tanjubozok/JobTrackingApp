@@ -7,17 +7,15 @@ namespace JobTracking.Repositories.Repository;
 
 public class WorkingRepository : BaseRepository<Working>, IWorkingRepository
 {
-    private readonly DatabaseContext _databaseContext;
-
-    public WorkingRepository(DatabaseContext context) : base(context)
+    public WorkingRepository(DatabaseContext context)
+        : base(context)
     {
-        _databaseContext = context;
     }
 
     public async Task<List<Working>> GetAllWithCategoryAsync()
     {
-        return await (from i in _databaseContext.Workings
-                      join c in _databaseContext.Categories! on i.CategoryId equals c.Id
+        return await (from i in _context.Workings
+                      join c in _context.Categories! on i.CategoryId equals c.Id
                       where (!c.IsDeleted && c.IsActive)
                       select new Working
                       {

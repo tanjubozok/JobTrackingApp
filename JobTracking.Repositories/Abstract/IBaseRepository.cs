@@ -11,10 +11,11 @@ public interface IBaseRepository<T> where T : class, IBaseEntity, new()
     Task<T?> GetByIdAsync(object id);
 
     IQueryable<T> GetQuery();
+    IQueryable<T> GetQuery(Expression<Func<T, bool>>? filter = null);
 
     Task<bool> GetAnyAsync(Expression<Func<T, bool>>? filter = null);
     Task<int> GetCountAsync(Expression<Func<T, bool>>? filter = null);
 
     Task<T> CreateAsync(T entity);
-    Task Update(T entity, T unchanged);
+    void Update(T entity, T unchanged);
 }

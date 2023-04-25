@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using FluentValidation;
 using JobTracking.Common.Abstract;
 using JobTracking.Common.ComplextTypes;
 using JobTracking.Common.ResponseObjects;
@@ -7,43 +6,47 @@ using JobTracking.Dtos.CategoryDtos;
 using JobTracking.Entities.Models;
 using JobTracking.Repositories.Abstract;
 using JobTracking.Servives.Abstract;
-using JobTracking.Servives.Extensions;
+using Microsoft.EntityFrameworkCore;
 
 namespace JobTracking.Servives.Manager;
 
 public class CategoryManager : ICategoryService
 {
     private readonly ICategoryRepository _categoryRepository;
+    private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
-    private readonly IValidator<CategoryCreateDto> _categoryCreateDtoValidator;
-    private readonly IValidator<CategoryUpdateDto> _categoryUpdateDtoValidator;
 
-    public CategoryManager(ICategoryRepository categoryRepository, IMapper mapper, IValidator<CategoryCreateDto> categoryCreateDtoValidator, IValidator<CategoryUpdateDto> categoryUpdateDtoValidator)
+    public CategoryManager(ICategoryRepository categoryRepository, IMapper mapper, IUnitOfWork unitOfWork)
     {
         _categoryRepository = categoryRepository;
         _mapper = mapper;
-        _categoryCreateDtoValidator = categoryCreateDtoValidator;
-        _categoryUpdateDtoValidator = categoryUpdateDtoValidator;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<IResponse<CategoryCreateDto>> CreateAsync(CategoryCreateDto dto)
     {
-        var validationResult = _categoryCreateDtoValidator.Validate(dto);
-        if (validationResult.IsValid)
+        var category = _mapper.Map<Category>(dto);
+        category.IsDeleted = false;
+        category.IsActive = dto.IsActive;
+        category.CreatedDate = DateTime.UtcNow;
+        var data = await _categoryRepository.CreateAsync(category);
+        var result = await _unitOfWork.CommitAsync();
+        if (result > 0)
         {
-            var category = _mapper.Map<Category>(dto);
-            await _categoryRepository.CreateAsync(category);
-
-            return new Response<CategoryCreateDto>(ResponseType.Success, dto);
+            var categoryDto = _mapper.Map<CategoryCreateDto>(data);
+            return new Response<CategoryCreateDto>(ResponseType.Success, categoryDto);
         }
-        return new Response<CategoryCreateDto>(ResponseType.ValidationError, validationResult.CustomValidationErrors());
+        return new Response<CategoryCreateDto>(ResponseType.SaveError, "Kayıt sırasında hata oluştu");
     }
 
     public async Task<IResponse<List<CategoryListDto>>> GetAllAsync()
     {
-        var categories = await _categoryRepository.GetAllAsync(x => x.IsActive & !x.IsDeleted);
-        var categoryDto = _mapper.Map<List<CategoryListDto>>(categories);
+        var categories = await _categoryRepository
+            .GetQuery(x => x.IsActive & !x.IsDeleted)
+            .OrderBy(x => x.CreatedDate)
+            .ToListAsync();
 
+        var categoryDto = _mapper.Map<List<CategoryListDto>>(categories);
         return new Response<List<CategoryListDto>>(ResponseType.Success, categoryDto);
     }
 
@@ -56,32 +59,18 @@ public class CategoryManager : ICategoryService
         if (category.IsActive && !category.IsDeleted)
         {
             var categoryDto = _mapper.Map<CategoryUpdateDto>(category);
-
             return new Response<CategoryUpdateDto>(ResponseType.Success, categoryDto);
         }
-
-        return new Response<CategoryUpdateDto>(ResponseType.NotFound, "Kategori bulunamadı");
-    }
-
-    public async Task<IResponse<CategoryUpdateDto>> GetByIdPassiveAsync(int id)
-    {
-        var category = await _categoryRepository.GetByIdAsync(id);
-        if (category is null)
-            return new Response<CategoryUpdateDto>(ResponseType.NotFound, "Kategori bulunamadı");
-
-        if (!category.IsActive && !category.IsDeleted)
-        {
-            var categoryDto = _mapper.Map<CategoryUpdateDto>(category);
-
-            return new Response<CategoryUpdateDto>(ResponseType.Success, categoryDto);
-        }
-
         return new Response<CategoryUpdateDto>(ResponseType.NotFound, "Kategori bulunamadı");
     }
 
     public async Task<IResponse<List<CategoryListDto>>> GetNotActiveAllList()
     {
-        var categories = await _categoryRepository.GetAllAsync(x => !x.IsActive & !x.IsDeleted);
+        var categories = await _categoryRepository
+            .GetQuery(x => !x.IsActive & !x.IsDeleted)
+            .OrderBy(x => x.CreatedDate)
+            .ToListAsync();
+
         var categoryDto = _mapper.Map<List<CategoryListDto>>(categories);
         return new Response<List<CategoryListDto>>(ResponseType.Success, categoryDto);
     }
@@ -93,20 +82,18 @@ public class CategoryManager : ICategoryService
 
     public async Task<IResponse<CategoryUpdateDto>> UpdateAsync(CategoryUpdateDto dto)
     {
-        var validResult = _categoryUpdateDtoValidator.Validate(dto);
-        if (validResult.IsValid)
+        var updatedEntity = await _categoryRepository.GetByIdAsync(dto.Id);
+        if (updatedEntity is not null)
         {
-            var updatedEntity = await _categoryRepository.GetByIdAsync(dto.Id);
-            if (updatedEntity is not null)
-            {
-                var category = _mapper.Map<Category>(dto);
-                category.ModifiedDate = DateTime.UtcNow;
-                await _categoryRepository.Update(category, updatedEntity);
-
+            var category = _mapper.Map<Category>(dto);
+            category.ModifiedDate = DateTime.UtcNow;
+            category.CreatedDate = updatedEntity.CreatedDate;
+            _categoryRepository.Update(category, updatedEntity);
+            var result = await _unitOfWork.CommitAsync();
+            if (result > 0)
                 return new Response<CategoryUpdateDto>(ResponseType.Success);
-            }
-            return new Response<CategoryUpdateDto>(ResponseType.NotFound, "Kategori bulunamdı");
+            return new Response<CategoryUpdateDto>(ResponseType.SaveError, "Kayıt sırasında hata oluştu");
         }
-        return new Response<CategoryUpdateDto>(ResponseType.ValidationError, validResult.CustomValidationErrors());
+        return new Response<CategoryUpdateDto>(ResponseType.NotFound, "Kategori bulunamdı");
     }
 }

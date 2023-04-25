@@ -26,6 +26,31 @@ public class CategoryController : Controller
         return View(list.Data);
     }
 
+    public IActionResult Create()
+    {
+        TempData["MenuActive"] = "Categories";
+
+        return View(new CategoryCreateDto());
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Create(CategoryCreateDto dto)
+    {
+        TempData["MenuActive"] = "Categories";
+
+        if (ModelState.IsValid)
+        {
+            var result = await _categoryService.CreateAsync(dto);
+            if (result.ResponseType == ResponseType.Success)
+            {
+                _notifyService.Success($"{dto.Definition} eklendi.");
+                return RedirectToAction("List");
+            }
+            _notifyService.Error(result.Message);
+        }
+        return View(dto);
+    }
+
     public async Task<IActionResult> Edit(int id)
     {
         TempData["MenuActive"] = "Categories";
@@ -33,9 +58,7 @@ public class CategoryController : Controller
         var result = await _categoryService.GetByIdAsync(id);
         if (result.ResponseType == ResponseType.Success)
             return View(result.Data);
-
         _notifyService.Error(result.Message);
-
         return RedirectToAction("List");
     }
 
@@ -52,7 +75,6 @@ public class CategoryController : Controller
                 _notifyService.Success($"{dto.Definition} güncellendi.");
                 return RedirectToAction("List");
             }
-
             _notifyService.Error(result.Message);
         }
         return View(dto);
