@@ -6,7 +6,8 @@ namespace JobTracking.Repositories.Repository;
 
 public class ReportingRepository : BaseRepository<Reporting>, IReportingRepository
 {
-    public ReportingRepository(DatabaseContext context) : base(context)
+    public ReportingRepository(DatabaseContext context)
+        : base(context)
     {
     }
 }

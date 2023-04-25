@@ -6,6 +6,7 @@ using JobTracking.Entities.Models;
 using JobTracking.Repositories.Abstract;
 using JobTracking.Repositories.Context;
 using JobTracking.Repositories.Repository;
+using JobTracking.Repositories.UnitOfWorks;
 using JobTracking.Servives.Abstract;
 using JobTracking.Servives.Manager;
 using JobTracking.Servives.Mappings.Helpers;
@@ -49,14 +50,17 @@ public static class DependencyExtension
 
         #region Di
 
+        // repositories
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<ICategoryRepository, CategoryRepository>();
+        services.AddScoped<IWorkingRepository, WorkingRepository>();
+        services.AddScoped<IReportingRepository, ReportingRepository>();
+
+
         // services
         services.AddScoped<ICategoryService, CategoryManager>();
         services.AddScoped<IWorkingService, WorkingManager>();
 
-        // repositories
-        services.AddScoped<ICategoryRepository, CategoryRepository>();
-        services.AddScoped<IWorkingRepository, WorkingRepository>();
-        services.AddScoped<IReportingRepository, ReportingRepository>();
 
         #endregion
 

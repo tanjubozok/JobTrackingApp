@@ -15,7 +15,6 @@ public class CategorySeed : IEntityTypeConfiguration<Category>
                 Definition = "Acil",
                 Description = "Öncelik verilecek iş",
                 CreatedDate = DateTime.UtcNow,
-                ModifiedDate = default,
                 IsActive = true,
                 IsDeleted = false,
             },
@@ -25,7 +24,6 @@ public class CategorySeed : IEntityTypeConfiguration<Category>
                 Definition = "Bu hafta",
                 Description = "Öncelik verilecek iş",
                 CreatedDate = DateTime.UtcNow,
-                ModifiedDate = default,
                 IsActive = true,
                 IsDeleted = false,
             },
@@ -35,7 +33,6 @@ public class CategorySeed : IEntityTypeConfiguration<Category>
                 Definition = "Bugün",
                 Description = "Öncelik verilecek iş",
                 CreatedDate = DateTime.UtcNow,
-                ModifiedDate = default,
                 IsActive = true,
                 IsDeleted = false,
             });
