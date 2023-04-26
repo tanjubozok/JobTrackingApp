@@ -7,7 +7,7 @@ public class Working : IBaseEntity
     public int Id { get; set; }
     public string? Definition { get; set; }
     public string? Description { get; set; }
-    public bool Status { get; set; } = true;
+    public bool Status { get; set; }
     public DateTime CreatedDate { get; set; }
 
     public int? AppUserId { get; set; }
