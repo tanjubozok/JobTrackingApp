@@ -63,8 +63,6 @@ public static class DependencyExtension
             opt.AccessDeniedPath = "/Member/Account/AccessDenied";
         });
 
-
-
         #endregion
 
         #region Validation
