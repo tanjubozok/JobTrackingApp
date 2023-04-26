@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace JobTracking.Repositories.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230424185400_InitialDatabase")]
+    [Migration("20230426133007_InitialDatabase")]
     partial class InitialDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -153,7 +153,7 @@ namespace JobTracking.Repositories.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime>("ModifiedDate")
+                    b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
@@ -164,32 +164,29 @@ namespace JobTracking.Repositories.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 4, 24, 18, 53, 59, 979, DateTimeKind.Utc).AddTicks(9832),
+                            CreatedDate = new DateTime(2023, 4, 26, 13, 30, 6, 926, DateTimeKind.Utc).AddTicks(3649),
                             Definition = "Acil",
                             Description = "Öncelik verilecek iş",
                             IsActive = true,
-                            IsDeleted = false,
-                            ModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            IsDeleted = false
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 4, 24, 18, 53, 59, 979, DateTimeKind.Utc).AddTicks(9835),
+                            CreatedDate = new DateTime(2023, 4, 26, 13, 30, 6, 926, DateTimeKind.Utc).AddTicks(3651),
                             Definition = "Bu hafta",
                             Description = "Öncelik verilecek iş",
                             IsActive = true,
-                            IsDeleted = false,
-                            ModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            IsDeleted = false
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2023, 4, 24, 18, 53, 59, 979, DateTimeKind.Utc).AddTicks(9838),
+                            CreatedDate = new DateTime(2023, 4, 26, 13, 30, 6, 926, DateTimeKind.Utc).AddTicks(3652),
                             Definition = "Bugün",
                             Description = "Öncelik verilecek iş",
                             IsActive = true,
-                            IsDeleted = false,
-                            ModifiedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            IsDeleted = false
                         });
                 });
 

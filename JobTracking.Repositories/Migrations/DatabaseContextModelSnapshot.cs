@@ -100,6 +100,9 @@ namespace JobTracking.Repositories.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("ProfileImage")
+                        .HasColumnType("text");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("text");
 
@@ -162,7 +165,7 @@ namespace JobTracking.Repositories.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 4, 25, 22, 18, 58, 951, DateTimeKind.Utc).AddTicks(8630),
+                            CreatedDate = new DateTime(2023, 4, 26, 13, 31, 45, 880, DateTimeKind.Utc).AddTicks(6938),
                             Definition = "Acil",
                             Description = "Öncelik verilecek iş",
                             IsActive = true,
@@ -171,7 +174,7 @@ namespace JobTracking.Repositories.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 4, 25, 22, 18, 58, 951, DateTimeKind.Utc).AddTicks(8634),
+                            CreatedDate = new DateTime(2023, 4, 26, 13, 31, 45, 880, DateTimeKind.Utc).AddTicks(6943),
                             Definition = "Bu hafta",
                             Description = "Öncelik verilecek iş",
                             IsActive = true,
@@ -180,7 +183,7 @@ namespace JobTracking.Repositories.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2023, 4, 25, 22, 18, 58, 951, DateTimeKind.Utc).AddTicks(8635),
+                            CreatedDate = new DateTime(2023, 4, 26, 13, 31, 45, 880, DateTimeKind.Utc).AddTicks(6944),
                             Definition = "Bugün",
                             Description = "Öncelik verilecek iş",
                             IsActive = true,

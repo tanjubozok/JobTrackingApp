@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation;
+using JobTracking.Dtos.AppUserDtos;
 using JobTracking.Dtos.CategoryDtos;
 using JobTracking.Dtos.WorkingDtos;
 using JobTracking.Entities.Models;
@@ -10,8 +11,10 @@ using JobTracking.Repositories.UnitOfWorks;
 using JobTracking.Servives.Abstract;
 using JobTracking.Servives.Manager;
 using JobTracking.Servives.Mappings.Helpers;
+using JobTracking.Servives.ValidationRules.AppUserValidators;
 using JobTracking.Servives.ValidationRules.CategoryValidators;
 using JobTracking.Servives.ValidationRules.WorkingValidators;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,14 +30,40 @@ public static class DependencyExtension
         services.AddDbContext<DatabaseContext>(opt =>
         {
             opt.UseNpgsql(configuration.GetConnectionString("LocalPostgreSql"));
+            //opt.UseSqlServer(configuration.GetConnectionString("LocalSqlServer"));
         });
 
-        #endregion    
+        #endregion
 
-        #region Identity configuration
+        #region Identity Configurations
 
-        services.AddIdentity<AppUser, AppRole>()
-            .AddEntityFrameworkStores<DatabaseContext>();
+        services.AddIdentity<AppUser, AppRole>(opt =>
+        {
+            // Password settings
+            opt.Password.RequireDigit = true;
+            opt.Password.RequiredLength = 4;
+            opt.Password.RequireNonAlphanumeric = false;
+            opt.Password.RequireUppercase = false;
+            opt.Password.RequireLowercase = false;
+            opt.Password.RequiredUniqueChars = 0;
+        })
+           .AddEntityFrameworkStores<DatabaseContext>();
+
+        services.ConfigureApplicationCookie(opt =>
+        {
+            opt.Cookie.Name = "JobTrackingApp";
+            opt.Cookie.SameSite = SameSiteMode.Strict;
+            opt.Cookie.HttpOnly = true;
+            opt.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+
+            opt.ExpireTimeSpan = TimeSpan.FromDays(20);
+
+            opt.LoginPath = "/Member/Account/Login";
+            opt.LogoutPath = "/Member/Account/Logout";
+            opt.AccessDeniedPath = "/Member/Account/AccessDenied";
+        });
+
+
 
         #endregion
 
@@ -45,6 +74,9 @@ public static class DependencyExtension
 
         services.AddTransient<IValidator<WorkingCreateDto>, WorkingCreateDtoValidator>();
         services.AddTransient<IValidator<WorkingUpdateDto>, WorkingUpdateDtoValidator>();
+
+        services.AddTransient<IValidator<AppUserLoginDto>, AppUserLoginDtoValidator>();
+        services.AddTransient<IValidator<AppUserRegisterDto>, AppUserRegisterDtoValidator>();
 
         #endregion
 
