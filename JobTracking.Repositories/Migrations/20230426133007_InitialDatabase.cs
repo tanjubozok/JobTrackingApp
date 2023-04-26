@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -63,7 +64,7 @@ namespace JobTracking.Repositories.Migrations
                     IsActive = table.Column<bool>(type: "boolean", nullable: false),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    ModifiedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -231,9 +232,9 @@ namespace JobTracking.Repositories.Migrations
                 columns: new[] { "Id", "CreatedDate", "Definition", "Description", "IsActive", "IsDeleted", "ModifiedDate" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 4, 24, 18, 53, 59, 979, DateTimeKind.Utc).AddTicks(9832), "Acil", "Öncelik verilecek iş", true, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, new DateTime(2023, 4, 24, 18, 53, 59, 979, DateTimeKind.Utc).AddTicks(9835), "Bu hafta", "Öncelik verilecek iş", true, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 3, new DateTime(2023, 4, 24, 18, 53, 59, 979, DateTimeKind.Utc).AddTicks(9838), "Bugün", "Öncelik verilecek iş", true, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 1, new DateTime(2023, 4, 26, 13, 30, 6, 926, DateTimeKind.Utc).AddTicks(3649), "Acil", "Öncelik verilecek iş", true, false, null },
+                    { 2, new DateTime(2023, 4, 26, 13, 30, 6, 926, DateTimeKind.Utc).AddTicks(3651), "Bu hafta", "Öncelik verilecek iş", true, false, null },
+                    { 3, new DateTime(2023, 4, 26, 13, 30, 6, 926, DateTimeKind.Utc).AddTicks(3652), "Bugün", "Öncelik verilecek iş", true, false, null }
                 });
 
             migrationBuilder.CreateIndex(

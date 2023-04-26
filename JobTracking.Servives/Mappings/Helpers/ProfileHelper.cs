@@ -10,7 +10,8 @@ public static class ProfileHelper
         return new List<Profile>
         {
             new CategoryProfile(),
-            new WorkingProfile()
+            new WorkingProfile(),
+            new AppUserProfile()
         };
     }
 }

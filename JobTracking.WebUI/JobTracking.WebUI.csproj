@@ -7,15 +7,33 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Admin\Data\**" />
+    <Compile Remove="Areas\Admin\Models\**" />
+    <Compile Remove="Areas\Member\Data\**" />
+    <Compile Remove="Areas\Member\Models\**" />
+    <Compile Remove="Models\**" />
+    <Content Remove="Areas\Admin\Data\**" />
+    <Content Remove="Areas\Admin\Models\**" />
+    <Content Remove="Areas\Member\Data\**" />
+    <Content Remove="Areas\Member\Models\**" />
+    <Content Remove="Models\**" />
+    <EmbeddedResource Remove="Areas\Admin\Data\**" />
+    <EmbeddedResource Remove="Areas\Admin\Models\**" />
+    <EmbeddedResource Remove="Areas\Member\Data\**" />
+    <EmbeddedResource Remove="Areas\Member\Models\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <None Remove="Areas\Admin\Data\**" />
+    <None Remove="Areas\Admin\Models\**" />
+    <None Remove="Areas\Member\Data\**" />
+    <None Remove="Areas\Member\Models\**" />
+    <None Remove="Models\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\JobTracking.Servives\JobTracking.Servives.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Member\Data\" />
-    <Folder Include="Areas\Member\Models\" />
-    <Folder Include="Models\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
