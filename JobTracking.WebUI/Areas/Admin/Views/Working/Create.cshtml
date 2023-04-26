@@ -1,0 +1,56 @@
+﻿@model WorkingCreateDto
+@{
+    TempData["Title"] = "İş Ekle";
+}
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4">
+        <span class="text-muted fw-light">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="text-dark">
+                Dashboard /
+            </a>
+            <a asp-area="Admin" asp-controller="Working" asp-action="List" class="text-dark">
+                İşler /
+            </a>
+        </span>
+        @TempData["Title"]
+    </h4>
+    <div class="row">
+        <div class="col-xl">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <form asp-area="Admin" asp-controller="Working" asp-action="Create" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="mb-3">
+                            <label asp-for="CategoryId" class="form-label">Kategoriler</label>
+                            <select asp-for="CategoryId" asp-items="ViewBag.Categories" class="form-select">
+                                <option hidden value="-1">seçiniz</option>
+                            </select>
+                            <span asp-validation-for="CategoryId" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Definition" class="form-label">Tanım</label>
+                            <input type="text" asp-for="Definition" class="form-control" placeholder="tanım">
+                            <span asp-validation-for="Definition" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Description" class="form-label">Açıklama</label>
+                            <textarea asp-for="Description" class="form-control" placeholder="açıklama"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                        <a asp-area="Admin" asp-controller="Working" asp-action="List" class="btn btn-outline-secondary">
+                            <i class="bx bx-left-arrow"></i>
+                            Listeye geri dön
+                        </a>
+                        <button type="submit" class="btn btn-success">
+                            <i class="bx bx-save"></i>
+                            Kaydet
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

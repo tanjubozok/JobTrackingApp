@@ -64,6 +64,11 @@ public class CategoryManager : ICategoryService
         return new Response<CategoryUpdateDto>(ResponseType.NotFound, "Kategori bulunamadı");
     }
 
+    public Task<IResponse<CategoryUpdateDto>> GetByIdPassiveAsync(int id)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task<IResponse<List<CategoryListDto>>> GetNotActiveAllList()
     {
         var categories = await _categoryRepository

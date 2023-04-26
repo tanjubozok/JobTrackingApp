@@ -50,7 +50,7 @@
                     <li class="menu-item @(active=="Dashboard" ? "active" : "")">
                         <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div data-i18n="Analytics">Dashboard</div>
+                            <div>Dashboard</div>
                         </a>
                     </li>
                     <li class="menu-header small text-uppercase">
@@ -59,7 +59,13 @@
                     <li class="menu-item @(active == "Categories" ? "active" : "")">
                         <a asp-area="Admin" asp-controller="Category" asp-action="List" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div data-i18n="Analytics">Kategoriler</div>
+                            <div>Kategoriler</div>
+                        </a>
+                    </li>
+                    <li class="menu-item @(active == "Working" ? "active" : "")">
+                        <a asp-area="Admin" asp-controller="Working" asp-action="List" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <div>İşler</div>
                         </a>
                     </li>
                 </ul>
@@ -174,7 +180,7 @@
     <script src="/admin-theme/assets/vendor/libs/apex-charts/apexcharts.js"></script>
     <script src="/admin-theme/assets/js/main.js"></script>
     <script src="/admin-theme/assets/js/dashboards-analytics.js"></script>
-    
+
     @await Component.InvokeAsync("Notyf")
 
     @await RenderSectionAsync("Scripts",false)
