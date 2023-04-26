@@ -1,5 +1,55 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model AppUserLoginDto
 @{
+    TempData["Title"] = "Giriş yap";
 }
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+<div class="card-body">
+    <div class="app-brand justify-content-center">
+        <div class="app-brand-link gap-2">
+            <span class="app-brand-text demo text-body fw-bolder">
+                @TempData["Title"]
+            </span>
+        </div>
+    </div>
+    <form asp-area="Member" asp-controller="Account" asp-action="Login" method="post" class="mb-3">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="mb-3">
+            <label asp-for="Username" class="form-label">Kullanıcı adı</label>
+            <input asp-for="Username" class="form-control" placeholder="kullanıcı adı" autofocus />
+            <span asp-validation-for="Username" class="text-danger"></span>
+        </div>
+        <div class="mb-3 form-password-toggle">
+            <label asp-for="Password" class="form-label">Şifre</label>
+            <div class="input-group input-group-merge">
+                <input type="password" asp-for="Password" class="form-control" placeholder="********" />
+                <span class="input-group-text cursor-pointer">
+                    <i class="bx bx-hide"></i>
+                </span>
+            </div>
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <div class="form-check">
+                <input asp-for="RememberMe" class="form-check-input" type="checkbox">
+                <label class="form-check-label" asp-for="RememberMe">
+                    Beni hatırla
+                </label>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary d-grid w-100">
+            Giriş yap
+        </button>
+    </form>
+    <p class="text-center">
+        <span>
+            Platformumuzda yeni misiniz?
+        </span>
+        <a asp-area="Member" asp-controller="Account" asp-action="Register">
+            <span>
+                Bir hesap oluşturun
+            </span>
+        </a>
+    </p>
+</div>

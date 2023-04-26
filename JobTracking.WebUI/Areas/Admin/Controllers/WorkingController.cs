@@ -2,12 +2,14 @@
 using JobTracking.Common.ComplextTypes;
 using JobTracking.Dtos.WorkingDtos;
 using JobTracking.Servives.Abstract;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace JobTracking.WebUI.Areas.Admin.Controllers;
 
 [Area("Admin")]
+[Authorize(Roles = "Admin")]
 public class WorkingController : Controller
 {
     private readonly IWorkingService _workingService;

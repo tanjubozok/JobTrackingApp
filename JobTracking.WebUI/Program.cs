@@ -22,11 +22,13 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
     app.UseStatusCodePages();
 }
-
-app.UseNotyf();
-
 app.UseStaticFiles();
 app.UseRouting();
+
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.UseNotyf();
 
 app.MapControllerRoute(
     name: "areas",

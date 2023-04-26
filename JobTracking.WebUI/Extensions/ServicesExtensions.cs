@@ -1,5 +1,4 @@
 ﻿using AspNetCoreHero.ToastNotification;
-using JobTracking.Entities.Models;
 using JobTracking.Repositories.Context;
 
 namespace JobTracking.WebUI.Extensions;

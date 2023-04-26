@@ -2,11 +2,13 @@
 using JobTracking.Common.ComplextTypes;
 using JobTracking.Dtos.CategoryDtos;
 using JobTracking.Servives.Abstract;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JobTracking.WebUI.Areas.Admin.Controllers;
 
 [Area("Admin")]
+[Authorize(Roles = "Admin")]
 public class CategoryController : Controller
 {
     private readonly ICategoryService _categoryService;
