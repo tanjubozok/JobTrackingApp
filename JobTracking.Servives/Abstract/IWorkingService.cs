@@ -7,7 +7,7 @@ public interface IWorkingService
 {
     Task<IResponse<List<WorkingListDto>>> GetAllAsync();
     Task<IResponse<List<WorkingListDto>>> GetAllWithCategoryAsync();
-    Task<IResponse<WorkingListDto>> GetByIdAsync(int id);
+    Task<IResponse<WorkingUpdateDto>> GetByIdAsync(int id);
     Task<IResponse<WorkingCreateDto>> CreateAsync(WorkingCreateDto dto);
     Task<IResponse<WorkingUpdateDto>> UpdateAsync(WorkingUpdateDto dto);
 }

@@ -56,14 +56,14 @@ public class WorkingManager : IWorkingService
         return new Response<List<WorkingListDto>>(ResponseType.Success, workingDto);
     }
 
-    public async Task<IResponse<WorkingListDto>> GetByIdAsync(int id)
+    public async Task<IResponse<WorkingUpdateDto>> GetByIdAsync(int id)
     {
         var working = await _workingRepository.GetByIdAsync(id);
         if (working is null)
-            return new Response<WorkingListDto>(ResponseType.NotFound, "İş bulunamadı");
+            return new Response<WorkingUpdateDto>(ResponseType.NotFound, "İş bulunamadı");
 
-        var workingDto = _mapper.Map<WorkingListDto>(working);
-        return new Response<WorkingListDto>(ResponseType.Success, workingDto);
+        var workingDto = _mapper.Map<WorkingUpdateDto>(working);
+        return new Response<WorkingUpdateDto>(ResponseType.Success, workingDto);
     }
 
     public async Task<IResponse<WorkingUpdateDto>> UpdateAsync(WorkingUpdateDto dto)
@@ -77,7 +77,7 @@ public class WorkingManager : IWorkingService
             var result = await _unitOfWork.CommitAsync();
             if (result > 0)
                 return new Response<WorkingUpdateDto>(ResponseType.Success);
-            return new Response<WorkingUpdateDto>(ResponseType.SaveError, "Kayıt sırasında hata oluştu");
+            return new Response<WorkingUpdateDto>(ResponseType.SaveError, "Güncelleme olmadı.");
         }
         return new Response<WorkingUpdateDto>(ResponseType.NotFound, "İş bulunamdı");
     }
