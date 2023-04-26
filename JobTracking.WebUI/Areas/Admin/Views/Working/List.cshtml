@@ -29,7 +29,7 @@
                         <th class="col-1 text-center">Kategori</th>
                         <th class="col-1 text-center">Kullanıcı</th>
                         <th class="col-1 text-center">Oluşturma Tarihi</th>
-                        <th class="col-2 text-center">İşlem</th>
+                        <th class="col-1 text-center">İşlem</th>
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
@@ -43,19 +43,64 @@
                             <td class="text-center"></td>
                             <td class="text-center">@item.CreatedDate.ToString("dd.MM.yyyy HH:mm")</td>
                             <td class="text-center">
-                                <a asp-area="Admin" asp-controller="Category" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">
+                                <a asp-area="Admin" asp-controller="Working" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">
                                     <i class="bx bx-edit-alt"></i>
-                                    Düzenle
                                 </a>
-                                <a asp-area="Admin" asp-controller="Category" asp-action="Remove" asp-route-id="@item.Id" class="btn btn-danger">
+                                <button class="btn btn-danger"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#workingDeleteModal"
+                                        data-id="@item.Id"
+                                        data-definition="@item.Definition"
+                                        data-description="@item.Description">
                                     <i class="bx bx-trash"></i>
-                                    Sil
-                                </a>
+                                </button>
+                                <button class="btn btn-info"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#workingDeleteModal"
+                                        data-id="@item.Id"
+                                        data-definition="@item.Definition"
+                                        data-description="@item.Description">
+                                    <i class="bx bx-trash"></i>
+                                </button>
                             </td>
                         </tr>
                     }
                 </tbody>
             </table>
         </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/working-delete.js"></script>
+}
+
+<div class="modal fade" id="workingDeleteModal" data-bs-backdrop="static" tabindex="-1">
+    <div class="modal-dialog">
+        <form class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="backDropModalTitle">İş Silme</h5>
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="İptal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12">
+                    <div class="alert alert-danger">
+                        <h6 class="alert-heading fw-bold mb-1 wdescription"></h6>
+                        <p class="mb-0 wdefinition"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    İptal
+                </button>
+                <button type="button" class="btn btn-danger" id="btnWorkingRemove">
+                    Sil
+                </button>
+            </div>
+        </form>
     </div>
 </div>

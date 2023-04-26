@@ -10,7 +10,7 @@ namespace JobTracking.WebUI.Areas.Admin.Controllers;
 public class CategoryController : Controller
 {
     private readonly ICategoryService _categoryService;
-    public INotyfService _notifyService { get; }
+    private readonly INotyfService _notifyService;
 
     public CategoryController(ICategoryService categoryService, INotyfService notyfService)
     {

@@ -47,9 +47,6 @@ public class BaseRepository<T> : IBaseRepository<T>
         ? await _table.AsNoTracking().SingleOrDefaultAsync()
         : await _table.Where(filter).AsNoTracking().SingleOrDefaultAsync();
 
-    public IQueryable<T> GetQuery()
-        => _table.AsNoTracking().AsQueryable();
-
     public IQueryable<T> GetQuery(Expression<Func<T, bool>>? filter = null)
         => filter == null
         ? _table.AsNoTracking().AsQueryable()
