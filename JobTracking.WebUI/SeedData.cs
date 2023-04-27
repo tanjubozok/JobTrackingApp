@@ -48,7 +48,7 @@ public class SeedData
 
         if (await userManager.FindByEmailAsync(adminUser.Email) is null)
         {
-            var result = await userManager.CreateAsync(adminUser, "Admin123!");
+            var result = await userManager.CreateAsync(adminUser, "123456");
             if (result.Succeeded)
                 await userManager.AddToRoleAsync(adminUser, "Admin");
         }
@@ -64,7 +64,7 @@ public class SeedData
 
         if (await userManager.FindByEmailAsync(memberUser.Email) is null)
         {
-            var result = await userManager.CreateAsync(memberUser, "Member123!");
+            var result = await userManager.CreateAsync(memberUser, "123456");
             if (result.Succeeded)
                 await userManager.AddToRoleAsync(memberUser, "Member");
         }

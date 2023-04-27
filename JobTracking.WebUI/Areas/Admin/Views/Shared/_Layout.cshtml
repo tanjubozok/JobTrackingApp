@@ -38,8 +38,8 @@
         <div class="layout-container">
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
                 <div class="app-brand demo">
-                    <a href="index.html" class="app-brand-link">
-                        <span class="app-brand-text demo menu-text fw-bolder ms-2">Sneat</span>
+                    <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="app-brand-link">
+                        <span class="app-brand-text demo menu-text fw-bolder ms-2">JobTracking</span>
                     </a>
                     <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
                         <i class="bx bx-chevron-left bx-sm align-middle"></i>
@@ -66,6 +66,12 @@
                         <a asp-area="Admin" asp-controller="Working" asp-action="List" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div>İşler</div>
+                        </a>
+                    </li>
+                    <li class="menu-item @(active == "WorkOrder" ? "active" : "")">
+                        <a asp-area="Admin" asp-controller="Working" asp-action="GetAllTable" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <div>İş Ata</div>
                         </a>
                     </li>
                 </ul>

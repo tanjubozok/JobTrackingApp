@@ -27,6 +27,7 @@ public class DatabaseContext : IdentityDbContext<AppUser, AppRole, int>
         #region Seeds
 
         builder.ApplyConfiguration(new CategorySeed());
+        builder.ApplyConfiguration(new WorkingSeed());
 
         #endregion
 

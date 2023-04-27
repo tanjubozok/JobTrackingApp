@@ -12,20 +12,51 @@ public class WorkingRepository : BaseRepository<Working>, IWorkingRepository
     {
     }
 
-    public async Task<List<Working>> GetAllWithCategoryAsync()
+    public async Task<List<Working>> GetAllTable()
     {
-        return await (from i in _context.Workings
-                      join c in _context.Categories! on i.CategoryId equals c.Id
-                      where (!c.IsDeleted && c.IsActive)
+        var result = (from work in _context.Workings
+                      join category in _context.Categories! on work.CategoryId equals category.Id
+                        into workCategory
+                      from category in workCategory.DefaultIfEmpty()
+                      join user in _context.Users on work.AppUserId equals user.Id
+                        into workUser
+                      from user in workUser.DefaultIfEmpty()
+                      join report in _context.Reportings on work.Id equals report.WorkingId
+                        into workReport
+                      from report in workReport.DefaultIfEmpty()
                       select new Working
                       {
-                          Id = i.Id,
-                          CategoryId = i.CategoryId,
-                          CreatedDate = i.CreatedDate,
-                          Definition = i.Definition,
-                          Description = i.Description,
-                          Status = i.Status,
-                          Category = c
-                      }).ToListAsync();
+                          Id = work.Id,
+                          CreatedDate = work.CreatedDate,
+                          Definition = work.Definition,
+                          Description = work.Description,
+                          Status = work.Status,
+                          Category = category,
+                          AppUser = user,
+                          Reportings = work.Reportings
+                      })
+                      .OrderByDescending(x => x.CreatedDate);
+
+        return await result.ToListAsync();
+    }
+
+    public async Task<List<Working>> GetAllWithCategoryAsync()
+    {
+        var result = (from work in _context.Workings
+                      join category in _context.Categories! on work.CategoryId equals category.Id
+                      where (!category.IsDeleted && category.IsActive)
+                      select new Working
+                      {
+                          Id = work.Id,
+                          CategoryId = work.CategoryId,
+                          CreatedDate = work.CreatedDate,
+                          Definition = work.Definition,
+                          Description = work.Description,
+                          Status = work.Status,
+                          Category = category
+                      })
+                      .OrderByDescending(x => x.CreatedDate);
+
+        return await result.ToListAsync();
     }
 }

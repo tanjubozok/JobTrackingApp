@@ -17,6 +17,6 @@ public class WorkingCreateDtoValidator : AbstractValidator<WorkingCreateDto>
 
         RuleFor(x => x.CategoryId)
             .NotEmpty().WithMessage("Kategori zorunlu alandır")
-            .ExclusiveBetween(1, int.MaxValue).WithMessage("Kategori seçiniz");
+            .ExclusiveBetween(0, int.MaxValue).WithMessage("Kategori seçiniz");
     }
 }

@@ -27,7 +27,6 @@
                         <th class="col-1 text-center">Id</th>
                         <th>Tanım</th>
                         <th class="col-1 text-center">Kategori</th>
-                        <th class="col-1 text-center">Kullanıcı</th>
                         <th class="col-1 text-center">Oluşturma Tarihi</th>
                         <th class="col-1 text-center">İşlem</th>
                     </tr>
@@ -40,7 +39,6 @@
                             <td class="text-center">@counter</td>
                             <td>@item.Definition</td>
                             <td class="text-center">@item.Category.Definition</td>
-                            <td class="text-center"></td>
                             <td class="text-center">@item.CreatedDate.ToString("dd.MM.yyyy HH:mm")</td>
                             <td class="text-center">
                                 <a asp-area="Admin" asp-controller="Working" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">
@@ -56,10 +54,7 @@
                                 </button>
                                 <button class="btn btn-info"
                                         data-bs-toggle="modal"
-                                        data-bs-target="#workingDeleteModal"
-                                        data-id="@item.Id"
-                                        data-definition="@item.Definition"
-                                        data-description="@item.Description">
+                                        data-bs-target="#workingDeleteModal">
                                     <i class="bx bx-trash"></i>
                                 </button>
                             </td>

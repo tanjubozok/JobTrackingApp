@@ -49,6 +49,13 @@ public class WorkingManager : IWorkingService
         return new Response<List<WorkingListDto>>(ResponseType.Success, workingDto);
     }
 
+    public async Task<IResponse<List<WorkingTableListDto>>> GetAllTableAsync()
+    {
+        var workingTableList = await _workingRepository.GetAllTable();
+        var dto = _mapper.Map<List<WorkingTableListDto>>(workingTableList);
+        return new Response<List<WorkingTableListDto>>(ResponseType.Success, dto);
+    }
+
     public async Task<IResponse<List<WorkingListDto>>> GetAllWithCategoryAsync()
     {
         var workingList = await _workingRepository.GetAllWithCategoryAsync();

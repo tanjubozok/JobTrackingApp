@@ -29,8 +29,8 @@ public static class DependencyExtension
 
         services.AddDbContext<DatabaseContext>(opt =>
         {
-            opt.UseNpgsql(configuration.GetConnectionString("LocalPostgreSql"));
-            //opt.UseSqlServer(configuration.GetConnectionString("LocalSqlServer"));
+            //opt.UseNpgsql(configuration.GetConnectionString("LocalPostgreSql"));
+            opt.UseSqlServer(configuration.GetConnectionString("LocalSqlServer"));
         });
 
         #endregion

@@ -9,6 +9,7 @@ public class WorkingProfile : Profile
     public WorkingProfile()
     {
         this.CreateMap<Working, WorkingListDto>().ReverseMap();
+        this.CreateMap<Working, WorkingTableListDto>().ReverseMap();
         this.CreateMap<Working, WorkingCreateDto>().ReverseMap();
         this.CreateMap<Working, WorkingUpdateDto>().ReverseMap();
     }

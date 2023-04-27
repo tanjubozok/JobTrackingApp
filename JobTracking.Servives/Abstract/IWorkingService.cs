@@ -6,6 +6,7 @@ namespace JobTracking.Servives.Abstract;
 public interface IWorkingService
 {
     Task<IResponse<List<WorkingListDto>>> GetAllAsync();
+    Task<IResponse<List<WorkingTableListDto>>> GetAllTableAsync();
     Task<IResponse<List<WorkingListDto>>> GetAllWithCategoryAsync();
     Task<IResponse<WorkingUpdateDto>> GetByIdAsync(int id);
     Task<IResponse<WorkingCreateDto>> CreateAsync(WorkingCreateDto dto);

@@ -31,6 +31,14 @@ public class WorkingController : Controller
         return View(list.Data);
     }
 
+    public async Task<IActionResult> GetAllTable()
+    {
+        TempData["MenuActive"] = "WorkOrder";
+
+        var list = await _workingService.GetAllTableAsync();
+        return View(list.Data);
+    }
+
     public async Task<IActionResult> Create()
     {
         TempData["MenuActive"] = "Working";
