@@ -11,7 +11,7 @@ builder.Services
 
 builder.Services.AddDependencies(builder.Configuration);
 builder.Services.ToastrExtension();
-builder.Services.SeedDataExtension();
+//builder.Services.SeedDataExtension();
 
 
 

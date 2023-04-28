@@ -1,4 +1,5 @@
-﻿using JobTracking.Entities.Models;
+﻿using Bogus;
+using JobTracking.Entities.Models;
 using Microsoft.AspNetCore.Identity;
 
 namespace JobTracking.WebUI;
@@ -67,6 +68,24 @@ public class SeedData
             var result = await userManager.CreateAsync(memberUser, "123456");
             if (result.Succeeded)
                 await userManager.AddToRoleAsync(memberUser, "Member");
+        }
+
+        var userFaker = new Faker<AppUser>("tr")
+            .RuleFor(u => u.Name, f => f.Name.FirstName())
+            .RuleFor(u => u.Surname, f => f.Name.LastName())
+            .RuleFor(u => u.UserName, (f, u) => f.Internet.UserName(u.Name, u.Surname))
+            .RuleFor(u => u.Email, (f, u) => f.Internet.Email(u.Name, u.Surname));
+
+        var user = userFaker.Generate(66);
+
+        foreach (var item in user)
+        {
+            if (await userManager.FindByEmailAsync(item.Email) is null)
+            {
+                var result = await userManager.CreateAsync(item, "123456");
+                if (result.Succeeded)
+                    await userManager.AddToRoleAsync(item, "Member");
+            }
         }
     }
 }

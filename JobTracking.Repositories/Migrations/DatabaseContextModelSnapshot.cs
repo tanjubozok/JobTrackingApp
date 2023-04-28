@@ -167,7 +167,7 @@ namespace JobTracking.Repositories.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 4, 27, 8, 28, 31, 495, DateTimeKind.Utc).AddTicks(3037),
+                            CreatedDate = new DateTime(2023, 4, 27, 17, 16, 37, 708, DateTimeKind.Utc).AddTicks(6612),
                             Definition = "Acil",
                             Description = "Öncelik verilecek iş",
                             IsActive = true,
@@ -176,7 +176,7 @@ namespace JobTracking.Repositories.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 4, 27, 8, 28, 31, 495, DateTimeKind.Utc).AddTicks(3039),
+                            CreatedDate = new DateTime(2023, 4, 27, 17, 16, 37, 708, DateTimeKind.Utc).AddTicks(6614),
                             Definition = "Bu hafta",
                             Description = "Öncelik verilecek iş",
                             IsActive = true,
@@ -185,7 +185,7 @@ namespace JobTracking.Repositories.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2023, 4, 27, 8, 28, 31, 495, DateTimeKind.Utc).AddTicks(3040),
+                            CreatedDate = new DateTime(2023, 4, 27, 17, 16, 37, 708, DateTimeKind.Utc).AddTicks(6615),
                             Definition = "Bugün",
                             Description = "Öncelik verilecek iş",
                             IsActive = true,
@@ -260,7 +260,7 @@ namespace JobTracking.Repositories.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2023, 4, 27, 11, 28, 31, 495, DateTimeKind.Local).AddTicks(3227),
+                            CreatedDate = new DateTime(2023, 4, 27, 20, 16, 37, 708, DateTimeKind.Local).AddTicks(6781),
                             Definition = "Footer düzenleme",
                             Description = "localhost.com sitesindeki footerdaki telefon numarası değiştirilmesi gerekiyor",
                             Status = false
@@ -269,7 +269,7 @@ namespace JobTracking.Repositories.Migrations
                         {
                             Id = 2,
                             CategoryId = 3,
-                            CreatedDate = new DateTime(2023, 4, 27, 11, 28, 31, 495, DateTimeKind.Local).AddTicks(3239),
+                            CreatedDate = new DateTime(2023, 4, 27, 20, 16, 37, 708, DateTimeKind.Local).AddTicks(6822),
                             Definition = "Logo düzenleme",
                             Description = "localhost.com sitesindeki logo değiştirilmesi gerekiyor",
                             Status = false
@@ -278,7 +278,7 @@ namespace JobTracking.Repositories.Migrations
                         {
                             Id = 3,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2023, 4, 27, 11, 28, 31, 495, DateTimeKind.Local).AddTicks(3240),
+                            CreatedDate = new DateTime(2023, 4, 27, 20, 16, 37, 708, DateTimeKind.Local).AddTicks(6823),
                             Definition = "Hakkımızda düzenleme",
                             Description = "localhost.com sitesindeki hakkımızda değiştirilmesi gerekiyor",
                             Status = false
@@ -287,7 +287,7 @@ namespace JobTracking.Repositories.Migrations
                         {
                             Id = 4,
                             CategoryId = 3,
-                            CreatedDate = new DateTime(2023, 4, 27, 11, 28, 31, 495, DateTimeKind.Local).AddTicks(3241),
+                            CreatedDate = new DateTime(2023, 4, 27, 20, 16, 37, 708, DateTimeKind.Local).AddTicks(6824),
                             Definition = "Adres düzenleme",
                             Description = "localhost.com sitesindeki adres değiştirilmesi gerekiyor",
                             Status = false

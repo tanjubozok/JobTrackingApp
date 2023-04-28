@@ -1,8 +1,9 @@
-﻿using JobTracking.Entities.Models;
+﻿using JobTracking.Dtos.Abstract;
+using JobTracking.Entities.Models;
 
 namespace JobTracking.Dtos.WorkingDtos;
 
-public class WorkingTableListDto
+public class WorkingTableListDto : IBaseDto
 {
     public int Id { get; set; }
     public string? Definition { get; set; }

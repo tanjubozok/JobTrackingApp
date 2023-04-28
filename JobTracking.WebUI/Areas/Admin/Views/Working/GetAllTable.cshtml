@@ -1,6 +1,6 @@
 ﻿@model List<WorkingTableListDto>
 @{
-    TempData["Title"] = "İşler";
+    TempData["Title"] = "İş Ata";
     int counter = 0;
 }
 <div class="container-xxl flex-grow-1 container-p-y">
@@ -40,32 +40,36 @@
                         <tr>
                             <td class="text-center">@counter</td>
                             <td>@item.Definition</td>
-                            <td class="text-center">@item.Category.Definition</td>
+                            <td class="text-center">@item.Category?.Definition</td>
                             <td class="text-center">@item.CreatedDate.ToString("dd.MM.yyyy HH:mm")</td>
                             <td class="text-center">
                                 @{
                                     if (item.AppUser is null)
                                     {
-                                        <span class="badge bg-label-warning">Çalışan personel yok</span>
+                                        <span class="badge bg-label-warning">
+                                            Çalışan personel yok
+                                        </span>
                                     }
                                     else
                                     {
-                                        <span class="badge bg-label-warning">@item.AppUser.UserName</span>
+                                        <span class="badge bg-label-success">
+                                            @item.AppUser.UserName
+                                        </span>
                                     }
                                 }
                             </td>
-                            <td class="text-center">@item.Reportings.Count</td>
+                            <td class="text-center">@item.Reportings?.Count</td>
                             <td class="text-center">
                                 @{
                                     if (item.AppUser is null)
                                     {
-                                        <button class="btn btn-info">
+                                        <a asp-area="Admin" asp-controller="Working" asp-action="SetPersonel2" asp-route-id="@item.Id" class="btn btn-info">
                                             Personel Ata
-                                        </button>
+                                        </a>
                                     }
                                     else
                                     {
-                                        <button class="btn btn-default">
+                                        <button class="btn btn-default btn-sm">
                                             Detay göster
                                         </button>
                                     }

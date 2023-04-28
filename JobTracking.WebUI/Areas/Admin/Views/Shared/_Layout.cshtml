@@ -39,7 +39,9 @@
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
                 <div class="app-brand demo">
                     <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="app-brand-link">
-                        <span class="app-brand-text demo menu-text fw-bolder ms-2">JobTracking</span>
+                        <span class="app-brand-text demo menu-text fw-bolder ms-2">
+                            Görev App
+                        </span>
                     </a>
                     <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
                         <i class="bx bx-chevron-left bx-sm align-middle"></i>
@@ -49,7 +51,7 @@
                 <ul class="menu-inner py-1">
                     <li class="menu-item @(active=="Dashboard" ? "active" : "")">
                         <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <i class="menu-icon tf-icons bx bxs-dashboard"></i>
                             <div>Dashboard</div>
                         </a>
                     </li>
@@ -58,20 +60,20 @@
                     </li>
                     <li class="menu-item @(active == "Categories" ? "active" : "")">
                         <a asp-area="Admin" asp-controller="Category" asp-action="List" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <i class="menu-icon tf-icons bx bx-bookmarks"></i>
                             <div>Kategoriler</div>
                         </a>
                     </li>
                     <li class="menu-item @(active == "Working" ? "active" : "")">
                         <a asp-area="Admin" asp-controller="Working" asp-action="List" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div>İşler</div>
+                            <i class="menu-icon tf-icons bx bxs-notepad"></i>
+                            <div>Görevler</div>
                         </a>
                     </li>
                     <li class="menu-item @(active == "WorkOrder" ? "active" : "")">
                         <a asp-area="Admin" asp-controller="Working" asp-action="GetAllTable" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div>İş Ata</div>
+                            <i class="menu-icon tf-icons bx bxs-book-content"></i>
+                            <div>Görev Ata</div>
                         </a>
                     </li>
                 </ul>
@@ -85,24 +87,7 @@
                         </a>
                     </div>
                     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-                        <div class="navbar-nav align-items-center">
-                            <div class="nav-item d-flex align-items-center">
-                                <i class="bx bx-search fs-4 lh-0"></i>
-                                <input type="text"
-                                       class="form-control border-0 shadow-none"
-                                       placeholder="Search..."
-                                       aria-label="Search..." />
-                            </div>
-                        </div>
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
-                            <li class="nav-item lh-1 me-3">
-                                <a class="github-button"
-                                   href="https://github.com/themeselection/sneat-html-admin-template-free"
-                                   data-icon="octicon-star"
-                                   data-size="large"
-                                   data-show-count="true"
-                                   aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Star</a>
-                            </li>
                             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">

@@ -85,11 +85,13 @@ public static class DependencyExtension
         services.AddScoped<ICategoryRepository, CategoryRepository>();
         services.AddScoped<IWorkingRepository, WorkingRepository>();
         services.AddScoped<IReportingRepository, ReportingRepository>();
+        services.AddScoped<IAppUserRepository, AppUserRepository>();
 
 
         // services
         services.AddScoped<ICategoryService, CategoryManager>();
         services.AddScoped<IWorkingService, WorkingManager>();
+        services.AddScoped<IAppUserService, AppUserManager>();
 
 
         #endregion

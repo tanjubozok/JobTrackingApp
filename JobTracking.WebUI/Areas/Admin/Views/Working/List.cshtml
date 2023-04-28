@@ -1,6 +1,6 @@
 ﻿@model List<WorkingListDto>
 @{
-    TempData["Title"] = "İşler";
+    TempData["Title"] = "Görevler";
     int counter = 0;
 }
 <div class="container-xxl flex-grow-1 container-p-y">
@@ -16,8 +16,8 @@
     <div class="card">
         <div class="card-header">
             <a asp-area="Admin" asp-controller="Working" asp-action="Create" class="btn btn-primary">
-                <i class="bx bx-plus"></i>
-                İş Ekle
+                <i class='bx bx-add-to-queue'></i>
+                Görev Ekle
             </a>
         </div>
         <div class="table-responsive text-nowrap">
@@ -38,11 +38,11 @@
                         <tr>
                             <td class="text-center">@counter</td>
                             <td>@item.Definition</td>
-                            <td class="text-center">@item.Category.Definition</td>
+                            <td class="text-center">@item.Category?.Definition</td>
                             <td class="text-center">@item.CreatedDate.ToString("dd.MM.yyyy HH:mm")</td>
                             <td class="text-center">
                                 <a asp-area="Admin" asp-controller="Working" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">
-                                    <i class="bx bx-edit-alt"></i>
+                                    <i class='bx bx-edit'></i>
                                 </a>
                                 <button class="btn btn-danger"
                                         data-bs-toggle="modal"
@@ -55,7 +55,7 @@
                                 <button class="btn btn-info"
                                         data-bs-toggle="modal"
                                         data-bs-target="#workingDeleteModal">
-                                    <i class="bx bx-trash"></i>
+                                    <i class="bx bx-message-alt-detail"></i>
                                 </button>
                             </td>
                         </tr>
@@ -89,7 +89,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                     İptal
                 </button>
                 <button type="button" class="btn btn-danger" id="btnWorkingRemove">

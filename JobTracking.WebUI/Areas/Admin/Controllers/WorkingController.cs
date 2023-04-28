@@ -2,6 +2,7 @@
 using JobTracking.Common.ComplextTypes;
 using JobTracking.Dtos.WorkingDtos;
 using JobTracking.Servives.Abstract;
+using JobTracking.WebUI.Areas.Admin.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -14,13 +15,15 @@ public class WorkingController : Controller
 {
     private readonly IWorkingService _workingService;
     private readonly ICategoryService _categoryService;
+    private readonly IAppUserService _appUserService;
     private readonly INotyfService _notifyService;
 
-    public WorkingController(IWorkingService workingService, INotyfService notifyService, ICategoryService categoryService)
+    public WorkingController(IWorkingService workingService, INotyfService notifyService, ICategoryService categoryService, IAppUserService appUserService)
     {
         _workingService = workingService;
         _notifyService = notifyService;
         _categoryService = categoryService;
+        _appUserService = appUserService;
     }
 
     public async Task<IActionResult> List()
@@ -37,6 +40,27 @@ public class WorkingController : Controller
 
         var list = await _workingService.GetAllTableAsync();
         return View(list.Data);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> SetPersonel2(int id, string s, int activePage = 1, int pageCount = 10)
+    {
+        TempData["MenuActive"] = "WorkOrder";
+
+        var appUsers = _appUserService.NonAdminUsers(out int totalPage, s, activePage, pageCount);
+        var work = await _workingService.GetAllByIdWithCategoryAsync(id);
+
+        ViewBag.Search = s;
+        ViewBag.TotalPage = totalPage;
+        ViewBag.ActivePage = activePage;
+
+        WorkingListViewModel model = new()
+        {
+            AppUserListDto = appUsers.Data,
+            WorkingListDto = work.Data
+        };
+
+        return View(model);
     }
 
     public async Task<IActionResult> Create()
@@ -79,7 +103,7 @@ public class WorkingController : Controller
         if (result.ResponseType == ResponseType.Success)
         {
             var categories = await _categoryService.GetAllAsync();
-            ViewBag.Categories = new SelectList(categories.Data, "Id", "Definition", result.Data.CategoryId);
+            ViewBag.Categories = new SelectList(categories.Data, "Id", "Definition", result.Data?.CategoryId);
 
             return View(result.Data);
         }

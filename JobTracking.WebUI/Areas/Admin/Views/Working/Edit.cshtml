@@ -1,6 +1,6 @@
 ﻿@model WorkingUpdateDto
 @{
-    TempData["Title"] = "İş Güncelle";
+    TempData["Title"] = "Görev Güncelle";
 }
 @section Scripts{
     <partial name="_ValidationScriptsPartial" />
@@ -12,7 +12,7 @@
                 Dashboard /
             </a>
             <a asp-area="Admin" asp-controller="Working" asp-action="List" class="text-dark">
-                İşler /
+                Görevler /
             </a>
         </span>
         @TempData["Title"]
@@ -41,8 +41,8 @@
                             <textarea asp-for="Description" class="form-control" placeholder="açıklama"></textarea>
                             <span asp-validation-for="Description" class="text-danger"></span>
                         </div>
-                        <a asp-area="Admin" asp-controller="Working" asp-action="List" class="btn btn-outline-secondary">
-                            <i class="bx bx-left-arrow"></i>
+                        <a asp-area="Admin" asp-controller="Working" asp-action="List" class="btn btn-dark">
+                            <i class='bx bx-arrow-from-right'></i>
                             Listeye geri dön
                         </a>
                         <button type="submit" class="btn btn-success">

@@ -49,23 +49,37 @@ public class WorkingManager : IWorkingService
         return new Response<List<WorkingListDto>>(ResponseType.Success, workingDto);
     }
 
+    public async Task<IResponse<WorkingListDto>> GetAllByIdWithCategoryAsync(int id)
+    {
+        var workingList = await _workingRepository
+            .GetAllByIdWithCategoryAsync(id);
+
+        var workingDto = _mapper.Map<WorkingListDto>(workingList);
+        return new Response<WorkingListDto>(ResponseType.Success, workingDto);
+    }
+
     public async Task<IResponse<List<WorkingTableListDto>>> GetAllTableAsync()
     {
-        var workingTableList = await _workingRepository.GetAllTable();
+        var workingTableList = await _workingRepository
+            .GetAllTableAsync();
+
         var dto = _mapper.Map<List<WorkingTableListDto>>(workingTableList);
         return new Response<List<WorkingTableListDto>>(ResponseType.Success, dto);
     }
 
     public async Task<IResponse<List<WorkingListDto>>> GetAllWithCategoryAsync()
     {
-        var workingList = await _workingRepository.GetAllWithCategoryAsync();
+        var workingList = await _workingRepository
+            .GetAllWithCategoryAsync();
+
         var workingDto = _mapper.Map<List<WorkingListDto>>(workingList);
         return new Response<List<WorkingListDto>>(ResponseType.Success, workingDto);
     }
 
     public async Task<IResponse<WorkingUpdateDto>> GetByIdAsync(int id)
     {
-        var working = await _workingRepository.GetByIdAsync(id);
+        var working = await _workingRepository
+            .GetByIdAsync(id);
         if (working is null)
             return new Response<WorkingUpdateDto>(ResponseType.NotFound, "İş bulunamadı");
 
@@ -75,7 +89,8 @@ public class WorkingManager : IWorkingService
 
     public async Task<IResponse<WorkingUpdateDto>> UpdateAsync(WorkingUpdateDto dto)
     {
-        var updatedEntity = await _workingRepository.GetByIdAsync(dto.Id);
+        var updatedEntity = await _workingRepository
+            .GetByIdAsync(dto.Id);
         if (updatedEntity is not null)
         {
             var working = _mapper.Map<Working>(dto);

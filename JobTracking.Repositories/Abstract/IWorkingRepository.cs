@@ -5,5 +5,6 @@ namespace JobTracking.Repositories.Abstract;
 public interface IWorkingRepository : IBaseRepository<Working>
 {
     Task<List<Working>> GetAllWithCategoryAsync();
-    Task<List<Working>> GetAllTable();
+    Task<List<Working>> GetAllTableAsync();
+    Task<Working> GetAllByIdWithCategoryAsync(int id);
 }

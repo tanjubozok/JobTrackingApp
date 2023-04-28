@@ -10,5 +10,6 @@ public class AppUserProfile : Profile
     {
         CreateMap<AppUser, AppUserLoginDto>().ReverseMap();
         CreateMap<AppUser, AppUserRegisterDto>().ReverseMap();
+        CreateMap<AppUser, AppUserListDto>().ReverseMap();
     }
 }

@@ -12,7 +12,7 @@ public class WorkingRepository : BaseRepository<Working>, IWorkingRepository
     {
     }
 
-    public async Task<List<Working>> GetAllTable()
+    public async Task<List<Working>> GetAllTableAsync()
     {
         var result = (from work in _context.Workings
                       join category in _context.Categories! on work.CategoryId equals category.Id
@@ -21,7 +21,7 @@ public class WorkingRepository : BaseRepository<Working>, IWorkingRepository
                       join user in _context.Users on work.AppUserId equals user.Id
                         into workUser
                       from user in workUser.DefaultIfEmpty()
-                      join report in _context.Reportings on work.Id equals report.WorkingId
+                      join report in _context.Reportings! on work.Id equals report.WorkingId
                         into workReport
                       from report in workReport.DefaultIfEmpty()
                       select new Working
@@ -38,6 +38,25 @@ public class WorkingRepository : BaseRepository<Working>, IWorkingRepository
                       .OrderByDescending(x => x.CreatedDate);
 
         return await result.ToListAsync();
+    }
+
+    public async Task<Working> GetAllByIdWithCategoryAsync(int id)
+    {
+        var result = (from work in _context.Workings
+                      join category in _context.Categories! on work.CategoryId equals category.Id
+                      where (!category.IsDeleted && category.IsActive && work.Id == id)
+                      select new Working
+                      {
+                          Id = work.Id,
+                          CategoryId = work.CategoryId,
+                          CreatedDate = work.CreatedDate,
+                          Definition = work.Definition,
+                          Description = work.Description,
+                          Status = work.Status,
+                          Category = category
+                      });
+
+        return await result.FirstOrDefaultAsync();
     }
 
     public async Task<List<Working>> GetAllWithCategoryAsync()
