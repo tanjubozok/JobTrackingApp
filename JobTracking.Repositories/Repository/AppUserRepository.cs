@@ -13,38 +13,38 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
 
     public async Task<List<AppUser>> NonAdminUsersAsync()
     {
-        var result = (from u in _context.Users
-                      join ur in _context.UserRoles on u.Id equals ur.UserId
-                      join r in _context.Roles on ur.RoleId equals r.Id
-                      where r.Name == "Member"
-                      select new AppUser
-                      {
-                          Id = u.Id,
-                          Name = u.Name,
-                          Surname = u.Surname,
-                          UserName = u.UserName,
-                          Email = u.Email,
-                          ProfileImage = u.ProfileImage
-                      });
+        var result = from u in _context.Users
+                     join ur in _context.UserRoles on u.Id equals ur.UserId
+                     join r in _context.Roles on ur.RoleId equals r.Id
+                     where r.Name == "Member"
+                     select new AppUser
+                     {
+                         Id = u.Id,
+                         Name = u.Name,
+                         Surname = u.Surname,
+                         UserName = u.UserName,
+                         Email = u.Email,
+                         ProfileImage = u.ProfileImage
+                     };
 
         return await result.ToListAsync();
     }
 
     public List<AppUser> NonAdminUsers(out int totalPage, string search, int activePage = 1, int pageCount = 10)
     {
-        var result = (from u in _context.Users
-                      join ur in _context.UserRoles on u.Id equals ur.UserId
-                      join r in _context.Roles on ur.RoleId equals r.Id
-                      where r.Name == "Member"
-                      select new AppUser
-                      {
-                          Id = u.Id,
-                          Name = u.Name,
-                          Surname = u.Surname,
-                          UserName = u.UserName,
-                          Email = u.Email,
-                          ProfileImage = u.ProfileImage
-                      });
+        var result = from u in _context.Users
+                     join ur in _context.UserRoles on u.Id equals ur.UserId
+                     join r in _context.Roles on ur.RoleId equals r.Id
+                     where r.Name == "Member"
+                     select new AppUser
+                     {
+                         Id = u.Id,
+                         Name = u.Name,
+                         Surname = u.Surname,
+                         UserName = u.UserName,
+                         Email = u.Email,
+                         ProfileImage = u.ProfileImage
+                     };
 
         totalPage = (int)Math.Ceiling((double)result.Count() / pageCount);
 

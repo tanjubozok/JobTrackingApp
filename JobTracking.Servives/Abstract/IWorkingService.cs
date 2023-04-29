@@ -8,6 +8,7 @@ public interface IWorkingService
     Task<IResponse<List<WorkingListDto>>> GetAllAsync();
     Task<IResponse<List<WorkingTableListDto>>> GetAllTableAsync();
     Task<IResponse<List<WorkingListDto>>> GetAllWithCategoryAsync();
+    Task<IResponse<List<WorkingListDto>>> GetAllByAppUserId(int appUserId);
     Task<IResponse<WorkingListDto>> GetAllByIdWithCategoryAsync(int id);
     Task<IResponse<WorkingUpdateDto>> GetByIdAsync(int id);
     Task<IResponse<WorkingCreateDto>> CreateAsync(WorkingCreateDto dto);

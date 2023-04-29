@@ -1,10 +1,10 @@
 ﻿@model WorkingListViewModel
 @{
-    TempData["Title"] = "Personel Ata";
+    TempData["Title"] = "Personele Görev Ata";
     string search = (string)ViewBag.Search;
 }
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4">
+    <h4 class="fw-bold py-3 mb-1">
         <span class="text-muted fw-light">
             <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="text-dark">
                 Dashboard /
@@ -12,12 +12,11 @@
         </span>
         <span class="text-muted fw-light">
             <a asp-area="Admin" asp-controller="Working" asp-action="GetAllTable" class="text-dark">
-                İş Ata /
+                Görev Ata /
             </a>
         </span>
         @TempData["Title"]
     </h4>
-
     <div class="row">
         @if (!string.IsNullOrEmpty(search))
         {
@@ -84,9 +83,8 @@
                         <tr>
                             <th class="text-center">Ad Soyad</th>
                             <th class="text-center">Kullanıcı Adı</th>
-                            <th class="text-center">E-Posta</th>
+                            <th class="text-center">Task Sayısı</th>
                             <th class="col-1 text-center">Profil Resim</th>
-                            <th class="col-1 text-center">İş Sayısı</th>
                             <th class="col-1 text-center"></th>
                         </tr>
                     </thead>
@@ -96,7 +94,9 @@
                             <tr>
                                 <td class="text-center">@(item.Name + " " + item.Surname)</td>
                                 <td class="text-center">@item.Username</td>
-                                <td class="text-center">@item.Email</td>
+                                <td>
+                                    <getWorkingByAppUserId app-user-id="item.Id"></getWorkingByAppUserId>
+                                </td>
                                 <td class="text-center">
                                     <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
                                         <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="" data-bs-original-title="Lilian Fuller">
@@ -104,7 +104,6 @@
                                         </li>
                                     </ul>
                                 </td>
-                                <td class="text-center"></td>
                                 <td class="text-center">
                                     <button class="btn btn-outline-primary">
                                         İşi ata

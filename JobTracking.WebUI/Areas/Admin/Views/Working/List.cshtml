@@ -4,7 +4,7 @@
     int counter = 0;
 }
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4">
+    <h4 class="fw-bold py-3 mb-1">
         <span class="text-muted fw-light">
             <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="text-dark">
                 Dashboard /
@@ -12,7 +12,6 @@
         </span>
         @TempData["Title"]
     </h4>
-
     <div class="card">
         <div class="card-header">
             <a asp-area="Admin" asp-controller="Working" asp-action="Create" class="btn btn-primary">
@@ -38,7 +37,11 @@
                         <tr>
                             <td class="text-center">@counter</td>
                             <td>@item.Definition</td>
-                            <td class="text-center">@item.Category?.Definition</td>
+                            <td class="text-center">
+                                <span class="badge bg-label-@item.Category!.Color">
+                                    @item.Category?.Definition
+                                </span>
+                            </td>
                             <td class="text-center">@item.CreatedDate.ToString("dd.MM.yyyy HH:mm")</td>
                             <td class="text-center">
                                 <a asp-area="Admin" asp-controller="Working" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">

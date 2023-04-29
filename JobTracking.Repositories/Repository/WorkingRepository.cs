@@ -40,21 +40,21 @@ public class WorkingRepository : BaseRepository<Working>, IWorkingRepository
         return await result.ToListAsync();
     }
 
-    public async Task<Working> GetAllByIdWithCategoryAsync(int id)
+    public async Task<Working?> GetByIdWithCategoryAsync(int id)
     {
-        var result = (from work in _context.Workings
-                      join category in _context.Categories! on work.CategoryId equals category.Id
-                      where (!category.IsDeleted && category.IsActive && work.Id == id)
-                      select new Working
-                      {
-                          Id = work.Id,
-                          CategoryId = work.CategoryId,
-                          CreatedDate = work.CreatedDate,
-                          Definition = work.Definition,
-                          Description = work.Description,
-                          Status = work.Status,
-                          Category = category
-                      });
+        var result = from work in _context.Workings
+                     join category in _context.Categories! on work.CategoryId equals category.Id
+                     where (!category.IsDeleted && category.IsActive && work.Id == id)
+                     select new Working
+                     {
+                         Id = work.Id,
+                         CategoryId = work.CategoryId,
+                         CreatedDate = work.CreatedDate,
+                         Definition = work.Definition,
+                         Description = work.Description,
+                         Status = work.Status,
+                         Category = category
+                     };
 
         return await result.FirstOrDefaultAsync();
     }
@@ -75,6 +75,24 @@ public class WorkingRepository : BaseRepository<Working>, IWorkingRepository
                           Category = category
                       })
                       .OrderByDescending(x => x.CreatedDate);
+
+        return await result.ToListAsync();
+    }
+
+    public async Task<List<Working>> GetAllByAppUserId(int appUserId)
+    {
+        var result = from work in _context.Workings
+                     where (work.AppUserId == appUserId)
+                     select new Working
+                     {
+                         Id = work.Id,
+                         AppUserId = work.AppUserId,
+                         CategoryId = work.CategoryId,
+                         CreatedDate = work.CreatedDate,
+                         Definition = work.Definition,
+                         Description = work.Description,
+                         Status = work.Status
+                     };
 
         return await result.ToListAsync();
     }

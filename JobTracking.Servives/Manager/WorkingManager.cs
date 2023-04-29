@@ -49,10 +49,18 @@ public class WorkingManager : IWorkingService
         return new Response<List<WorkingListDto>>(ResponseType.Success, workingDto);
     }
 
+    public async Task<IResponse<List<WorkingListDto>>> GetAllByAppUserId(int appUserId)
+    {
+        var workingList = await _workingRepository.GetAllByAppUserId(appUserId);
+
+        var dto = _mapper.Map<List<WorkingListDto>>(workingList);
+        return new Response<List<WorkingListDto>>(ResponseType.Success, dto);
+    }
+
     public async Task<IResponse<WorkingListDto>> GetAllByIdWithCategoryAsync(int id)
     {
         var workingList = await _workingRepository
-            .GetAllByIdWithCategoryAsync(id);
+            .GetByIdWithCategoryAsync(id);
 
         var workingDto = _mapper.Map<WorkingListDto>(workingList);
         return new Response<WorkingListDto>(ResponseType.Success, workingDto);
