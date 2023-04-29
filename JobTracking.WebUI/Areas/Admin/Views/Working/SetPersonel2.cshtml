@@ -26,7 +26,7 @@
                     <a asp-area="Admin"
                    asp-controller="Working"
                    asp-action="SetPersonel2"
-                   asp-route-id="@Model.WorkingListDto.Id" class="float-end">
+                   asp-route-id="@Model.WorkList.Id" class="float-end">
                         <strong>Filtreyi kaldır</strong>
                     </a>
                 </div>
@@ -36,26 +36,26 @@
             <div class="card">
                 <div class="d-flex align-items-end row">
                     <div class="card-body">
-                        <h5 class="card-title text-primary">İşin Adı</h5>
+                        <h5 class="card-title text-primary">Görevin Kategorisi</h5>
                         <p class="mb-3">
-                            @Model.WorkingListDto.Definition
-                        </p>
-                        <hr />
-                        <h5 class="card-title text-primary">İşin Açıklaması</h5>
-                        <p class="mb-3">
-                            @Model.WorkingListDto.Description
-                        </p>
-                        <hr />
-                        <h5 class="card-title text-primary">Kategorisi</h5>
-                        <p class="mb-3">
-                            <span class="badge bg-label-warning rounded-pill">
-                                @Model.WorkingListDto.Category?.Definition
+                            <span class="badge bg-label-@Model.WorkList.Category!.Color rounded-pill">
+                                @Model.WorkList.Category?.Definition
                             </span>
                         </p>
                         <hr />
-                        <h5 class="card-title text-primary">Oluşturma Tarihi</h5>
+                        <h5 class="card-title text-primary">Görevin Oluşturma Tarihi</h5>
                         <p class="mb-3">
-                            @Model.WorkingListDto.CreatedDate.ToString("dd.MM.yyyy HH.mm")
+                            @Model.WorkList.CreatedDate.ToString("dd.MM.yyyy HH:mm")
+                        </p>
+                        <hr />
+                        <h5 class="card-title text-primary">Görevin Adı</h5>
+                        <p class="mb-3">
+                            @Model.WorkList.Definition
+                        </p>
+                        <hr />
+                        <h5 class="card-title text-primary">Görevin Açıklaması</h5>
+                        <p class="mb-3">
+                            @Model.WorkList.Description
                         </p>
                     </div>
                 </div>
@@ -72,7 +72,8 @@
                     {
                         <input class="form-control me-2" type="search" placeholder="arama..." aria-label="arama" name="s">
                     }
-                    <button class="btn btn-outline-primary" type="submit">
+                    <button class="btn btn-primary" type="submit" style="width:10%">
+                        <i class="bx bx-search-alt-2"></i>
                         Ara
                     </button>
                 </form>
@@ -89,7 +90,7 @@
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
-                        @foreach (var item in Model.AppUserListDto)
+                        @foreach (var item in Model.AppUser!)
                         {
                             <tr>
                                 <td class="text-center">@(item.Name + " " + item.Surname)</td>
@@ -99,15 +100,26 @@
                                 </td>
                                 <td class="text-center">
                                     <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="" data-bs-original-title="Lilian Fuller">
+                                        <li data-bs-toggle="tooltip"
+                                            data-popup="tooltip-custom"
+                                            data-bs-placement="top"
+                                            class="avatar avatar-xs pull-up"
+                                            title="@item.Username"
+                                            data-bs-original-title="@item.Username">
                                             <img src="/images/profiles/@item.ProfileImage" alt="@item.Username" class="rounded-circle">
                                         </li>
                                     </ul>
                                 </td>
                                 <td class="text-center">
-                                    <button class="btn btn-outline-primary">
-                                        İşi ata
-                                    </button>
+                                    <a asp-area="Admin"
+                                   asp-controller="Working"
+                                   asp-action="AssignTask"
+                                   asp-route-appUserId="@item.Id"
+                                   asp-route-workId="@Model.WorkList.Id"
+                                       class="btn btn-outline-secondary">
+                                        <i class="bx bxs-user-detail"></i>
+                                        Görevi ata
+                                    </a>
                                 </td>
                             </tr>
                         }
@@ -121,7 +133,7 @@
                             {
                                 <li class="page-item @(ViewBag.ActivePage==i?"active":"")">
                                     <a class="page-link" asp-area="Admin" asp-controller="Working" asp-action="SetPersonel2"
-                               asp-route-id="@Model.WorkingListDto.Id"
+                               asp-route-id="@Model.WorkList.Id"
                                asp-route-activePage="@i"
                                asp-route-s="@search">
                                         @i
@@ -135,7 +147,7 @@
                             {
                                 <li class="page-item @(ViewBag.ActivePage==i?"active":"")">
                                     <a class="page-link" asp-area="Admin" asp-controller="Working" asp-action="SetPersonel2"
-                               asp-route-id="@Model.WorkingListDto.Id"
+                               asp-route-id="@Model.WorkList.Id"
                                asp-route-activePage="@i">
                                         @i
                                     </a>

@@ -5,6 +5,6 @@ namespace JobTracking.WebUI.Areas.Admin.Models;
 
 public class WorkingListViewModel
 {
-    public WorkingListDto? WorkingListDto { get; set; }
-    public List<AppUserListDto>? AppUserListDto { get; set; }
+    public WorkingListDto? WorkList { get; set; }
+    public List<AppUserListDto>? AppUser { get; set; }
 }
