@@ -99,7 +99,7 @@ public class WorkingController : Controller
 
         var user = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == model.AppUser!.Id);
         var work = await _workingService.GetByIdAsync(model.Work!.Id);
-        work.Data.AppUserId = user.Id;
+        work.Data!.AppUserId = user!.Id;
 
         if (user is null || work is null)
         {

@@ -92,6 +92,8 @@ public static class DependencyExtension
         services.AddScoped<ICategoryService, CategoryManager>();
         services.AddScoped<IWorkingService, WorkingManager>();
         services.AddScoped<IAppUserService, AppUserManager>();
+        services.AddScoped<IAppUserService, AppUserManager>();
+        services.AddScoped<IFileService, FileManager>();
 
 
         #endregion
