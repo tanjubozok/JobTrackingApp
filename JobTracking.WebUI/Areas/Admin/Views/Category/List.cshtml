@@ -18,6 +18,10 @@
                 <i class='bx bx-add-to-queue'></i>
                 Kategori Ekle
             </a>
+            <a asp-area="Admin" asp-controller="File" asp-action="ExportExcel" class="btn btn-success">
+                <i class='bx bxs-file'></i>
+                Excel
+            </a>
         </div>
         <div class="table-responsive text-nowrap">
             <table class="table table-hover table-striped table-bordered">
@@ -40,7 +44,7 @@
                             <td>@item.Definition</td>
                             <td>
                                 <span class="badge bg-label-@item.Color">
-                                   Görev Rengi
+                                    Görev Rengi
                                 </span>
                             </td>
                             <td class="text-center">
@@ -57,10 +61,10 @@
                             </td>
                             <td class="text-center">@item.CreatedDate.ToString("dd.MM.yyyy HH:mm")</td>
                             <td class="text-center">
-                                <a asp-area="Admin" asp-controller="Category" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">
+                                <a asp-area="Admin" asp-controller="Category" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">
                                     <i class='bx bx-edit'></i>
                                 </a>
-                                <a asp-area="Admin" asp-controller="Category" asp-action="Remove" asp-route-id="@item.Id" class="btn btn-danger">
+                                <a asp-area="Admin" asp-controller="Category" asp-action="Remove" asp-route-id="@item.Id" class="btn btn-danger btn-sm">
                                     <i class="bx bx-trash"></i>
                                 </a>
                             </td>

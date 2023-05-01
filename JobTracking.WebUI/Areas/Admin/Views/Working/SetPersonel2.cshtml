@@ -58,7 +58,14 @@
                             @Model.WorkList.Description
                         </p>
                     </div>
+
                 </div>
+            </div>
+            <div class="row px-3 mt-3">
+                <a asp-area="Admin" asp-controller="Working" asp-action="GetAllTable" class="btn btn-dark">
+                    <i class='bx bx-arrow-from-right'></i>
+                    Listeye geri dön
+                </a>
             </div>
         </div>
         <div class="col-9">
@@ -103,7 +110,7 @@
                                         <li data-bs-toggle="tooltip"
                                             data-popup="tooltip-custom"
                                             data-bs-placement="top"
-                                            class="avatar avatar-xs pull-up"
+                                            class="avatar avatar-md pull-up"
                                             title="@item.Username"
                                             data-bs-original-title="@item.Username">
                                             <img src="/images/profiles/@item.ProfileImage" alt="@item.Username" class="rounded-circle">
@@ -116,7 +123,7 @@
                                    asp-action="AssignTask"
                                    asp-route-appUserId="@item.Id"
                                    asp-route-workId="@Model.WorkList.Id"
-                                       class="btn btn-outline-secondary">
+                                       class="btn btn-outline-secondary btn-sm">
                                         <i class="bx bxs-user-detail"></i>
                                         Görevi ata
                                     </a>

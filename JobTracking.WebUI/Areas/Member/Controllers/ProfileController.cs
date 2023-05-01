@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace JobTracking.WebUI.Areas.Member.Controllers;
 
 [Area("Member")]
-[Authorize(Roles = "Member")]
-public class HomeController : Controller
+[Authorize(Roles = "Admin,Member")]
+public class ProfileController : Controller
 {
     public IActionResult Index()
     {
