@@ -5,7 +5,7 @@ namespace JobTracking.WebUI.Extensions;
 
 public static class ServicesExtensions
 {
-    public static void ToastrExtension(this IServiceCollection services)
+    public static void ToasterExtension(this IServiceCollection services)
     {
         services.AddNotyf(opt =>
         {
