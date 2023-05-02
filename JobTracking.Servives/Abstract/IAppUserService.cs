@@ -1,5 +1,6 @@
 ﻿using JobTracking.Common.Abstract;
 using JobTracking.Dtos.AppUserDtos;
+using JobTracking.Entities.Models;
 
 namespace JobTracking.Servives.Abstract;
 

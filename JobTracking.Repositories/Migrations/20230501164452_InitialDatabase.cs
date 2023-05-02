@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -60,6 +61,7 @@ namespace JobTracking.Repositories.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Definition = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true),
+                    Color = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -228,28 +230,28 @@ namespace JobTracking.Repositories.Migrations
 
             migrationBuilder.InsertData(
                 table: "Categories",
-                columns: new[] { "Id", "CreatedDate", "Definition", "Description", "IsActive", "IsDeleted", "ModifiedDate" },
-                values: new object[] { 1, new DateTime(2023, 4, 27, 17, 16, 37, 708, DateTimeKind.Utc).AddTicks(6612), "Acil", "Öncelik verilecek iş", true, false, null });
+                columns: new[] { "Id", "Color", "CreatedDate", "Definition", "Description", "IsActive", "IsDeleted", "ModifiedDate" },
+                values: new object[] { 1, null, new DateTime(2023, 5, 1, 16, 44, 51, 903, DateTimeKind.Utc).AddTicks(7063), "Acil", "Öncelik verilecek iş", true, false, null });
 
             migrationBuilder.InsertData(
                 table: "Categories",
-                columns: new[] { "Id", "CreatedDate", "Definition", "Description", "IsActive", "IsDeleted", "ModifiedDate" },
-                values: new object[] { 2, new DateTime(2023, 4, 27, 17, 16, 37, 708, DateTimeKind.Utc).AddTicks(6614), "Bu hafta", "Öncelik verilecek iş", true, false, null });
+                columns: new[] { "Id", "Color", "CreatedDate", "Definition", "Description", "IsActive", "IsDeleted", "ModifiedDate" },
+                values: new object[] { 2, null, new DateTime(2023, 5, 1, 16, 44, 51, 903, DateTimeKind.Utc).AddTicks(7070), "Bu hafta", "Öncelik verilecek iş", true, false, null });
 
             migrationBuilder.InsertData(
                 table: "Categories",
-                columns: new[] { "Id", "CreatedDate", "Definition", "Description", "IsActive", "IsDeleted", "ModifiedDate" },
-                values: new object[] { 3, new DateTime(2023, 4, 27, 17, 16, 37, 708, DateTimeKind.Utc).AddTicks(6615), "Bugün", "Öncelik verilecek iş", true, false, null });
+                columns: new[] { "Id", "Color", "CreatedDate", "Definition", "Description", "IsActive", "IsDeleted", "ModifiedDate" },
+                values: new object[] { 3, null, new DateTime(2023, 5, 1, 16, 44, 51, 903, DateTimeKind.Utc).AddTicks(7075), "Bugün", "Öncelik verilecek iş", true, false, null });
 
             migrationBuilder.InsertData(
                 table: "Workings",
                 columns: new[] { "Id", "AppUserId", "CategoryId", "CreatedDate", "Definition", "Description", "Status" },
                 values: new object[,]
                 {
-                    { 1, null, 1, new DateTime(2023, 4, 27, 20, 16, 37, 708, DateTimeKind.Local).AddTicks(6781), "Footer düzenleme", "localhost.com sitesindeki footerdaki telefon numarası değiştirilmesi gerekiyor", false },
-                    { 2, null, 3, new DateTime(2023, 4, 27, 20, 16, 37, 708, DateTimeKind.Local).AddTicks(6822), "Logo düzenleme", "localhost.com sitesindeki logo değiştirilmesi gerekiyor", false },
-                    { 3, null, 2, new DateTime(2023, 4, 27, 20, 16, 37, 708, DateTimeKind.Local).AddTicks(6823), "Hakkımızda düzenleme", "localhost.com sitesindeki hakkımızda değiştirilmesi gerekiyor", false },
-                    { 4, null, 3, new DateTime(2023, 4, 27, 20, 16, 37, 708, DateTimeKind.Local).AddTicks(6824), "Adres düzenleme", "localhost.com sitesindeki adres değiştirilmesi gerekiyor", false }
+                    { 1, null, 1, new DateTime(2023, 5, 1, 19, 44, 51, 903, DateTimeKind.Local).AddTicks(7658), "Footer düzenleme", "localhost.com sitesindeki footerdaki telefon numarası değiştirilmesi gerekiyor", false },
+                    { 2, null, 3, new DateTime(2023, 5, 1, 19, 44, 51, 903, DateTimeKind.Local).AddTicks(7682), "Logo düzenleme", "localhost.com sitesindeki logo değiştirilmesi gerekiyor", false },
+                    { 3, null, 2, new DateTime(2023, 5, 1, 19, 44, 51, 903, DateTimeKind.Local).AddTicks(7687), "Hakkımızda düzenleme", "localhost.com sitesindeki hakkımızda değiştirilmesi gerekiyor", false },
+                    { 4, null, 3, new DateTime(2023, 5, 1, 19, 44, 51, 903, DateTimeKind.Local).AddTicks(7692), "Adres düzenleme", "localhost.com sitesindeki adres değiştirilmesi gerekiyor", false }
                 });
 
             migrationBuilder.CreateIndex(

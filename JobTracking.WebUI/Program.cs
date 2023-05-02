@@ -10,7 +10,7 @@ builder.Services
     .AddFluentValidation();
 
 builder.Services.AddDependencies(builder.Configuration);
-builder.Services.ToastrExtension();
+builder.Services.ToasterExtension();
 //builder.Services.SeedDataExtension();
 
 

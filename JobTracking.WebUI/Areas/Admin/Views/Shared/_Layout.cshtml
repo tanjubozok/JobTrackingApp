@@ -48,11 +48,20 @@
                     </a>
                 </div>
                 <div class="menu-inner-shadow"></div>
-                <ul class="menu-inner py-1">
+                <ul class="menu-inner py-1">                   
                     <li class="menu-item @(active=="Dashboard" ? "active" : "")">
                         <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="menu-link">
                             <i class="menu-icon tf-icons bx bxs-dashboard"></i>
                             <div>Dashboard</div>
+                        </a>
+                    </li>
+                    <li class="menu-header small text-uppercase">
+                        <span class="menu-header-text">Profil İşlemleri</span>
+                    </li>
+                    <li class="menu-item @(active=="Profile" ? "active" : "")">
+                        <a asp-area="Member" asp-controller="Profile" asp-action="Index" class="menu-link">
+                            <i class='menu-icon tf-icons bx bx-user'></i>
+                            <div>Profil Sayfası</div>
                         </a>
                     </li>
                     <li class="menu-header small text-uppercase">
@@ -114,9 +123,9 @@
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="#">
+                                        <a class="dropdown-item" asp-area="Member" asp-controller="Profile" asp-action="Index">
                                             <i class="bx bx-user me-2"></i>
-                                            <span class="align-middle">My Profile</span>
+                                            <span class="align-middle">Profil Sayfası</span>
                                         </a>
                                     </li>
                                     <li>

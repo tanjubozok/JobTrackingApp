@@ -3,6 +3,7 @@ using JobTracking.Common.Abstract;
 using JobTracking.Common.ComplextTypes;
 using JobTracking.Common.ResponseObjects;
 using JobTracking.Dtos.AppUserDtos;
+using JobTracking.Entities.Models;
 using JobTracking.Repositories.Abstract;
 using JobTracking.Servives.Abstract;
 

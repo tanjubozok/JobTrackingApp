@@ -75,6 +75,7 @@ public static class DependencyExtension
 
         services.AddTransient<IValidator<AppUserLoginDto>, AppUserLoginDtoValidator>();
         services.AddTransient<IValidator<AppUserRegisterDto>, AppUserRegisterDtoValidator>();
+        services.AddTransient<IValidator<AppUserProfileDto>, AppUserProfileDtoValidator>();
 
         #endregion
 

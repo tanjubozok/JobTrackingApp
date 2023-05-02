@@ -41,7 +41,7 @@ public class SeedData
         AppUser adminUser = new()
         {
             UserName = "admin",
-            Email = "admin@example.com",
+            Email = "admin@localhost",
             EmailConfirmed = true,
             Name = "Admin",
             Surname = "User"
@@ -57,7 +57,7 @@ public class SeedData
         AppUser memberUser = new()
         {
             UserName = "member",
-            Email = "member@example.com",
+            Email = "member@localhost",
             EmailConfirmed = true,
             Name = "Member",
             Surname = "User"

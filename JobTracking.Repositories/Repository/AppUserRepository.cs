@@ -56,5 +56,5 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
         result = result.Skip((activePage - 1) * pageCount).Take(pageCount);
 
         return result.ToList();
-    }
+    }    
 }

@@ -1,0 +1,88 @@
+﻿@model AppUserProfileDto
+@{
+    TempData["Title"] = "Profil Detay";
+    Layout = "/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function () {
+            $('#uploadImage').change(function (e) {
+                $('#newProfile').show();
+                $('#newProfileImage').attr('src', URL.createObjectURL(e.target.files[0]));
+            });
+        });
+    </script>
+}
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-1">
+        <span class="text-muted fw-light">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="text-dark">
+                Dashboard /
+            </a>
+        </span>
+        @TempData["Title"]
+    </h4>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <form asp-area="Member" asp-controller="Profile" asp-action="Index" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="row">
+                            <label asp-for="Name" class="form-label">Profil Resmi</label>
+                            <div class="mb-3 col-md-6">
+                                <img src="/images/profiles/@Model.ProfileImage" alt="@Model.Username" class="d-block rounded" height="100" width="100">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col-md-6">
+                                <label asp-for="Name" class="form-label">Ad</label>
+                                <input class="form-control" asp-for="Name" autofocus="">
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <label asp-for="Surname" class="form-label">Soyad</label>
+                                <input class="form-control" asp-for="Surname" autofocus="">
+                                <span asp-validation-for="Surname" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3 col-md-6">
+                                <label asp-for="Email" class="form-label">E-Posta</label>
+                                <input class="form-control" type="email" asp-for="Email" placeholder="john.doe@example.com">
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label asp-for="Email" class="form-label">Yeni Profil Resmi</label>
+                            <div class="d-flex align-items-start align-items-sm-center gap-4">
+                                <div class="button-wrapper">
+                                    <label class="btn btn-primary me-2 mb-3" tabindex="0">
+                                        <span class="d-none d-sm-block">
+                                            Yeni profil resimi yükle
+                                        </span>
+                                        <i class="bx bx-upload d-block d-sm-none"></i>
+                                        <input type="file" id="uploadImage" class="account-file-input" hidden="" accept="image/png, image/jpeg">
+                                    </label>
+                                    <div class="mb-3" style="display:none;" id="newProfile">
+                                        <img class="d-block rounded" height="100" width="100" id="newProfileImage" name="newProfileImage">
+                                    </div>
+                                    <p class="text-muted">
+                                        İzin verilen JPG, GIF veya PNG. Maksimum boyut 800K
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="btn btn-dark">
+                            <i class='bx bx-arrow-from-right'></i>
+                            Dashboard geri dön
+                        </a>
+                        <button type="submit" class="btn btn-success">
+                            <i class="bx bx-save"></i>
+                            Kaydet
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
