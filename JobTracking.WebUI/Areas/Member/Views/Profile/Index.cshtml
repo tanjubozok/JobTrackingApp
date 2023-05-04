@@ -27,8 +27,9 @@
         <div class="col-md-12">
             <div class="card mb-4">
                 <div class="card-body">
-                    <form asp-area="Member" asp-controller="Profile" asp-action="Index" method="post">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <form asp-area="Member" asp-controller="Profile" asp-action="Index" method="post" enctype="multipart/form-data">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <input type="hidden" asp-for="Id" />
                         <div class="row">
                             <label asp-for="Name" class="form-label">Profil Resmi</label>
                             <div class="mb-3 col-md-6">
@@ -61,7 +62,7 @@
                                             Yeni profil resimi yükle
                                         </span>
                                         <i class="bx bx-upload d-block d-sm-none"></i>
-                                        <input type="file" id="uploadImage" class="account-file-input" hidden="" accept="image/png, image/jpeg">
+                                        <input type="file" id="uploadImage" name="uploadImage" class="account-file-input" hidden="" accept="image/png, image/jpeg">
                                     </label>
                                     <div class="mb-3" style="display:none;" id="newProfile">
                                         <img class="d-block rounded" height="100" width="100" id="newProfileImage" name="newProfileImage">
