@@ -1,6 +1,7 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using JobTracking.Dtos.AppUserDtos;
 using JobTracking.Entities.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -91,9 +92,11 @@ public class AccountController : Controller
         return View(dto);
     }
 
+    [Authorize]
     public IActionResult Logout()
     {
-        return View();
+        _signInManager.SignOutAsync();
+        return RedirectToAction("Login");
     }
 
     public IActionResult AccessDenied()

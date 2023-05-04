@@ -13,5 +13,5 @@ public class FileManager : IFileService
         excelBlank.Cells["A1"].LoadFromCollection(list, true, TableStyles.Light15);
 
         return await excelPackage.GetAsByteArrayAsync();
-    }    
+    }
 }
