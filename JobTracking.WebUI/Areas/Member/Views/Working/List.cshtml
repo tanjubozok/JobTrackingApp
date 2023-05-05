@@ -1,0 +1,64 @@
+﻿@model List<WorkingTableListDto>
+@{
+    TempData["Title"] = "Tamamlanmamış Görevler";
+    int counter = 0;
+}
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-1">
+        <span class="text-muted fw-light">
+            <a asp-area="Member" asp-controller="Home" asp-action="Index" class="text-dark">
+                Dashboard /
+            </a>
+        </span>
+        @TempData["Title"]
+    </h4>
+    <div class="card">
+        <div class="table-responsive text-nowrap">
+            <table class="table table-hover table-striped table-bordered table-sm">
+                <thead>
+                    <tr>
+                        <th class="col-1 text-center">Id</th>
+                        <th class="col-1 text-center">Oluşturma Tarihi</th>
+                        <th>Tanım</th>
+                        <th class="col-1 text-center">Kategorisi</th>
+                        <th class="col-1 text-center">Rapor Sayısı</th>
+                        <th class="col-1 text-center">İşlem</th>
+                    </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                    @foreach (var item in Model)
+                    {
+                        counter++;
+                        <tr>
+                            <td class="text-center">@counter</td>
+                            <td class="text-center">@item.CreatedDate.ToString("dd.MM.yyyy HH:mm")</td>
+                            <td>@item.Definition</td>
+                            <td class="text-center">
+                                <span class="badge bg-label-@item.Category!.Color">
+                                    @item.Category!.Definition
+                                </span>
+                            </td>
+                            <td class="text-center">@item.Reportings!.Count</td>
+                            <td class="text-center">
+                                @if (item.Reportings.Count > 0)
+                                {
+                                    <a asp-area="Member" asp-controller="Working" asp-action="ReportList" asp-route-id="@item.Id" asp-route-name="@item.Definition" class="btn btn-outline-secondary btn-sm">
+                                        <i class='bx bx-notepad'></i>
+                                        Raporlara Git
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a asp-area="Member" asp-controller="Working" asp-action="ReportWrite" asp-route-id="@item.Id" class="btn btn-outline-dark btn-sm">
+                                        <i class='bx bx-book-content'></i>
+                                        Rapor Yaz
+                                    </a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

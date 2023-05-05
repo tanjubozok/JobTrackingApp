@@ -27,7 +27,9 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
                          ProfileImage = u.ProfileImage
                      };
 
-        return await result.ToListAsync();
+        return await result
+            .AsNoTracking()
+            .ToListAsync();
     }
 
     public List<AppUser> NonAdminUsers(out int totalPage, string search, int activePage = 1, int pageCount = 10)
@@ -55,6 +57,8 @@ public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
         }
         result = result.Skip((activePage - 1) * pageCount).Take(pageCount);
 
-        return result.ToList();
+        return result
+            .AsNoTracking()
+            .ToList();
     }
 }

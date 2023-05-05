@@ -2,6 +2,7 @@
 using FluentValidation;
 using JobTracking.Dtos.AppUserDtos;
 using JobTracking.Dtos.CategoryDtos;
+using JobTracking.Dtos.ReportingDtos;
 using JobTracking.Dtos.WorkingDtos;
 using JobTracking.Entities.Models;
 using JobTracking.Repositories.Abstract;
@@ -13,6 +14,7 @@ using JobTracking.Servives.Manager;
 using JobTracking.Servives.Mappings.Helpers;
 using JobTracking.Servives.ValidationRules.AppUserValidators;
 using JobTracking.Servives.ValidationRules.CategoryValidators;
+using JobTracking.Servives.ValidationRules.ReportingValidators;
 using JobTracking.Servives.ValidationRules.WorkingValidators;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -77,6 +79,8 @@ public static class DependencyExtension
         services.AddTransient<IValidator<AppUserRegisterDto>, AppUserRegisterDtoValidator>();
         services.AddTransient<IValidator<AppUserProfileDto>, AppUserProfileDtoValidator>();
 
+        services.AddTransient<IValidator<ReportingCreateDto>, ReportingCreateDtoValidator>();
+
         #endregion
 
         #region Di
@@ -92,6 +96,7 @@ public static class DependencyExtension
         // services
         services.AddScoped<ICategoryService, CategoryManager>();
         services.AddScoped<IWorkingService, WorkingManager>();
+        services.AddScoped<IReportingService, ReportingManager>();
         services.AddScoped<IAppUserService, AppUserManager>();
         services.AddScoped<IAppUserService, AppUserManager>();
         services.AddScoped<IFileService, FileManager>();

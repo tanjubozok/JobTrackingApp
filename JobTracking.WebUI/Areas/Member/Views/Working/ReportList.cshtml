@@ -1,0 +1,51 @@
+﻿@model List<ReportingListDto>
+@{
+    TempData["Title"] = "Raporlar";
+    int workingId = 0;
+}
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-1">
+        <span class="text-muted fw-light">
+            <a asp-area="Member" asp-controller="Home" asp-action="Index" class="text-dark">
+                Dashboard /
+            </a>
+        </span>
+        <span class="text-muted fw-light">
+            <a asp-area="Member" asp-controller="Working" asp-action="List" class="text-dark">
+                Tamamlanmamış Görevler /
+            </a>
+        </span>
+        @TempData["Title"]
+    </h4>
+
+    <div class="row">
+        <div class="mb-12 p-4">
+            <h4 class="text-dark">
+                @ViewBag.WorkingName
+            </h4>
+            <a asp-area="Member" asp-controller="Working" asp-action="ReportWrite" asp-route-id="@ViewBag.WorkingId" class="btn btn-primary">
+                <i class='bx bx-add-to-queue'></i>
+                Rapor Ekle
+            </a>
+            @foreach (var item in Model)
+            {
+                workingId = item.WorkingId;
+                <div class="accordion mt-3" id="accordionExample">
+                    <div class="card accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordion-@item.Id" aria-expanded="false" aria-controls="accordionOne">
+                                <h6>@item.Definition</h6>
+                            </button>
+                        </h2>
+
+                        <div id="accordion-@item.Id" class="accordion-collapse collapse" data-bs-parent="#accordionExample" style="">
+                            <div class="accordion-body">
+                                @item.Detail
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

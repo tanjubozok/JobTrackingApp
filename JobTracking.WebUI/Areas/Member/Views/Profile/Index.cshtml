@@ -1,7 +1,6 @@
 ﻿@model AppUserProfileDto
 @{
     TempData["Title"] = "Profil Detay";
-    Layout = "/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 @section Scripts{
     <partial name="_ValidationScriptsPartial" />
@@ -73,7 +72,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="btn btn-dark">
+                        <a asp-area="Member" asp-controller="Home" asp-action="Index" class="btn btn-dark">
                             <i class='bx bx-arrow-from-right'></i>
                             Dashboard geri dön
                         </a>

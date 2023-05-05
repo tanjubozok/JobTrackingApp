@@ -11,7 +11,8 @@ public static class ProfileHelper
         {
             new CategoryProfile(),
             new WorkingProfile(),
-            new AppUserProfile()
+            new AppUserProfile(),
+            new ReportingProfiles()
         };
     }
 }

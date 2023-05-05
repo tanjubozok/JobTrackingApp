@@ -37,7 +37,22 @@ public class WorkingRepository : BaseRepository<Working>, IWorkingRepository
                       })
                       .OrderByDescending(x => x.CreatedDate);
 
-        return await result.ToListAsync();
+        return await result
+            .AsNoTracking()
+            .ToListAsync();
+    }
+
+    public async Task<List<Working>> GetAllTableAsync(int appUserId)
+    {
+        var result = _context.Workings!
+            .Include(x => x.AppUser)
+            .Include(x => x.Category)
+            .Include(x => x.Reportings)
+            .Where(x => x.AppUserId == appUserId && !x.Status);
+
+        return await result
+            .AsNoTracking()
+            .ToListAsync();
     }
 
     public async Task<Working?> GetByIdWithCategoryAsync(int id)
@@ -56,7 +71,9 @@ public class WorkingRepository : BaseRepository<Working>, IWorkingRepository
                          Category = category
                      };
 
-        return await result.FirstOrDefaultAsync();
+        return await result
+            .AsNoTracking()
+            .FirstOrDefaultAsync();
     }
 
     public async Task<List<Working>> GetAllWithCategoryAsync()
@@ -76,7 +93,9 @@ public class WorkingRepository : BaseRepository<Working>, IWorkingRepository
                       })
                       .OrderByDescending(x => x.CreatedDate);
 
-        return await result.ToListAsync();
+        return await result
+            .AsNoTracking()
+            .ToListAsync();
     }
 
     public async Task<List<Working>> GetAllByAppUserId(int appUserId)
@@ -94,6 +113,8 @@ public class WorkingRepository : BaseRepository<Working>, IWorkingRepository
                          Status = work.Status
                      };
 
-        return await result.ToListAsync();
+        return await result
+            .AsNoTracking()
+            .ToListAsync();
     }
 }
