@@ -5,9 +5,9 @@ using JobTracking.Common.ResponseObjects;
 using JobTracking.Dtos.ReportingDtos;
 using JobTracking.Entities.Models;
 using JobTracking.Repositories.Abstract;
-using JobTracking.Servives.Abstract;
+using JobTracking.Services.Abstract;
 
-namespace JobTracking.Servives.Manager;
+namespace JobTracking.Services.Manager;
 
 public class ReportingManager : IReportingService
 {

@@ -4,9 +4,9 @@ using JobTracking.Common.ComplextTypes;
 using JobTracking.Common.ResponseObjects;
 using JobTracking.Dtos.AppUserDtos;
 using JobTracking.Repositories.Abstract;
-using JobTracking.Servives.Abstract;
+using JobTracking.Services.Abstract;
 
-namespace JobTracking.Servives.Manager;
+namespace JobTracking.Services.Manager;
 
 public class AppUserManager : IAppUserService
 {

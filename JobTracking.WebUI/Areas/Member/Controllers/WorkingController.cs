@@ -2,7 +2,7 @@
 using JobTracking.Common.ComplextTypes;
 using JobTracking.Dtos.ReportingDtos;
 using JobTracking.Entities.Models;
-using JobTracking.Servives.Abstract;
+using JobTracking.Services.Abstract;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

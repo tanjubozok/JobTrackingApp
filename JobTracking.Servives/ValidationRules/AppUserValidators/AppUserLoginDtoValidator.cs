@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using JobTracking.Dtos.AppUserDtos;
 
-namespace JobTracking.Servives.ValidationRules.AppUserValidators;
+namespace JobTracking.Services.ValidationRules.AppUserValidators;
 
 public class AppUserLoginDtoValidator : AbstractValidator<AppUserLoginDto>
 {

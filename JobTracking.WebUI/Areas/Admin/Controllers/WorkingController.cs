@@ -2,7 +2,7 @@
 using JobTracking.Common.ComplextTypes;
 using JobTracking.Dtos.WorkingDtos;
 using JobTracking.Entities.Models;
-using JobTracking.Servives.Abstract;
+using JobTracking.Services.Abstract;
 using JobTracking.WebUI.Areas.Admin.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

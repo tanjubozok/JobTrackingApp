@@ -1,7 +1,7 @@
 ﻿using JobTracking.Common.Abstract;
 using JobTracking.Dtos.AppUserDtos;
 
-namespace JobTracking.Servives.Abstract;
+namespace JobTracking.Services.Abstract;
 
 public interface IAppUserService
 {

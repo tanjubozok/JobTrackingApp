@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using JobTracking.Dtos.CategoryDtos;
 
-namespace JobTracking.Servives.ValidationRules.CategoryValidators;
+namespace JobTracking.Services.ValidationRules.CategoryValidators;
 
 public class CategoryCreateDtoValidator : AbstractValidator<CategoryCreateDto>
 {

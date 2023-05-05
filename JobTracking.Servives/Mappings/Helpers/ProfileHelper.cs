@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using JobTracking.Servives.Mappings.AutoMapper;
+using JobTracking.Services.Mappings.AutoMapper;
 
-namespace JobTracking.Servives.Mappings.Helpers;
+namespace JobTracking.Services.Mappings.Helpers;
 
 public static class ProfileHelper
 {

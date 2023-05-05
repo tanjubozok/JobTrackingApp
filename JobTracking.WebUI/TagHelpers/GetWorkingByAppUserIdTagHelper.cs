@@ -1,4 +1,4 @@
-﻿using JobTracking.Servives.Abstract;
+﻿using JobTracking.Services.Abstract;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace JobTracking.WebUI.TagHelpers;

@@ -1,7 +1,7 @@
 ﻿using FluentValidation.Results;
 using JobTracking.Common.ResponseObjects;
 
-namespace JobTracking.Servives.Extensions;
+namespace JobTracking.Services.Extensions;
 
 public static class ValidationResultExtension
 {

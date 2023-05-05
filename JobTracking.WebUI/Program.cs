@@ -1,6 +1,6 @@
 using AspNetCoreHero.ToastNotification.Extensions;
 using FluentValidation.AspNetCore;
-using JobTracking.Servives.DependencyResolvers;
+using JobTracking.Services.DependencyResolvers;
 using JobTracking.WebUI.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);

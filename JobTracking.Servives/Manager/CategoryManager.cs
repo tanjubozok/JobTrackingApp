@@ -5,10 +5,10 @@ using JobTracking.Common.ResponseObjects;
 using JobTracking.Dtos.CategoryDtos;
 using JobTracking.Entities.Models;
 using JobTracking.Repositories.Abstract;
-using JobTracking.Servives.Abstract;
+using JobTracking.Services.Abstract;
 using Microsoft.EntityFrameworkCore;
 
-namespace JobTracking.Servives.Manager;
+namespace JobTracking.Services.Manager;
 
 public class CategoryManager : ICategoryService
 {
