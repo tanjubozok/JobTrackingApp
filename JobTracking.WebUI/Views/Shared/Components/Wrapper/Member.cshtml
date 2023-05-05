@@ -1,0 +1,61 @@
+﻿@model AppUserProfileDto
+@{
+    string active = null;
+    if (TempData["MenuActive"] is not null)
+    {
+        active = TempData["MenuActive"].ToString();
+    }
+}
+<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+    <div class="app-brand demo">
+        <a asp-area="Member" asp-controller="Home" asp-action="Index" class="app-brand-link">
+            <span class="app-brand-text demo menu-text fw-bolder ms-2">
+                Görev App
+            </span>
+        </a>
+        <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+            <i class="bx bx-chevron-left bx-sm align-middle"></i>
+        </a>
+    </div>
+    <div class="menu-inner-shadow"></div>
+    <ul class="menu-inner py-1">
+        <li class="menu-item @(active=="Dashboard" ? "active" : "")">
+            <a asp-area="Member" asp-controller="Home" asp-action="Index" class="menu-link">
+                <i class="menu-icon tf-icons bx bxs-dashboard"></i>
+                <div>Dashboard</div>
+            </a>
+        </li>
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Profil İşlemleri</span>
+        </li>
+        <li class="menu-item @(active=="Profile" ? "active" : "")">
+            <a asp-area="Member" asp-controller="Profile" asp-action="Index" class="menu-link">
+                <i class='menu-icon tf-icons bx bx-user'></i>
+                <div>Profil Detay</div>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a asp-area="Member" asp-controller="Account" asp-action="Logout" class="menu-link">
+                <i class='menu-icon tf-icons bx bx-log-out'></i>
+                <div>Çıkış yap</div>
+            </a>
+        </li>
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">İşlemler</span>
+        </li>
+        <li class="menu-item @(active=="Working" ? "active" : "")">
+            <a asp-area="Member" asp-controller="Working" asp-action="List" class="menu-link">
+                <i class='menu-icon tf-icons bx bxs-book'></i>
+                <div>Tamamlanmamış Görevler</div>
+            </a>
+        </li>
+        <li class="menu-item @(active=="WorkingOk" ? "active" : "")">
+            <a asp-area="Member" asp-controller="Working" asp-action="List" class="menu-link">
+                <i class='menu-icon tf-icons bx bxs-book-add'></i>
+                <div>Tamamlanmış Görevler</div>
+            </a>
+        </li>
+    </ul>
+</aside>
+
+

@@ -4,7 +4,7 @@ using JobTracking.Entities.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace JobTracking.WebUI.Areas.Admin.ViewComponents;
+namespace JobTracking.WebUI.ViewComponents;
 
 public class Wrapper : ViewComponent
 {
@@ -21,6 +21,10 @@ public class Wrapper : ViewComponent
     {
         var user = _userManager.FindByNameAsync(User.Identity!.Name).Result;
         var userDto = _mapper.Map<AppUserProfileDto>(user);
-        return View(userDto);
+
+        var userRole = _userManager.GetRolesAsync(user).Result;
+        if (userRole.Contains("Admin"))
+            return View(userDto);
+        return View("Member", userDto);
     }
 }

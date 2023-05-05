@@ -1,10 +1,4 @@
-﻿@{
-    string active = null;
-    if (TempData["MenuActive"] is not null)
-    {
-        active = TempData["MenuActive"].ToString();
-    }
-}
+﻿
 <!DOCTYPE html>
 <html lang="tr"
       class="light-style layout-menu-fixed"
@@ -36,60 +30,10 @@
 <body>
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
-            <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-                <div class="app-brand demo">
-                    <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="app-brand-link">
-                        <span class="app-brand-text demo menu-text fw-bolder ms-2">
-                            Görev App
-                        </span>
-                    </a>
-                    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
-                        <i class="bx bx-chevron-left bx-sm align-middle"></i>
-                    </a>
-                </div>
-                <div class="menu-inner-shadow"></div>
-                <ul class="menu-inner py-1">
-                    <li class="menu-item @(active=="Dashboard" ? "active" : "")">
-                        <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="menu-link">
-                            <i class="menu-icon tf-icons bx bxs-dashboard"></i>
-                            <div>Dashboard</div>
-                        </a>
-                    </li>
-                    <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">Profil İşlemleri</span>
-                    </li>
-                    <li class="menu-item @(active=="Profile" ? "active" : "")">
-                        <a asp-area="Member" asp-controller="Profile" asp-action="Index" class="menu-link">
-                            <i class='menu-icon tf-icons bx bx-user'></i>
-                            <div>Profil Detay</div>
-                        </a>
-                    </li>
-                    <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">İşlemler</span>
-                    </li>
-                    <li class="menu-item @(active == "Categories" ? "active" : "")">
-                        <a asp-area="Admin" asp-controller="Category" asp-action="List" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-bookmarks"></i>
-                            <div>Kategoriler</div>
-                        </a>
-                    </li>
-                    <li class="menu-item @(active == "Working" ? "active" : "")">
-                        <a asp-area="Admin" asp-controller="Working" asp-action="List" class="menu-link">
-                            <i class="menu-icon tf-icons bx bxs-notepad"></i>
-                            <div>Görevler</div>
-                        </a>
-                    </li>
-                    <li class="menu-item @(active == "WorkOrder" ? "active" : "")">
-                        <a asp-area="Admin" asp-controller="Working" asp-action="GetAllTable" class="menu-link">
-                            <i class="menu-icon tf-icons bx bxs-book-content"></i>
-                            <div>Görev Ata</div>
-                        </a>
-                    </li>
-                </ul>
-            </aside>
-            <div class="layout-page">
-                @await Component.InvokeAsync("Wrapper")
 
+            @await Component.InvokeAsync("Wrapper")
+
+            <div class="layout-page">
                 <div class="content-wrapper">
                     @RenderBody()
 
