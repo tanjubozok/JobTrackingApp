@@ -9,19 +9,19 @@ using JobTracking.Repositories.Abstract;
 using JobTracking.Repositories.Context;
 using JobTracking.Repositories.Repository;
 using JobTracking.Repositories.UnitOfWorks;
-using JobTracking.Servives.Abstract;
-using JobTracking.Servives.Manager;
-using JobTracking.Servives.Mappings.Helpers;
-using JobTracking.Servives.ValidationRules.AppUserValidators;
-using JobTracking.Servives.ValidationRules.CategoryValidators;
-using JobTracking.Servives.ValidationRules.ReportingValidators;
-using JobTracking.Servives.ValidationRules.WorkingValidators;
+using JobTracking.Services.Abstract;
+using JobTracking.Services.Manager;
+using JobTracking.Services.Mappings.Helpers;
+using JobTracking.Services.ValidationRules.AppUserValidators;
+using JobTracking.Services.ValidationRules.CategoryValidators;
+using JobTracking.Services.ValidationRules.ReportingValidators;
+using JobTracking.Services.ValidationRules.WorkingValidators;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace JobTracking.Servives.DependencyResolvers;
+namespace JobTracking.Services.DependencyResolvers;
 
 public static class DependencyExtension
 {

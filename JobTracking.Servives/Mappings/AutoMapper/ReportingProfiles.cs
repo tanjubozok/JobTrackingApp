@@ -2,7 +2,7 @@
 using JobTracking.Dtos.ReportingDtos;
 using JobTracking.Entities.Models;
 
-namespace JobTracking.Servives.Mappings.AutoMapper;
+namespace JobTracking.Services.Mappings.AutoMapper;
 
 public class ReportingProfiles : Profile
 {

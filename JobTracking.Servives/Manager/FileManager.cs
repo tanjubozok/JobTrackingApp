@@ -1,8 +1,8 @@
-﻿using JobTracking.Servives.Abstract;
+﻿using JobTracking.Services.Abstract;
 using OfficeOpenXml;
 using OfficeOpenXml.Table;
 
-namespace JobTracking.Servives.Manager;
+namespace JobTracking.Services.Manager;
 
 public class FileManager : IFileService
 {

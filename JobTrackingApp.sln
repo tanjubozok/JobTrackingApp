@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JobTracking.Dtos", "JobTrac
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JobTracking.Repositories", "JobTracking.Repositories\JobTracking.Repositories.csproj", "{90FC88E9-CB6F-485F-AE34-3CAFFA4C3975}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JobTracking.Servives", "JobTracking.Servives\JobTracking.Servives.csproj", "{2C06786B-FB8E-4A40-8475-B6FE05A00792}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JobTracking.Services", "JobTracking.Servives\JobTracking.Services.csproj", "{2C06786B-FB8E-4A40-8475-B6FE05A00792}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JobTracking.WebUI", "JobTracking.WebUI\JobTracking.WebUI.csproj", "{833825BF-EB3D-45AB-9BD7-FEFFBBBFB51F}"
 EndProject

@@ -1,4 +1,4 @@
-﻿namespace JobTracking.Servives.Abstract;
+﻿namespace JobTracking.Services.Abstract;
 
 public interface IFileService
 {

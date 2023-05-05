@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using JobTracking.Dtos.ReportingDtos;
 
-namespace JobTracking.Servives.ValidationRules.ReportingValidators;
+namespace JobTracking.Services.ValidationRules.ReportingValidators;
 
 public class ReportingCreateDtoValidator : AbstractValidator<ReportingCreateDto>
 {
