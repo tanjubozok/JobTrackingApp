@@ -29,13 +29,10 @@ public class CategoryManager : ICategoryService
         category.IsDeleted = false;
         category.IsActive = dto.IsActive;
         category.CreatedDate = DateTime.UtcNow;
-        var data = await _categoryRepository.CreateAsync(category);
+        await _categoryRepository.CreateAsync(category);
         var result = await _unitOfWork.CommitAsync();
         if (result > 0)
-        {
-            var categoryDto = _mapper.Map<CategoryCreateDto>(data);
-            return new Response<CategoryCreateDto>(ResponseType.Success, categoryDto);
-        }
+            return new Response<CategoryCreateDto>(ResponseType.Success, dto);
         return new Response<CategoryCreateDto>(ResponseType.SaveError, "Kayıt sırasında hata oluştu");
     }
 

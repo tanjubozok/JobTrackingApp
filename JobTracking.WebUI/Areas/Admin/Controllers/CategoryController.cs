@@ -14,10 +14,10 @@ public class CategoryController : Controller
     private readonly ICategoryService _categoryService;
     private readonly INotyfService _notifyService;
 
-    public CategoryController(ICategoryService categoryService, INotyfService notyfService)
+    public CategoryController(ICategoryService categoryService, INotyfService notifyService)
     {
         _categoryService = categoryService;
-        _notifyService = notyfService;
+        _notifyService = notifyService;
     }
 
     public async Task<IActionResult> List()

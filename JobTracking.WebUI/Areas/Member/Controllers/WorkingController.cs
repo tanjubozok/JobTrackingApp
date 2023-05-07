@@ -40,8 +40,11 @@ public class WorkingController : Controller
         TempData["MenuActive"] = "Working";
 
         var list = await _reportingService.GetAllByWorkingIdAsync(id);
+        var working = await _workingService.GetByIdAsync(id);
 
+        ViewBag.WorkingName = working.Data!.Definition;
         ViewBag.WorkingId = id;
+
         return View(list.Data);
     }
 
@@ -50,17 +53,12 @@ public class WorkingController : Controller
         TempData["MenuActive"] = "Working";
 
         var working = await _workingService.GetAllByIdWithCategoryAsync(id);
-
-        var categoriName = working.Data.Category!.Definition;
-        var categoriColor = working.Data.Category.Color;
-        var workingName = working.Data.Definition;
-
         ReportingCreateDto dto = new()
         {
             WorkingId = id,
-            CategoryName = categoriName,
-            Color = categoriColor,
-            WorkingName = workingName
+            CategoryName = working.Data!.Category!.Definition,
+            Color = working.Data.Category.Color,
+            WorkingName = working.Data.Definition
         };
         return View(dto);
     }
@@ -79,6 +77,37 @@ public class WorkingController : Controller
             _notifyService.Error(result.Message);
         }
         return View(dto);
+    }
+
+    public async Task<IActionResult> ReportEdit(int id)
+    {
+        var result = await _reportingService.GetById(id);
+        if (result.ResponseType == ResponseType.Success)
+            return View(result.Data);
+        _notifyService.Error(result.Message);
+        return RedirectToAction("List");
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> ReportEdit(ReportingEditDto dto)
+    {
+        if (ModelState.IsValid)
+        {
+            var result = await _reportingService.EditReport(dto);
+            if (result.ResponseType == ResponseType.Success)
+            {
+                _notifyService.Success("Updated");
+                return RedirectToAction("List");
+            }
+            _notifyService.Error(result.Message);
+        }
+        return View(dto);
+    }
+
+    public async Task<IActionResult> DoneTask(int id)
+    {
+        var result = await _workingService.DoneWorking(id);
+        return Json("null");
     }
 }
 

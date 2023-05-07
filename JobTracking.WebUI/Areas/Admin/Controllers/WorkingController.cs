@@ -48,7 +48,7 @@ public class WorkingController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> SetPersonel2(int id, string s, int activePage = 1, int pageCount = 10)
+    public async Task<IActionResult> SetPersonnel2(int id, string s, int activePage = 1, int pageCount = 10)
     {
         TempData["MenuActive"] = "WorkOrder";
 
@@ -77,7 +77,7 @@ public class WorkingController : Controller
         if (user is null || work is null)
         {
             _notifyService.Error("Eşleşen task bulunamadı.");
-            return RedirectToAction("SetPersonel2", "Working", new { area = "Admin" });
+            return RedirectToAction("SetPersonnel2", "Working", new { area = "Admin" });
         }
 
         PersonWorkingViewModel model = new()

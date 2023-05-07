@@ -14,4 +14,5 @@ public interface IWorkingService
     Task<IResponse<WorkingUpdateDto>> GetByIdAsync(int id);
     Task<IResponse<WorkingCreateDto>> CreateAsync(WorkingCreateDto dto);
     Task<IResponse<WorkingUpdateDto>> UpdateAsync(WorkingUpdateDto dto);
+    Task<IResponse<WorkingUpdateDto>> DoneWorking(int workingId);
 }

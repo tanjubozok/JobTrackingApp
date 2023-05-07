@@ -25,14 +25,24 @@ public class ReportingManager : IReportingService
     public async Task<IResponse<ReportingCreateDto>> CreateReport(ReportingCreateDto dto)
     {
         var report = _mapper.Map<Reporting>(dto);
-        var addedData = await _reportingRepository.CreateAsync(report);
+        await _reportingRepository.CreateAsync(report);
         var result = await _unitOfWork.CommitAsync();
         if (result > 0)
-        {
-            var reportDto = _mapper.Map<ReportingCreateDto>(addedData);
-            return new Response<ReportingCreateDto>(ResponseType.Success, reportDto);
-        }
+            return new Response<ReportingCreateDto>(ResponseType.Success, dto);
         return new Response<ReportingCreateDto>(ResponseType.SaveError, "Kayıt sırasında hata oluştu");
+    }
+
+    public async Task<IResponse<ReportingEditDto>> EditReport(ReportingEditDto dto)
+    {
+        var report = await _reportingRepository.GetByIdAsync(dto.Id);
+        if (report is null)
+            return new Response<ReportingEditDto>(ResponseType.NotFound, "Rapor bulunamadı");
+        var updatedData = _mapper.Map<Reporting>(dto);
+        _reportingRepository.Update(updatedData, report);
+        var result = await _unitOfWork.CommitAsync();
+        if (result > 0)
+            return new Response<ReportingEditDto>(ResponseType.Success, dto);
+        return new Response<ReportingEditDto>(ResponseType.SaveError, "Kayıt sırasında hata oluştu");
     }
 
     public async Task<IResponse<List<ReportingListDto>>> GetAllByWorkingIdAsync(int workingId)
@@ -41,5 +51,15 @@ public class ReportingManager : IReportingService
         var dto = _mapper.Map<List<ReportingListDto>>(list);
 
         return new Response<List<ReportingListDto>>(ResponseType.Success, dto);
+    }
+
+    public async Task<IResponse<ReportingEditDto>> GetById(int id)
+    {
+        var report = await _reportingRepository.GetByIdAsync(id);
+        if (report is null)
+            return new Response<ReportingEditDto>(ResponseType.NotFound, $"{id} bulunamadı");
+
+        var dto = _mapper.Map<ReportingEditDto>(report);
+        return new Response<ReportingEditDto>(ResponseType.Success, dto);
     }
 }

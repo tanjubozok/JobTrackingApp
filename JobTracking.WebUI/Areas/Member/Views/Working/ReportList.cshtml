@@ -19,10 +19,14 @@
     </h4>
 
     <div class="row">
-        <div class="mb-12 p-4">
+        <div class="mb-12 p-3">
             <h4 class="text-dark">
                 @ViewBag.WorkingName
             </h4>
+            <a asp-area="Member" asp-controller="Working" asp-action="List" class="btn btn-dark">
+                <i class='bx bx-arrow-from-right'></i>
+                Listeye geri dön
+            </a>
             <a asp-area="Member" asp-controller="Working" asp-action="ReportWrite" asp-route-id="@ViewBag.WorkingId" class="btn btn-primary">
                 <i class='bx bx-add-to-queue'></i>
                 Rapor Ekle
@@ -40,7 +44,14 @@
 
                         <div id="accordion-@item.Id" class="accordion-collapse collapse" data-bs-parent="#accordionExample" style="">
                             <div class="accordion-body">
-                                @item.Detail
+                                <div class="mb-3">
+                                    @item.Detail
+                                </div>
+                                <div class="mb-3">
+                                    <a asp-area="Member" asp-controller="Working" asp-action="ReportEdit" asp-route-id="@item.Id" class="btn btn-warning text-dark">
+                                        Düzenle
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
