@@ -9,4 +9,5 @@ public interface IWorkingRepository : IBaseRepository<Working>
     Task<List<Working>> GetAllTableAsync(int appUserId);
     Task<Working?> GetByIdWithCategoryAsync(int id);
     Task<List<Working>> GetAllByAppUserId(int appUserId);
+    Task<List<Working>> GetAllTableCompleteAsync(int appUserId);
 }

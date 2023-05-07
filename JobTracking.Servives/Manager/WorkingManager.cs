@@ -131,4 +131,13 @@ public class WorkingManager : IWorkingService
         }
         return new Response<WorkingUpdateDto>(ResponseType.NotFound, "İş bulunamdı");
     }
+
+    public async Task<IResponse<List<WorkingTableListDto>>> GetAllTableCompleteAsync(int appUserId)
+    {
+        var workingTableList = await _workingRepository
+                           .GetAllTableCompleteAsync(appUserId);
+
+        var dto = _mapper.Map<List<WorkingTableListDto>>(workingTableList);
+        return new Response<List<WorkingTableListDto>>(ResponseType.Success, dto);
+    }
 }

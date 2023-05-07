@@ -55,6 +55,19 @@ public class WorkingRepository : BaseRepository<Working>, IWorkingRepository
             .ToListAsync();
     }
 
+    public async Task<List<Working>> GetAllTableCompleteAsync(int appUserId)
+    {
+        var result = _context.Workings!
+            .Include(x => x.AppUser)
+            .Include(x => x.Category)
+            .Include(x => x.Reportings)
+            .Where(x => x.AppUserId == appUserId && x.Status);
+
+        return await result
+            .AsNoTracking()
+            .ToListAsync();
+    }
+
     public async Task<Working?> GetByIdWithCategoryAsync(int id)
     {
         var result = from work in _context.Workings

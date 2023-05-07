@@ -35,6 +35,15 @@ public class WorkingController : Controller
         return View(appUserWorkingList.Data);
     }
 
+    public async Task<IActionResult> CompleteList()
+    {
+        TempData["MenuActive"] = "CompleteWorking";
+
+        var activeUser = await _userManager.FindByNameAsync(User.Identity!.Name);
+        var appUserWorkingList = await _workingService.GetAllTableCompleteAsync(activeUser.Id);
+        return View(appUserWorkingList.Data);
+    }
+
     public async Task<IActionResult> ReportList(int id)
     {
         TempData["MenuActive"] = "Working";
