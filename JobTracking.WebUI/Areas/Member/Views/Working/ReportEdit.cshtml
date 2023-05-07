@@ -1,0 +1,51 @@
+﻿@model ReportingEditDto
+@{
+    TempData["Title"] = "Rapor Düzenle";
+}
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-1">
+        <span class="text-muted fw-light">
+            <a asp-area="Member" asp-controller="Home" asp-action="Index" class="text-dark">
+                Dashboard /
+            </a>
+            <a asp-area="Member" asp-controller="Working" asp-action="List" class="text-dark">
+                Görevler /
+            </a>
+        </span>
+        @TempData["Title"]
+    </h4>
+    <div class="row">
+        <div class="col-xl">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <form asp-area="Member" asp-controller="Working" asp-action="ReportEdit" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Id" />
+                        <input type="hidden" asp-for="WorkingId" />
+                        <div class="mb-3">
+                            <label asp-for="Definition" class="form-label">Tanım</label>
+                            <input type="text" asp-for="Definition" class="form-control" placeholder="tanım">
+                            <span asp-validation-for="Definition" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Detail" class="form-label">Açıklama</label>
+                            <textarea asp-for="Detail" class="form-control" placeholder="açıklama"></textarea>
+                            <span asp-validation-for="Detail" class="text-danger"></span>
+                        </div>
+                        <a asp-area="Member" asp-controller="Working" asp-action="List" class="btn btn-dark">
+                            <i class='bx bx-arrow-from-right'></i>
+                            Listeye geri dön
+                        </a>
+                        <button type="submit" class="btn btn-success">
+                            <i class="bx bx-save"></i>
+                            Kaydet
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

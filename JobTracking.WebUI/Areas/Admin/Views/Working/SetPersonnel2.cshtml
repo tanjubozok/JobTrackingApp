@@ -25,7 +25,7 @@
                     <strong>"@search"</strong> için sonuçlar listelenmiştir.
                     <a asp-area="Admin"
                    asp-controller="Working"
-                   asp-action="SetPersonel2"
+                   asp-action="SetPersonnel2"
                    asp-route-id="@Model.WorkList.Id" class="float-end">
                         <strong>Filtreyi kaldır</strong>
                     </a>
@@ -70,7 +70,7 @@
         </div>
         <div class="col-9">
             <div class="row mb-3">
-                <form asp-area="Admin" asp-controller="Working" asp-action="SetPersonel2" method="get" class="d-flex">
+                <form asp-area="Admin" asp-controller="Working" asp-action="SetPersonnel2" method="get" class="d-flex">
                     @if (!string.IsNullOrEmpty(search))
                     {
                         <input class="form-control me-2" type="search" placeholder="arama..." aria-label="arama" name="s" value="@search">
@@ -139,7 +139,7 @@
                             for (int i = 1; i <= ViewBag.TotalPage; i++)
                             {
                                 <li class="page-item @(ViewBag.ActivePage==i?"active":"")">
-                                    <a class="page-link" asp-area="Admin" asp-controller="Working" asp-action="SetPersonel2"
+                                    <a class="page-link" asp-area="Admin" asp-controller="Working" asp-action="SetPersonnel2"
                                asp-route-id="@Model.WorkList.Id"
                                asp-route-activePage="@i"
                                asp-route-s="@search">
@@ -153,7 +153,7 @@
                             for (int i = 1; i <= ViewBag.TotalPage; i++)
                             {
                                 <li class="page-item @(ViewBag.ActivePage==i?"active":"")">
-                                    <a class="page-link" asp-area="Admin" asp-controller="Working" asp-action="SetPersonel2"
+                                    <a class="page-link" asp-area="Admin" asp-controller="Working" asp-action="SetPersonnel2"
                                asp-route-id="@Model.WorkList.Id"
                                asp-route-activePage="@i">
                                         @i

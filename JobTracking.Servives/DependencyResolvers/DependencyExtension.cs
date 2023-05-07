@@ -80,6 +80,7 @@ public static class DependencyExtension
         services.AddTransient<IValidator<AppUserProfileDto>, AppUserProfileDtoValidator>();
 
         services.AddTransient<IValidator<ReportingCreateDto>, ReportingCreateDtoValidator>();
+        services.AddTransient<IValidator<ReportingEditDto>, ReportingEditDtoValidator>();
 
         #endregion
 

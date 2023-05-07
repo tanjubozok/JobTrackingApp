@@ -10,5 +10,6 @@ public class ReportingProfiles : Profile
     {
         CreateMap<Reporting, ReportingListDto>().ReverseMap();
         CreateMap<Reporting, ReportingCreateDto>().ReverseMap();
+        CreateMap<Reporting, ReportingEditDto>().ReverseMap();
     }
 }

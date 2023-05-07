@@ -28,13 +28,10 @@ public class WorkingManager : IWorkingService
         var working = _mapper.Map<Working>(dto);
         working.Status = false;
         working.CreatedDate = DateTime.UtcNow;
-        var data = await _workingRepository.CreateAsync(working);
+        await _workingRepository.CreateAsync(working);
         var result = await _unitOfWork.CommitAsync();
         if (result > 0)
-        {
-            var workingDto = _mapper.Map<WorkingCreateDto>(data);
-            return new Response<WorkingCreateDto>(ResponseType.Success, workingDto);
-        }
+            return new Response<WorkingCreateDto>(ResponseType.Success, dto);
         return new Response<WorkingCreateDto>(ResponseType.SaveError, "Kayıt sırasında hata oluştu");
     }
 
@@ -113,6 +110,20 @@ public class WorkingManager : IWorkingService
             var working = _mapper.Map<Working>(dto);
             working.CreatedDate = updatedEntity.CreatedDate;
             _workingRepository.Update(working, updatedEntity);
+            var result = await _unitOfWork.CommitAsync();
+            if (result > 0)
+                return new Response<WorkingUpdateDto>(ResponseType.Success);
+            return new Response<WorkingUpdateDto>(ResponseType.SaveError, "Güncelleme olmadı.");
+        }
+        return new Response<WorkingUpdateDto>(ResponseType.NotFound, "İş bulunamdı");
+    }
+
+    public async Task<IResponse<WorkingUpdateDto>> DoneWorking(int workingId)
+    {
+        var working = await _workingRepository.GetByIdAsync(workingId);
+        if (working is not null)
+        {
+            working.Status = true;
             var result = await _unitOfWork.CommitAsync();
             if (result > 0)
                 return new Response<WorkingUpdateDto>(ResponseType.Success);

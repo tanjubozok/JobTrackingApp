@@ -70,15 +70,17 @@ public class SeedData
                 await userManager.AddToRoleAsync(memberUser, "Member");
         }
 
+
+        // Bogus fake data
         var userFaker = new Faker<AppUser>("tr")
             .RuleFor(u => u.Name, f => f.Name.FirstName())
             .RuleFor(u => u.Surname, f => f.Name.LastName())
             .RuleFor(u => u.UserName, (f, u) => f.Internet.UserName(u.Name, u.Surname))
             .RuleFor(u => u.Email, (f, u) => f.Internet.Email(u.Name, u.Surname));
 
-        var user = userFaker.Generate(66);
+        var users = userFaker.Generate(66);
 
-        foreach (var item in user)
+        foreach (var item in users)
         {
             if (await userManager.FindByEmailAsync(item.Email) is null)
             {
