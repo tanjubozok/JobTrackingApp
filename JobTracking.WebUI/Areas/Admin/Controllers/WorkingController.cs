@@ -21,14 +21,16 @@ public class WorkingController : Controller
     private readonly IAppUserService _appUserService;
     private readonly UserManager<AppUser> _userManager;
     private readonly INotyfService _notifyService;
+    private readonly INotificationService _notificationService;
 
-    public WorkingController(IWorkingService workingService, INotyfService notifyService, ICategoryService categoryService, IAppUserService appUserService, UserManager<AppUser> userManager)
+    public WorkingController(IWorkingService workingService, INotyfService notifyService, ICategoryService categoryService, IAppUserService appUserService, UserManager<AppUser> userManager, INotificationService notificationService)
     {
         _workingService = workingService;
         _notifyService = notifyService;
         _categoryService = categoryService;
         _appUserService = appUserService;
         _userManager = userManager;
+        _notificationService = notificationService;
     }
 
     public async Task<IActionResult> List()
@@ -110,7 +112,10 @@ public class WorkingController : Controller
         var result = await _workingService.UpdateAsync(work.Data!);
         if (result.ResponseType == ResponseType.Success)
         {
-            _notifyService.Success($"{user.UserName} {work.Data!.Definition} görevi atandı.");
+            var notify = $"{user.UserName} {work.Data!.Definition} gorevi atandı.";
+            _notifyService.Success(notify);
+            _ = await _notificationService.CreateAsync(user.Id, notify);
+
             return RedirectToAction("GetAllTable");
         }
         _notifyService.Error(result.Message);

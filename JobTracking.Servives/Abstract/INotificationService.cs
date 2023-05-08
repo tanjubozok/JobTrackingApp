@@ -5,5 +5,8 @@ namespace JobTracking.Services.Abstract;
 
 public interface INotificationService
 {
-    Task<IResponse<NotificationCreateDto>> CreateAsync(NotificationCreateDto dto);
+    Task<IResponse<NotificationCreateDto>> CreateAsync(int appUserId, string description);
+    Task<IResponse<List<NotificationListDto>>> GetAllAsync(int appUserId);
+    int NotificationCount(int appUserId);
+    Task<IResponse<NotificationUpdateDto>> DoneNotificationAsync(int notificationId);
 }

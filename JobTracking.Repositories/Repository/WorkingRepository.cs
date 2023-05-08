@@ -14,28 +14,44 @@ public class WorkingRepository : BaseRepository<Working>, IWorkingRepository
 
     public async Task<List<Working>> GetAllTableAsync()
     {
-        var result = (from work in _context.Workings
-                      join category in _context.Categories! on work.CategoryId equals category.Id
-                        into workCategory
-                      from category in workCategory.DefaultIfEmpty()
-                      join user in _context.Users on work.AppUserId equals user.Id
-                        into workUser
-                      from user in workUser.DefaultIfEmpty()
-                      join report in _context.Reportings! on work.Id equals report.WorkingId
-                        into workReport
-                      from report in workReport.DefaultIfEmpty()
-                      select new Working
-                      {
-                          Id = work.Id,
-                          CreatedDate = work.CreatedDate,
-                          Definition = work.Definition,
-                          Description = work.Description,
-                          Status = work.Status,
-                          Category = category,
-                          AppUser = user,
-                          Reportings = work.Reportings
-                      })
-                      .OrderByDescending(x => x.CreatedDate);
+        //var result = (from work in _context.Workings
+        //              join category in _context.Categories! on work.CategoryId equals category.Id
+        //                into workCategory
+        //              from category in workCategory.DefaultIfEmpty()
+        //              join user in _context.Users on work.AppUserId equals user.Id
+        //                into workUser
+        //              from user in workUser.DefaultIfEmpty()
+        //              join report in _context.Reportings! on work.Id equals report.WorkingId
+        //                into workReport
+        //              from report in workReport.DefaultIfEmpty()
+        //              select new Working
+        //              {
+        //                  Id = work.Id,
+        //                  CreatedDate = work.CreatedDate,
+        //                  Definition = work.Definition,
+        //                  Description = work.Description,
+        //                  Status = work.Status,
+        //                  Category = category,
+        //                  AppUser = user,
+        //                  Reportings = work.Reportings
+        //              })
+        //              .OrderByDescending(x => x.CreatedDate);
+
+        var result = _context.Workings!
+            .Include(x => x.AppUser)
+            .Include(x => x.Category)
+            .Include(x => x.Reportings)
+            .Select(work => new Working
+            {
+                Id = work.Id,
+                CreatedDate = work.CreatedDate,
+                Definition = work.Definition,
+                Description = work.Description,
+                Status = work.Status,
+                Category = work.Category,
+                AppUser = work.AppUser,
+                Reportings = work.Reportings
+            });
 
         return await result
             .AsNoTracking()

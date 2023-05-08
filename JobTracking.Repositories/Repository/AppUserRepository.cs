@@ -7,7 +7,7 @@ namespace JobTracking.Repositories.Repository;
 
 public class AppUserRepository : BaseRepository<AppUser>, IAppUserRepository
 {
-    public AppUserRepository(DatabaseContext context) 
+    public AppUserRepository(DatabaseContext context)
         : base(context)
     {
     }

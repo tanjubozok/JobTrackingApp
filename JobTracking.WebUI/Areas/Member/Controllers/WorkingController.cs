@@ -17,13 +17,15 @@ public class WorkingController : Controller
     private readonly IReportingService _reportingService;
     private readonly UserManager<AppUser> _userManager;
     private readonly INotyfService _notifyService;
+    private readonly INotificationService _notificationService;
 
-    public WorkingController(IWorkingService workingService, UserManager<AppUser> userManager, IReportingService reportingService, INotyfService notifyService)
+    public WorkingController(IWorkingService workingService, UserManager<AppUser> userManager, IReportingService reportingService, INotyfService notifyService, INotificationService notificationService)
     {
         _workingService = workingService;
         _userManager = userManager;
         _reportingService = reportingService;
         _notifyService = notifyService;
+        _notificationService = notificationService;
     }
 
     public async Task<IActionResult> List()
@@ -80,6 +82,14 @@ public class WorkingController : Controller
             var result = await _reportingService.CreateReport(dto);
             if (result.ResponseType == ResponseType.Success)
             {
+                var adminUserList = await _userManager.GetUsersInRoleAsync("Admin");
+                var currentUser = await _userManager.FindByNameAsync(User.Identity!.Name);
+                foreach (var item in adminUserList)
+                {
+                    var notify = $"{currentUser.UserName} {result.Data!.Definition} raporu yazdı.";
+                    _ = await _notificationService.CreateAsync(item.Id, notify);
+                }
+
                 _notifyService.Success($"{dto.Definition} eklendi.");
                 return RedirectToAction("List");
             }
@@ -116,6 +126,16 @@ public class WorkingController : Controller
     public async Task<IActionResult> DoneTask(int id)
     {
         var result = await _workingService.DoneWorking(id);
+        if (result.ResponseType == ResponseType.Success)
+        {
+            var adminUserList = await _userManager.GetUsersInRoleAsync("Admin");
+            var currentUser = await _userManager.FindByNameAsync(User.Identity!.Name);
+            foreach (var item in adminUserList)
+            {
+                var notify = $"{currentUser.UserName} görevi tamamladı.";
+                _ = await _notificationService.CreateAsync(item.Id, notify);
+            }
+        };
         return Json("null");
     }
 }
