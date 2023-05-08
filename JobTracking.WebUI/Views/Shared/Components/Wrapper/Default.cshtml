@@ -61,6 +61,18 @@
                 <div>Görev Ata</div>
             </a>
         </li>
+        <li class="menu-item @(active == "Notification" ? "active" : "")">
+            <a asp-area="Admin" asp-controller="Notification" asp-action="List" class="menu-link">
+                <i class="menu-icon tf-icons bx bxs-book-content"></i>
+                <div>Bildirimler</div>
+                @if (ViewBag.UserNotificationCount > 0)
+                {
+                    <span class="badge badge-center rounded-pill bg-danger ms-5">
+                        @ViewBag.UserNotificationCount
+                    </span>
+                }
+            </a>
+        </li>
     </ul>
 </aside>
 

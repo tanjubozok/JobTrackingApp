@@ -10,15 +10,19 @@
     <Compile Remove="Areas\Member\Data\**" />
     <Compile Remove="Areas\Member\Models\**" />
     <Compile Remove="Models\**" />
+    <Compile Remove="wwwroot\docs\**" />
     <Content Remove="Areas\Member\Data\**" />
     <Content Remove="Areas\Member\Models\**" />
     <Content Remove="Models\**" />
+    <Content Remove="wwwroot\docs\**" />
     <EmbeddedResource Remove="Areas\Member\Data\**" />
     <EmbeddedResource Remove="Areas\Member\Models\**" />
     <EmbeddedResource Remove="Models\**" />
+    <EmbeddedResource Remove="wwwroot\docs\**" />
     <None Remove="Areas\Member\Data\**" />
     <None Remove="Areas\Member\Models\**" />
     <None Remove="Models\**" />
+    <None Remove="wwwroot\docs\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,10 +33,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.13" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\docs\excels\" />
   </ItemGroup>
 
   <ItemGroup>
