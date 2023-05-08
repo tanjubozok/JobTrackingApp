@@ -92,6 +92,7 @@ public static class DependencyExtension
         services.AddScoped<IWorkingRepository, WorkingRepository>();
         services.AddScoped<IReportingRepository, ReportingRepository>();
         services.AddScoped<IAppUserRepository, AppUserRepository>();
+        services.AddScoped<INotificationRepository, NotificationRepository>();
 
 
         // services
@@ -101,6 +102,7 @@ public static class DependencyExtension
         services.AddScoped<IAppUserService, AppUserManager>();
         services.AddScoped<IAppUserService, AppUserManager>();
         services.AddScoped<IFileService, FileManager>();
+        services.AddScoped<INotificationService, NotificationManager>();
 
 
         #endregion

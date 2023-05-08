@@ -21,6 +21,7 @@ public class DatabaseContext : IdentityDbContext<AppUser, AppRole, int>
         builder.ApplyConfiguration(new WorkingConfiguration());
         builder.ApplyConfiguration(new ReportingConfiguration());
         builder.ApplyConfiguration(new AppUserConfiguration());
+        builder.ApplyConfiguration(new NotificationConfiguration());
 
         #endregion
 
@@ -37,4 +38,5 @@ public class DatabaseContext : IdentityDbContext<AppUser, AppRole, int>
     public DbSet<Category>? Categories { get; set; }
     public DbSet<Working>? Workings { get; set; }
     public DbSet<Reporting>? Reportings { get; set; }
+    public DbSet<Notification>? Notifications { get; set; }
 }

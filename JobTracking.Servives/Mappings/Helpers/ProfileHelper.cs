@@ -12,7 +12,8 @@ public static class ProfileHelper
             new CategoryProfile(),
             new WorkingProfile(),
             new AppUserProfile(),
-            new ReportingProfiles()
+            new ReportingProfiles(),
+            new NotificationProfile()
         };
     }
 }

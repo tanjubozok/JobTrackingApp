@@ -19,5 +19,9 @@ public class AppUserConfiguration : IEntityTypeConfiguration<AppUser>
         builder.HasMany(x => x.Workings)
             .WithOne(x => x.AppUser)
             .HasForeignKey(x => x.AppUserId);
+
+        builder.HasMany(x => x.Notifications)
+            .WithOne(x => x.AppUser)
+            .HasForeignKey(x => x.AppUserId);
     }
 }
