@@ -1,4 +1,5 @@
-﻿using JobTracking.Entities.Models;
+﻿using JobTracking.Dtos.GraphicDtos;
+using JobTracking.Entities.Models;
 using JobTracking.Repositories.Abstract;
 using JobTracking.Repositories.Context;
 using Microsoft.EntityFrameworkCore;
@@ -141,6 +142,75 @@ public class WorkingRepository : BaseRepository<Working>, IWorkingRepository
                          Description = work.Description,
                          Status = work.Status
                      };
+
+        return await result
+            .AsNoTracking()
+            .ToListAsync();
+    }
+
+    public async Task<int> GetNumberOfReportsWrittenAsync(int appUserId)
+    {
+        var result = _context.Workings!
+            .Include(x => x.Reportings)
+            .Where(x => x.AppUserId == appUserId);
+
+        return await result
+            .AsNoTracking()
+            .CountAsync();
+    }
+
+    public async Task<int> GetNumberOfTasksCompletedAsync(int appUserId)
+    {
+        var result = _context.Workings!
+            .Where(x => x.AppUserId == appUserId && x.Status);
+
+        return await result
+            .AsNoTracking()
+            .CountAsync();
+    }
+
+    public async Task<int> GetNumberOfTaskToCompleteAsync(int appUserId)
+    {
+        var result = _context.Workings!
+            .Where(x => x.AppUserId == appUserId && !x.Status);
+
+        return await result
+            .AsNoTracking()
+            .CountAsync();
+    }
+
+    public async Task<List<GraphicListDto>> MostCompletedStaffAsync()
+    {
+        var result = _context.Workings!
+            .Include(x => x.AppUser)
+            .Where(x => x.Status)
+            .GroupBy(x => x.AppUser!.UserName)
+            .OrderByDescending(x => x.Count())
+            .Take(5)
+            .Select(x => new GraphicListDto
+            {
+                Username = x.Key,
+                TaskCount = x.Count(),
+            });
+
+        return await result
+            .AsNoTracking()
+            .ToListAsync();
+    }
+
+    public async Task<List<GraphicListDto>> MostEmployedStaffAsync()
+    {
+        var result = _context.Workings!
+            .Include(x => x.AppUser)
+            .Where(x => !x.Status && x.AppUser != null)
+            .GroupBy(x => x.AppUser!.UserName)
+            .OrderByDescending(x => x.Count())
+            .Take(5)
+            .Select(x => new GraphicListDto
+            {
+                Username = x.Key,
+                TaskCount = x.Count(),
+            });
 
         return await result
             .AsNoTracking()

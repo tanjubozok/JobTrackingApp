@@ -26,21 +26,6 @@
             </a>
         </li>
         <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Profil İşlemleri</span>
-        </li>
-        <li class="menu-item @(active=="Profile" ? "active" : "")">
-            <a asp-area="Member" asp-controller="Profile" asp-action="Index" class="menu-link">
-                <i class='menu-icon tf-icons bx bx-user'></i>
-                <div>Profil Detay</div>
-            </a>
-        </li>
-        <li class="menu-item">
-            <a asp-area="Member" asp-controller="Account" asp-action="Logout" class="menu-link">
-                <i class='menu-icon tf-icons bx bx-log-out'></i>
-                <div>Çıkış yap</div>
-            </a>
-        </li>
-        <li class="menu-header small text-uppercase">
             <span class="menu-header-text">İşlemler</span>
         </li>
         <li class="menu-item @(active == "Categories" ? "active" : "")">
@@ -63,7 +48,7 @@
         </li>
         <li class="menu-item @(active == "Notification" ? "active" : "")">
             <a asp-area="Admin" asp-controller="Notification" asp-action="List" class="menu-link">
-                <i class="menu-icon tf-icons bx bxs-book-content"></i>
+                <i class='menu-icon tf-icons bx bxs-bell-ring'></i>
                 <div>Bildirimler</div>
                 @if (ViewBag.UserNotificationCount > 0)
                 {
@@ -71,6 +56,21 @@
                         @ViewBag.UserNotificationCount
                     </span>
                 }
+            </a>
+        </li>
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Profil İşlemleri</span>
+        </li>
+        <li class="menu-item @(active=="Profile" ? "active" : "")">
+            <a asp-area="Member" asp-controller="Profile" asp-action="Index" class="menu-link">
+                <i class='menu-icon tf-icons bx bx-user'></i>
+                <div>Profil Detay</div>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a asp-area="Member" asp-controller="Account" asp-action="Logout" class="menu-link">
+                <i class='menu-icon tf-icons bx bx-log-out'></i>
+                <div>Çıkış yap</div>
             </a>
         </li>
     </ul>

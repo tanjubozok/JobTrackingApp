@@ -65,4 +65,7 @@ public class NotificationManager : INotificationService
         var dto = _mapper.Map<List<NotificationListDto>>(notificationList);
         return new Response<List<NotificationListDto>>(ResponseType.Success, dto);
     }
+
+    public async Task<int> GetNumberOfUnreadNotificationAsync(int appUserId)
+        => await _notificationRepository.GetNumberOfUnreadNotificationAsync(appUserId);
 }
