@@ -8,19 +8,15 @@
 
   <ItemGroup>
     <Compile Remove="Areas\Member\Data\**" />
-    <Compile Remove="Areas\Member\Models\**" />
     <Compile Remove="Models\**" />
     <Compile Remove="wwwroot\docs\**" />
     <Content Remove="Areas\Member\Data\**" />
-    <Content Remove="Areas\Member\Models\**" />
     <Content Remove="Models\**" />
     <Content Remove="wwwroot\docs\**" />
     <EmbeddedResource Remove="Areas\Member\Data\**" />
-    <EmbeddedResource Remove="Areas\Member\Models\**" />
     <EmbeddedResource Remove="Models\**" />
     <EmbeddedResource Remove="wwwroot\docs\**" />
     <None Remove="Areas\Member\Data\**" />
-    <None Remove="Areas\Member\Models\**" />
     <None Remove="Models\**" />
     <None Remove="wwwroot\docs\**" />
   </ItemGroup>

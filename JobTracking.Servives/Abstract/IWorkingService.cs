@@ -1,4 +1,5 @@
 ﻿using JobTracking.Common.Abstract;
+using JobTracking.Dtos.GraphicDtos;
 using JobTracking.Dtos.WorkingDtos;
 
 namespace JobTracking.Services.Abstract;
@@ -16,4 +17,11 @@ public interface IWorkingService
     Task<IResponse<WorkingCreateDto>> CreateAsync(WorkingCreateDto dto);
     Task<IResponse<WorkingUpdateDto>> UpdateAsync(WorkingUpdateDto dto);
     Task<IResponse<WorkingUpdateDto>> DoneWorking(int workingId);
+    Task<int> GetNumberOfReportsWrittenAsync(int appUserId);
+    Task<int> GetNumberOfTasksCompletedAsync(int appUserId);
+    Task<int> GetNumberOfTaskToCompleteAsync(int appUserId);
+    Task<IResponse<List<GraphicListDto>>> MostCompletedStaffAsync();
+    Task<IResponse<List<GraphicListDto>>> MostEmployedStaffAsync();
+    Task<int> GetNumberOfTaskPendingAssignmentAsync();
+    Task<int> GetNumberOfCompletedTaskAsync();
 }

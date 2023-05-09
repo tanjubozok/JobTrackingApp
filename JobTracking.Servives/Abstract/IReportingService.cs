@@ -9,4 +9,5 @@ public interface IReportingService
     Task<IResponse<ReportingEditDto>> EditReport(ReportingEditDto dto);
     Task<IResponse<List<ReportingListDto>>> GetAllByWorkingIdAsync(int workingId);
     Task<IResponse<ReportingEditDto>> GetById(int id);
+    Task<int> GetTotalNumberOfWrittenReportAsync();
 }

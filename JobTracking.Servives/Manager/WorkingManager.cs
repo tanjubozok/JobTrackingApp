@@ -2,6 +2,7 @@
 using JobTracking.Common.Abstract;
 using JobTracking.Common.ComplextTypes;
 using JobTracking.Common.ResponseObjects;
+using JobTracking.Dtos.GraphicDtos;
 using JobTracking.Dtos.WorkingDtos;
 using JobTracking.Entities.Models;
 using JobTracking.Repositories.Abstract;
@@ -139,5 +140,42 @@ public class WorkingManager : IWorkingService
 
         var dto = _mapper.Map<List<WorkingTableListDto>>(workingTableList);
         return new Response<List<WorkingTableListDto>>(ResponseType.Success, dto);
+    }
+
+    public async Task<int> GetNumberOfReportsWrittenAsync(int appUserId)
+        => await _workingRepository.GetNumberOfReportsWrittenAsync(appUserId);
+
+    public async Task<int> GetNumberOfTasksCompletedAsync(int appUserId)
+        => await _workingRepository.GetNumberOfTasksCompletedAsync(appUserId);
+
+    public async Task<int> GetNumberOfTaskToCompleteAsync(int appUserId)
+        => await _workingRepository.GetNumberOfTaskToCompleteAsync(appUserId);
+
+    public async Task<IResponse<List<GraphicListDto>>> MostCompletedStaffAsync()
+    {
+        var data = await _workingRepository.MostCompletedStaffAsync();
+        if (data is not null)
+            return new Response<List<GraphicListDto>>(ResponseType.Success, data);
+        return new Response<List<GraphicListDto>>(ResponseType.NotFound, "Data bulunamadı");
+    }
+
+    public async Task<IResponse<List<GraphicListDto>>> MostEmployedStaffAsync()
+    {
+        var data = await _workingRepository.MostEmployedStaffAsync();
+        if (data is not null)
+            return new Response<List<GraphicListDto>>(ResponseType.Success, data);
+        return new Response<List<GraphicListDto>>(ResponseType.NotFound, "Data bulunamadı");
+    }
+
+    public async Task<int> GetNumberOfTaskPendingAssignmentAsync()
+    {
+        return await _workingRepository
+            .GetCountAsync(x => x.AppUser == null);
+    }
+
+    public async Task<int> GetNumberOfCompletedTaskAsync()
+    {
+        return await _workingRepository
+            .GetCountAsync(x => x.Status);
     }
 }

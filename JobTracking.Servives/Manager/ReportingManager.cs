@@ -62,4 +62,10 @@ public class ReportingManager : IReportingService
         var dto = _mapper.Map<ReportingEditDto>(report);
         return new Response<ReportingEditDto>(ResponseType.Success, dto);
     }
+
+    public async Task<int> GetTotalNumberOfWrittenReportAsync()
+    {
+        return await _reportingRepository
+            .GetCountAsync();
+    }
 }

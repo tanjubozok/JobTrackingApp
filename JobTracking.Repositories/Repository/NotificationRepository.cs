@@ -42,4 +42,14 @@ public class NotificationRepository : BaseRepository<Notification>, INotificatio
             .AsNoTracking()
             .Count();
     }
+
+    public async Task<int> GetNumberOfUnreadNotificationAsync(int appUserId)
+    {
+        var result = _context.Notifications!
+            .Where(x => x.AppUserId == appUserId && !x.Status);
+
+        return await result
+            .AsNoTracking()
+            .CountAsync();
+    }
 }
