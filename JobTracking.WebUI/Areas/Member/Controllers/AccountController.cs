@@ -1,4 +1,5 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using JobTracking.Common.InfoMessages;
 using JobTracking.Dtos.AppUserDtos;
 using JobTracking.Entities.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -7,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace JobTracking.WebUI.Areas.Member.Controllers;
 
-[Area("Member")]
+[Area(AreaInfo.Member)]
 public class AccountController : Controller
 {
     private readonly UserManager<AppUser> _userManager;

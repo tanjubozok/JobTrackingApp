@@ -1,4 +1,5 @@
-﻿using JobTracking.Entities.Models;
+﻿using JobTracking.Common.InfoMessages;
+using JobTracking.Entities.Models;
 using JobTracking.Services.Abstract;
 using JobTracking.WebUI.Areas.Admin.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -7,8 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace JobTracking.WebUI.Areas.Admin.Controllers;
 
-[Area("Admin")]
-[Authorize(Roles = "Admin")]
+[Area(AreaInfo.Admin)]
+[Authorize(Roles = RoleInfo.Admin)]
 public class HomeController : Controller
 {
     private readonly IWorkingService _workingService;
@@ -26,7 +27,7 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
-        TempData["MenuActive"] = "Dashboard";
+        TempData["MenuActive"] = TempDataInfo.Dashboard;
 
         var currentUser = await _userManager.FindByNameAsync(User.Identity!.Name);
 

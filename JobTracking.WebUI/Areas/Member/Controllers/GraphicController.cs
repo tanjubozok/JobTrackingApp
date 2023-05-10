@@ -1,12 +1,13 @@
-﻿using JobTracking.Services.Abstract;
+﻿using JobTracking.Common.InfoMessages;
+using JobTracking.Services.Abstract;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace JobTracking.WebUI.Areas.Member.Controllers;
 
-[Area("Member")]
-[Authorize(Roles = "Member")]
+[Area(AreaInfo.Member)]
+[Authorize(Roles = RoleInfo.Member)]
 public class GraphicController : Controller
 {
     private readonly IWorkingService _workingService;

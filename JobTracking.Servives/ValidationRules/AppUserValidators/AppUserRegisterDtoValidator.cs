@@ -16,7 +16,7 @@ public class AppUserRegisterDtoValidator : AbstractValidator<AppUserRegisterDto>
             .NotEmpty().WithMessage("Şifre boş olamaz")
             .MinimumLength(4).WithMessage("Şifre en az {MinLength} karakter olmalıdır");
 
-        RuleFor(x => x.ComfirmPassword)
+        RuleFor(x => x.ConfirmPassword)
             .NotEmpty().WithMessage("Şifre tekrar boş olamaz")
             .Equal(x => x.Password).WithMessage("{PropertyName} ile {ComparisonValue} uyuşmuyor");
 

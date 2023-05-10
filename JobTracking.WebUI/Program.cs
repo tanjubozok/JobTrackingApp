@@ -22,6 +22,11 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
     app.UseStatusCodePages();
 }
+else
+{
+    app.UseExceptionHandler("/Home/Error");
+}
+
 app.UseStaticFiles();
 app.UseRouting();
 

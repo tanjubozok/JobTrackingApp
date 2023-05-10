@@ -25,7 +25,8 @@ public class CategoryManager : ICategoryService
 
     public async Task<IResponse<CategoryCreateDto>> CreateAsync(CategoryCreateDto dto)
     {
-        var category = _mapper.Map<Category>(dto);
+        var category = _mapper
+            .Map<Category>(dto);
         category.IsDeleted = false;
         category.IsActive = dto.IsActive;
         category.CreatedDate = DateTime.UtcNow;
@@ -49,7 +50,8 @@ public class CategoryManager : ICategoryService
 
     public async Task<IResponse<CategoryUpdateDto>> GetByIdAsync(int id)
     {
-        var category = await _categoryRepository.GetByIdAsync(id);
+        var category = await _categoryRepository
+            .GetByIdAsync(id);
         if (category is null)
             return new Response<CategoryUpdateDto>(ResponseType.NotFound, "Kategori bulunamadı");
 
@@ -84,7 +86,8 @@ public class CategoryManager : ICategoryService
 
     public async Task<IResponse<CategoryUpdateDto>> UpdateAsync(CategoryUpdateDto dto)
     {
-        var updatedEntity = await _categoryRepository.GetByIdAsync(dto.Id);
+        var updatedEntity = await _categoryRepository
+            .GetByIdAsync(dto.Id);
         if (updatedEntity is not null)
         {
             var category = _mapper.Map<Category>(dto);

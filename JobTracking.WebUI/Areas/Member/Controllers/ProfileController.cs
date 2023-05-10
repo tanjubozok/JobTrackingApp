@@ -1,5 +1,6 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using AutoMapper;
+using JobTracking.Common.InfoMessages;
 using JobTracking.Dtos.AppUserDtos;
 using JobTracking.Entities.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -9,8 +10,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace JobTracking.WebUI.Areas.Member.Controllers;
 
-[Area("Member")]
-[Authorize(Roles = "Admin,Member")]
+[Area(AreaInfo.Member)]
+[Authorize(Roles = RoleInfo.AdminMember)]
 public class ProfileController : Controller
 {
     private readonly UserManager<AppUser> _userManager;
@@ -26,7 +27,7 @@ public class ProfileController : Controller
 
     public async Task<IActionResult> Index()
     {
-        TempData["MenuActive"] = "Profile";
+        TempData["MenuActive"] = TempDataInfo.Profile;
 
         var appUser = await _userManager.FindByNameAsync(User.Identity!.Name);
         var appUserDto = _mapper.Map<AppUserProfileDto>(appUser);
