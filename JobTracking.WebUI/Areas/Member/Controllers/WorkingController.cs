@@ -1,6 +1,5 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
-using JobTracking.Common.ComplextTypes;
-using JobTracking.Common.InfoMessages;
+using JobTracking.Common.ComplexTypes;
 using JobTracking.Dtos.ReportingDtos;
 using JobTracking.Entities.Models;
 using JobTracking.Services.Abstract;
@@ -10,8 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace JobTracking.WebUI.Areas.Member.Controllers;
 
-[Area(AreaInfo.Member)]
-[Authorize(Roles = RoleInfo.Member)]
+[Area("Member")]
+[Authorize(Roles = "Member")]
 public class WorkingController : Controller
 {
     private readonly IWorkingService _workingService;
@@ -31,7 +30,7 @@ public class WorkingController : Controller
 
     public async Task<IActionResult> List()
     {
-        TempData["MenuActive"] = TempDataInfo.Working;
+        TempData["MenuActive"] = "Working";
 
         var activeUser = await _userManager.FindByNameAsync(User.Identity!.Name);
         var appUserWorkingList = await _workingService.GetAllTableAsync(activeUser.Id);
@@ -40,7 +39,7 @@ public class WorkingController : Controller
 
     public async Task<IActionResult> CompleteList()
     {
-        TempData["MenuActive"] = TempDataInfo.CompleteWorking;
+        TempData["MenuActive"] = "CompleteWorking";
 
         var activeUser = await _userManager.FindByNameAsync(User.Identity!.Name);
         var appUserWorkingList = await _workingService.GetAllTableCompleteAsync(activeUser.Id);
@@ -49,7 +48,7 @@ public class WorkingController : Controller
 
     public async Task<IActionResult> ReportList(int id)
     {
-        TempData["MenuActive"] = TempDataInfo.Working;
+        TempData["MenuActive"] = "Working";
 
         var list = await _reportingService.GetAllByWorkingIdAsync(id);
         var working = await _workingService.GetByIdAsync(id);
@@ -62,7 +61,7 @@ public class WorkingController : Controller
 
     public async Task<IActionResult> ReportWrite(int id)
     {
-        TempData["MenuActive"] = TempDataInfo.Working;
+        TempData["MenuActive"] = "Working";
 
         var working = await _workingService.GetAllByIdWithCategoryAsync(id);
         ReportingCreateDto dto = new()

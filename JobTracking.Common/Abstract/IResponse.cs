@@ -1,4 +1,4 @@
-﻿using JobTracking.Common.ComplextTypes;
+﻿using JobTracking.Common.ComplexTypes;
 
 namespace JobTracking.Common.Abstract;
 

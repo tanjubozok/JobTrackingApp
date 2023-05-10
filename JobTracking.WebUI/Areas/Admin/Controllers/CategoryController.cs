@@ -1,6 +1,5 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
-using JobTracking.Common.ComplextTypes;
-using JobTracking.Common.InfoMessages;
+using JobTracking.Common.ComplexTypes;
 using JobTracking.Dtos.CategoryDtos;
 using JobTracking.Services.Abstract;
 using Microsoft.AspNetCore.Authorization;
@@ -8,8 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace JobTracking.WebUI.Areas.Admin.Controllers;
 
-[Area(AreaInfo.Admin)]
-[Authorize(Roles = RoleInfo.Admin)]
+[Area("Admin")]
+[Authorize(Roles = "Admin")]
 public class CategoryController : Controller
 {
     private readonly ICategoryService _categoryService;
@@ -23,7 +22,7 @@ public class CategoryController : Controller
 
     public async Task<IActionResult> List()
     {
-        TempData["MenuActive"] = TempDataInfo.Categories;
+        TempData["MenuActive"] = "Categories";
 
         var list = await _categoryService.GetAllAsync();
         return View(list.Data);
@@ -31,7 +30,7 @@ public class CategoryController : Controller
 
     public IActionResult Create()
     {
-        TempData["MenuActive"] = TempDataInfo.Categories;
+        TempData["MenuActive"] = "Categories";
 
         return View(new CategoryCreateDto());
     }
@@ -39,7 +38,7 @@ public class CategoryController : Controller
     [HttpPost]
     public async Task<IActionResult> Create(CategoryCreateDto dto)
     {
-        TempData["MenuActive"] = TempDataInfo.Categories;
+        TempData["MenuActive"] = "Categories";
 
         if (ModelState.IsValid)
         {
@@ -56,7 +55,7 @@ public class CategoryController : Controller
 
     public async Task<IActionResult> Edit(int id)
     {
-        TempData["MenuActive"] = TempDataInfo.Categories;
+        TempData["MenuActive"] = "Categories";
 
         var result = await _categoryService.GetByIdAsync(id);
         if (result.ResponseType == ResponseType.Success)
@@ -68,7 +67,7 @@ public class CategoryController : Controller
     [HttpPost]
     public async Task<IActionResult> Edit(CategoryUpdateDto dto)
     {
-        TempData["MenuActive"] = TempDataInfo.Categories;
+        TempData["MenuActive"] = "Categories";
 
         if (ModelState.IsValid)
         {

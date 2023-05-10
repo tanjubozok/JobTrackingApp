@@ -1,5 +1,5 @@
 ﻿using JobTracking.Common.Abstract;
-using JobTracking.Common.ComplextTypes;
+using JobTracking.Common.ComplexTypes;
 using JobTracking.Entities.Abstract;
 
 namespace JobTracking.Common.ResponseObjects;

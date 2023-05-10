@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using JobTracking.Common.Abstract;
-using JobTracking.Common.ComplextTypes;
+using JobTracking.Common.ComplexTypes;
 using JobTracking.Common.ResponseObjects;
 using JobTracking.Dtos.GraphicDtos;
 using JobTracking.Dtos.WorkingDtos;
@@ -49,8 +49,7 @@ public class WorkingManager : IWorkingService
 
     public async Task<IResponse<List<WorkingListDto>>> GetAllByAppUserId(int appUserId)
     {
-        var workingList = await _workingRepository
-            .GetAllByAppUserId(appUserId);
+        var workingList = await _workingRepository.GetAllByAppUserId(appUserId);
 
         var dto = _mapper.Map<List<WorkingListDto>>(workingList);
         return new Response<List<WorkingListDto>>(ResponseType.Success, dto);
@@ -122,8 +121,7 @@ public class WorkingManager : IWorkingService
 
     public async Task<IResponse<WorkingUpdateDto>> DoneWorking(int workingId)
     {
-        var working = await _workingRepository
-            .GetByIdAsync(workingId);
+        var working = await _workingRepository.GetByIdAsync(workingId);
         if (working is not null)
         {
             working.Status = true;
@@ -155,8 +153,7 @@ public class WorkingManager : IWorkingService
 
     public async Task<IResponse<List<GraphicListDto>>> MostCompletedStaffAsync()
     {
-        var data = await _workingRepository
-            .MostCompletedStaffAsync();
+        var data = await _workingRepository.MostCompletedStaffAsync();
         if (data is not null)
             return new Response<List<GraphicListDto>>(ResponseType.Success, data);
         return new Response<List<GraphicListDto>>(ResponseType.NotFound, "Data bulunamadı");
@@ -164,18 +161,21 @@ public class WorkingManager : IWorkingService
 
     public async Task<IResponse<List<GraphicListDto>>> MostEmployedStaffAsync()
     {
-        var data = await _workingRepository
-            .MostEmployedStaffAsync();
+        var data = await _workingRepository.MostEmployedStaffAsync();
         if (data is not null)
             return new Response<List<GraphicListDto>>(ResponseType.Success, data);
         return new Response<List<GraphicListDto>>(ResponseType.NotFound, "Data bulunamadı");
     }
 
     public async Task<int> GetNumberOfTaskPendingAssignmentAsync()
-        => await _workingRepository
-        .GetCountAsync(x => x.AppUser == null);
+    {
+        return await _workingRepository
+            .GetCountAsync(x => x.AppUser == null);
+    }
 
     public async Task<int> GetNumberOfCompletedTaskAsync()
-        => await _workingRepository
-        .GetCountAsync(x => x.Status);
+    {
+        return await _workingRepository
+            .GetCountAsync(x => x.Status);
+    }
 }
