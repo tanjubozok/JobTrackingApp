@@ -21,16 +21,22 @@ public class AppUserManager : IAppUserService
 
     public async Task<IResponse<List<AppUserListDto>>> NonAdminUsersAsync()
     {
-        var appUser = await _appUserRepository.NonAdminUsersAsync();
-        var appUserDto = _mapper.Map<List<AppUserListDto>>(appUser);
+        var appUser = await _appUserRepository
+            .NonAdminUsersAsync();
+
+        var appUserDto = _mapper
+            .Map<List<AppUserListDto>>(appUser);
 
         return new Response<List<AppUserListDto>>(ResponseType.Success, appUserDto);
     }
 
     public IResponse<List<AppUserListDto>> NonAdminUsers(out int totalPage, string search, int activePage = 1, int pageCount = 10)
     {
-        var appUser = _appUserRepository.NonAdminUsers(out totalPage, search, activePage, pageCount);
-        var appUserDto = _mapper.Map<List<AppUserListDto>>(appUser);
+        var appUser = _appUserRepository
+            .NonAdminUsers(out totalPage, search, activePage, pageCount);
+
+        var appUserDto = _mapper
+            .Map<List<AppUserListDto>>(appUser);
 
         return new Response<List<AppUserListDto>>(ResponseType.Success, appUserDto);
     }

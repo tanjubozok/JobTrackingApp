@@ -1,5 +1,6 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using JobTracking.Common.ComplextTypes;
+using JobTracking.Common.InfoMessages;
 using JobTracking.Dtos.WorkingDtos;
 using JobTracking.Entities.Models;
 using JobTracking.Services.Abstract;
@@ -12,8 +13,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace JobTracking.WebUI.Areas.Admin.Controllers;
 
-[Area("Admin")]
-[Authorize(Roles = "Admin")]
+[Area(AreaInfo.Admin)]
+[Authorize(Roles = RoleInfo.Admin)]
 public class WorkingController : Controller
 {
     private readonly IWorkingService _workingService;
@@ -35,7 +36,7 @@ public class WorkingController : Controller
 
     public async Task<IActionResult> List()
     {
-        TempData["MenuActive"] = "Working";
+        TempData["MenuActive"] = TempDataInfo.Working;
 
         var list = await _workingService.GetAllWithCategoryAsync();
         return View(list.Data);
@@ -43,7 +44,7 @@ public class WorkingController : Controller
 
     public async Task<IActionResult> GetAllTable()
     {
-        TempData["MenuActive"] = "WorkOrder";
+        TempData["MenuActive"] = TempDataInfo.WorkOrder;
 
         var list = await _workingService.GetAllTableAsync();
         return View(list.Data);
@@ -52,7 +53,7 @@ public class WorkingController : Controller
     [HttpGet]
     public async Task<IActionResult> SetPersonnel2(int id, string s, int activePage = 1, int pageCount = 10)
     {
-        TempData["MenuActive"] = "WorkOrder";
+        TempData["MenuActive"] = TempDataInfo.WorkOrder;
 
         var appUsers = _appUserService.NonAdminUsers(out int totalPage, s, activePage, pageCount);
         var work = await _workingService.GetAllByIdWithCategoryAsync(id);
@@ -71,7 +72,7 @@ public class WorkingController : Controller
 
     public async Task<IActionResult> AssignTask(int appUserId, int workId)
     {
-        TempData["MenuActive"] = "WorkOrder";
+        TempData["MenuActive"] = TempDataInfo.WorkOrder;
 
         var user = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == appUserId);
         var work = await _workingService.GetByIdAsync(workId);
@@ -125,7 +126,7 @@ public class WorkingController : Controller
 
     public async Task<IActionResult> Create()
     {
-        TempData["MenuActive"] = "Working";
+        TempData["MenuActive"] = TempDataInfo.Working;
 
         var categories = await _categoryService.GetAllAsync();
         ViewBag.Categories = new SelectList(categories.Data, "Id", "Definition");
@@ -136,7 +137,7 @@ public class WorkingController : Controller
     [HttpPost]
     public async Task<IActionResult> Create(WorkingCreateDto dto)
     {
-        TempData["MenuActive"] = "Working";
+        TempData["MenuActive"] = TempDataInfo.Working;
 
         if (ModelState.IsValid)
         {
@@ -157,7 +158,7 @@ public class WorkingController : Controller
 
     public async Task<IActionResult> Edit(int id)
     {
-        TempData["MenuActive"] = "Working";
+        TempData["MenuActive"] = TempDataInfo.Working;
 
         var result = await _workingService.GetByIdAsync(id);
         if (result.ResponseType == ResponseType.Success)
@@ -174,7 +175,7 @@ public class WorkingController : Controller
     [HttpPost]
     public async Task<IActionResult> Edit(WorkingUpdateDto dto)
     {
-        TempData["MenuActive"] = "Working";
+        TempData["MenuActive"] = TempDataInfo.Working;
 
         if (ModelState.IsValid)
         {

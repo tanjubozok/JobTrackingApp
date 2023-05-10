@@ -1,11 +1,12 @@
-﻿using JobTracking.Services.Abstract;
+﻿using JobTracking.Common.InfoMessages;
+using JobTracking.Services.Abstract;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JobTracking.WebUI.Areas.Admin.Controllers;
 
-[Area("Admin")]
-[Authorize(Roles = "Admin,Member")]
+[Area(AreaInfo.Admin)]
+[Authorize(Roles = RoleInfo.AdminMember)]
 public class FileController : Controller
 {
     private readonly IFileService _fileService;
