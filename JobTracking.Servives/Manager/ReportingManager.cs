@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using JobTracking.Common.Abstract;
-using JobTracking.Common.ComplextTypes;
+using JobTracking.Common.ComplexTypes;
 using JobTracking.Common.ResponseObjects;
 using JobTracking.Dtos.ReportingDtos;
 using JobTracking.Entities.Models;

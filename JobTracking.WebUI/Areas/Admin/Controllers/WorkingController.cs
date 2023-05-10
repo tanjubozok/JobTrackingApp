@@ -1,5 +1,5 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
-using JobTracking.Common.ComplextTypes;
+using JobTracking.Common.ComplexTypes;
 using JobTracking.Common.InfoMessages;
 using JobTracking.Dtos.WorkingDtos;
 using JobTracking.Entities.Models;

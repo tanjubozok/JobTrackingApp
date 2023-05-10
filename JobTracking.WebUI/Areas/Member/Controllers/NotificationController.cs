@@ -1,5 +1,5 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
-using JobTracking.Common.ComplextTypes;
+using JobTracking.Common.ComplexTypes;
 using JobTracking.Common.InfoMessages;
 using JobTracking.Entities.Models;
 using JobTracking.Services.Abstract;
@@ -26,7 +26,7 @@ public class NotificationController : Controller
 
     public async Task<IActionResult> List()
     {
-        TempData["MenuActive"] = TempDataInfo.Notification
+        TempData["MenuActive"] = TempDataInfo.Notification;
 
         var currentUser = await _userManager.FindByNameAsync(User.Identity!.Name);
         var result = await _notificationService.GetAllAsync(currentUser.Id);

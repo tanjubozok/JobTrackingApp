@@ -1,6 +1,5 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
-using JobTracking.Common.ComplextTypes;
-using JobTracking.Common.InfoMessages;
+using JobTracking.Common.ComplexTypes;
 using JobTracking.Entities.Models;
 using JobTracking.Services.Abstract;
 using Microsoft.AspNetCore.Authorization;
@@ -9,8 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace JobTracking.WebUI.Areas.Admin.Controllers;
 
-[Area(AreaInfo.Admin)]
-[Authorize(Roles = RoleInfo.Admin)]
+[Area("Admin")]
+[Authorize(Roles = "Admin")]
 public class NotificationController : Controller
 {
     private readonly INotificationService _notificationService;
@@ -26,7 +25,7 @@ public class NotificationController : Controller
 
     public async Task<IActionResult> List()
     {
-        TempData["MenuActive"] = TempDataInfo.Notification;
+        TempData["MenuActive"] = "Notification";
 
         var currentUser = await _userManager.FindByNameAsync(User.Identity!.Name);
         var result = await _notificationService.GetAllAsync(currentUser.Id);

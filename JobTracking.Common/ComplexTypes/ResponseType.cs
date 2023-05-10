@@ -1,4 +1,4 @@
-﻿namespace JobTracking.Common.ComplextTypes;
+﻿namespace JobTracking.Common.ComplexTypes;
 
 public enum ResponseType
 {
