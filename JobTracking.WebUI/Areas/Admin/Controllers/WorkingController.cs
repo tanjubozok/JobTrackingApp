@@ -5,6 +5,7 @@ using JobTracking.Dtos.WorkingDtos;
 using JobTracking.Entities.Models;
 using JobTracking.Services.Abstract;
 using JobTracking.WebUI.Areas.Admin.Models;
+using JobTracking.WebUI.CustomFilters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -135,20 +136,18 @@ public class WorkingController : Controller
     }
 
     [HttpPost]
+    [ValidModel]
     public async Task<IActionResult> Create(WorkingCreateDto dto)
     {
         TempData["MenuActive"] = TempDataInfo.Working;
 
-        if (ModelState.IsValid)
+        var result = await _workingService.CreateAsync(dto);
+        if (result.ResponseType == ResponseType.Success)
         {
-            var result = await _workingService.CreateAsync(dto);
-            if (result.ResponseType == ResponseType.Success)
-            {
-                _notifyService.Success($"{dto.Definition} eklendi.");
-                return RedirectToAction("List");
-            }
-            _notifyService.Error(result.Message);
+            _notifyService.Success($"{dto.Definition} eklendi.");
+            return RedirectToAction("List");
         }
+        _notifyService.Error(result.Message);
 
         var categories = await _categoryService.GetAllAsync();
         ViewBag.Categories = new SelectList(categories.Data, "Id", "Definition", dto.CategoryId);
@@ -173,20 +172,19 @@ public class WorkingController : Controller
     }
 
     [HttpPost]
+    [ValidModel]
     public async Task<IActionResult> Edit(WorkingUpdateDto dto)
     {
         TempData["MenuActive"] = TempDataInfo.Working;
 
-        if (ModelState.IsValid)
+        var result = await _workingService.UpdateAsync(dto);
+        if (result.ResponseType == ResponseType.Success)
         {
-            var result = await _workingService.UpdateAsync(dto);
-            if (result.ResponseType == ResponseType.Success)
-            {
-                _notifyService.Success($"{dto.Definition} güncellendi.");
-                return RedirectToAction("List");
-            }
-            _notifyService.Error(result.Message);
+            _notifyService.Success($"{dto.Definition} güncellendi.");
+            return RedirectToAction("List");
         }
+        _notifyService.Error(result.Message);
+
         var categories = await _categoryService.GetAllAsync();
         ViewBag.Categories = new SelectList(categories.Data, "Id", "Definition", dto.CategoryId);
 

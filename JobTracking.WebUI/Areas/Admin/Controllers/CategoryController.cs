@@ -2,6 +2,7 @@
 using JobTracking.Common.ComplexTypes;
 using JobTracking.Dtos.CategoryDtos;
 using JobTracking.Services.Abstract;
+using JobTracking.WebUI.CustomFilters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -36,20 +37,19 @@ public class CategoryController : Controller
     }
 
     [HttpPost]
+    [ValidModel]
     public async Task<IActionResult> Create(CategoryCreateDto dto)
     {
         TempData["MenuActive"] = "Categories";
 
-        if (ModelState.IsValid)
+        var result = await _categoryService.CreateAsync(dto);
+        if (result.ResponseType == ResponseType.Success)
         {
-            var result = await _categoryService.CreateAsync(dto);
-            if (result.ResponseType == ResponseType.Success)
-            {
-                _notifyService.Success($"{dto.Definition} eklendi.");
-                return RedirectToAction("List");
-            }
-            _notifyService.Error(result.Message);
+            _notifyService.Success($"{dto.Definition} eklendi.");
+            return RedirectToAction("List");
         }
+        _notifyService.Error(result.Message);
+
         return View(dto);
     }
 
@@ -65,20 +65,19 @@ public class CategoryController : Controller
     }
 
     [HttpPost]
+    [ValidModel]
     public async Task<IActionResult> Edit(CategoryUpdateDto dto)
     {
         TempData["MenuActive"] = "Categories";
 
-        if (ModelState.IsValid)
+        var result = await _categoryService.UpdateAsync(dto);
+        if (result.ResponseType == ResponseType.Success)
         {
-            var result = await _categoryService.UpdateAsync(dto);
-            if (result.ResponseType == ResponseType.Success)
-            {
-                _notifyService.Success($"{dto.Definition} güncellendi.");
-                return RedirectToAction("List");
-            }
-            _notifyService.Error(result.Message);
+            _notifyService.Success($"{dto.Definition} güncellendi.");
+            return RedirectToAction("List");
         }
+        _notifyService.Error(result.Message);
+
         return View(dto);
     }
 }

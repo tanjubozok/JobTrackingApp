@@ -5,15 +5,13 @@ using JobTracking.WebUI.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services
-    .AddControllersWithViews()
-    .AddFluentValidation();
-
 builder.Services.AddDependencies(builder.Configuration);
 builder.Services.ToasterExtension();
 //builder.Services.SeedDataExtension();
 
-
+builder.Services.AddControllersWithViews();
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddFluentValidationClientsideAdapters();
 
 var app = builder.Build();
 

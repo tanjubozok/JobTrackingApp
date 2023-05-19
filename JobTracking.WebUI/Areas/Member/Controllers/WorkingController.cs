@@ -3,6 +3,7 @@ using JobTracking.Common.ComplexTypes;
 using JobTracking.Dtos.ReportingDtos;
 using JobTracking.Entities.Models;
 using JobTracking.Services.Abstract;
+using JobTracking.WebUI.CustomFilters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -75,26 +76,25 @@ public class WorkingController : Controller
     }
 
     [HttpPost]
+    [ValidModel]
     public async Task<IActionResult> ReportWrite(ReportingCreateDto dto)
     {
-        if (ModelState.IsValid)
+        var result = await _reportingService.CreateReport(dto);
+        if (result.ResponseType == ResponseType.Success)
         {
-            var result = await _reportingService.CreateReport(dto);
-            if (result.ResponseType == ResponseType.Success)
+            var adminUserList = await _userManager.GetUsersInRoleAsync("Admin");
+            var currentUser = await _userManager.FindByNameAsync(User.Identity!.Name);
+            foreach (var item in adminUserList)
             {
-                var adminUserList = await _userManager.GetUsersInRoleAsync("Admin");
-                var currentUser = await _userManager.FindByNameAsync(User.Identity!.Name);
-                foreach (var item in adminUserList)
-                {
-                    var notify = $"{currentUser.UserName} {result.Data!.Definition} raporu yazdı.";
-                    _ = await _notificationService.CreateAsync(item.Id, notify);
-                }
-
-                _notifyService.Success($"{dto.Definition} eklendi.");
-                return RedirectToAction("List");
+                var notify = $"{currentUser.UserName} {result.Data!.Definition} raporu yazdı.";
+                _ = await _notificationService.CreateAsync(item.Id, notify);
             }
-            _notifyService.Error(result.Message);
+
+            _notifyService.Success($"{dto.Definition} eklendi.");
+            return RedirectToAction("List");
         }
+        _notifyService.Error(result.Message);
+
         return View(dto);
     }
 
@@ -108,18 +108,17 @@ public class WorkingController : Controller
     }
 
     [HttpPost]
+    [ValidModel]
     public async Task<IActionResult> ReportEdit(ReportingEditDto dto)
     {
-        if (ModelState.IsValid)
+        var result = await _reportingService.EditReport(dto);
+        if (result.ResponseType == ResponseType.Success)
         {
-            var result = await _reportingService.EditReport(dto);
-            if (result.ResponseType == ResponseType.Success)
-            {
-                _notifyService.Success("Updated");
-                return RedirectToAction("List");
-            }
-            _notifyService.Error(result.Message);
+            _notifyService.Success("Updated");
+            return RedirectToAction("List");
         }
+        _notifyService.Error(result.Message);
+
         return View(dto);
     }
 

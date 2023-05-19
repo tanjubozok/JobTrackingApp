@@ -2,6 +2,7 @@
 using JobTracking.Common.InfoMessages;
 using JobTracking.Dtos.AppUserDtos;
 using JobTracking.Entities.Models;
+using JobTracking.WebUI.CustomFilters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -28,25 +29,24 @@ public class AccountController : Controller
     }
 
     [HttpPost]
+    [ValidModel]
     public async Task<IActionResult> Login(AppUserLoginDto dto)
     {
-        if (ModelState.IsValid)
+        var user = await _userManager.FindByNameAsync(dto.Username);
+        if (user is not null)
         {
-            var user = await _userManager.FindByNameAsync(dto.Username);
-            if (user is not null)
+            var result = await _signInManager.PasswordSignInAsync(user, dto.Password, dto.RememberMe, false);
+            if (result.Succeeded)
             {
-                var result = await _signInManager.PasswordSignInAsync(user, dto.Password, dto.RememberMe, false);
-                if (result.Succeeded)
-                {
-                    var roles = await _userManager.GetRolesAsync(user);
-                    if (roles.Contains("Admin"))
-                        return RedirectToAction("Index", "Home", new { area = "Admin" });
-                    return RedirectToAction("Index", "Home", new { area = "Member" });
-                }
+                var roles = await _userManager.GetRolesAsync(user);
+                if (roles.Contains("Admin"))
+                    return RedirectToAction("Index", "Home", new { area = "Admin" });
+                return RedirectToAction("Index", "Home", new { area = "Member" });
             }
-            _notifyService.Error("Kullanıcı adı veya şifre hatalıdır");
-            ModelState.AddModelError("", "Kullanıcı adı veya şifre hatalıdır");
         }
+        _notifyService.Error("Kullanıcı adı veya şifre hatalıdır");
+        ModelState.AddModelError("", "Kullanıcı adı veya şifre hatalıdır");
+
         return View(dto);
     }
 
