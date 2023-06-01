@@ -1,10 +1,4 @@
-﻿using JobTracking.Common.InfoMessages;
-using JobTracking.Entities.Models;
-using JobTracking.Services.Abstract;
-using JobTracking.WebUI.Areas.Member.Models;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using JobTracking.WebUI.Areas.Member.Models;
 
 namespace JobTracking.WebUI.Areas.Member.Controllers;
 

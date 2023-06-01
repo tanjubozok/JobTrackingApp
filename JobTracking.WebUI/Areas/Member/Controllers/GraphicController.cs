@@ -1,8 +1,4 @@
-﻿using JobTracking.Common.InfoMessages;
-using JobTracking.Services.Abstract;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace JobTracking.WebUI.Areas.Member.Controllers;
 

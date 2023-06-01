@@ -1,8 +1,4 @@
-﻿using Bogus;
-using JobTracking.Entities.Models;
-using Microsoft.AspNetCore.Identity;
-
-namespace JobTracking.WebUI;
+﻿namespace JobTracking.WebUI;
 
 public class SeedData
 {

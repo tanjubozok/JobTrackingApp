@@ -1,7 +1,4 @@
-﻿using JobTracking.Dtos.AppUserDtos;
-using JobTracking.Dtos.WorkingDtos;
-
-namespace JobTracking.WebUI.Areas.Admin.Models;
+﻿namespace JobTracking.WebUI.Areas.Admin.Models;
 
 public class WorkingListViewModel
 {

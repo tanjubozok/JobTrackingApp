@@ -1,13 +1,4 @@
-﻿using AspNetCoreHero.ToastNotification.Abstractions;
-using JobTracking.Common.ComplexTypes;
-using JobTracking.Common.InfoMessages;
-using JobTracking.Entities.Models;
-using JobTracking.Services.Abstract;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-
-namespace JobTracking.WebUI.Areas.Member.Controllers;
+﻿namespace JobTracking.WebUI.Areas.Member.Controllers;
 
 [Area(AreaInfo.Member)]
 [Authorize(Roles = RoleInfo.Member)]

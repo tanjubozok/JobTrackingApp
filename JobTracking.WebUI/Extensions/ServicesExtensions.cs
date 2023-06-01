@@ -1,7 +1,4 @@
-﻿using AspNetCoreHero.ToastNotification;
-using JobTracking.Repositories.Context;
-
-namespace JobTracking.WebUI.Extensions;
+﻿namespace JobTracking.WebUI.Extensions;
 
 public static class ServicesExtensions
 {

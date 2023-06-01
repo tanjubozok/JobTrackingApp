@@ -1,7 +1,4 @@
-﻿using JobTracking.Services.Abstract;
-using Microsoft.AspNetCore.Razor.TagHelpers;
-
-namespace JobTracking.WebUI.TagHelpers;
+﻿namespace JobTracking.WebUI.TagHelpers;
 
 [HtmlTargetElement("getWorkingByAppUserId")]
 public class GetWorkingByAppUserIdTagHelper : TagHelper

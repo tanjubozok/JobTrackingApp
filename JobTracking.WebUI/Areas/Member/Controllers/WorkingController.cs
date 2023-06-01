@@ -1,12 +1,4 @@
-﻿using AspNetCoreHero.ToastNotification.Abstractions;
-using JobTracking.Common.ComplexTypes;
-using JobTracking.Dtos.ReportingDtos;
-using JobTracking.Entities.Models;
-using JobTracking.Services.Abstract;
-using JobTracking.WebUI.CustomFilters;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using JobTracking.Dtos.ReportingDtos;
 
 namespace JobTracking.WebUI.Areas.Member.Controllers;
 

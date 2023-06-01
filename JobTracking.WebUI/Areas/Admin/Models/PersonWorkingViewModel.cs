@@ -1,7 +1,4 @@
-﻿using JobTracking.Dtos.WorkingDtos;
-using JobTracking.Entities.Models;
-
-namespace JobTracking.WebUI.Areas.Admin.Models;
+﻿namespace JobTracking.WebUI.Areas.Admin.Models;
 
 public class PersonWorkingViewModel
 {

@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
-
-namespace JobTracking.WebUI.CustomFilters;
+﻿namespace JobTracking.WebUI.CustomFilters;
 
 public class ValidModelAttribute : ActionFilterAttribute
 {

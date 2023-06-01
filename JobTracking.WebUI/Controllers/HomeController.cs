@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using System.Net;
-
-namespace JobTracking.WebUI.Controllers;
+﻿namespace JobTracking.WebUI.Controllers;
 
 public class HomeController : Controller
 {

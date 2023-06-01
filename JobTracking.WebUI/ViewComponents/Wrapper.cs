@@ -1,11 +1,4 @@
-﻿using AutoMapper;
-using JobTracking.Dtos.AppUserDtos;
-using JobTracking.Entities.Models;
-using JobTracking.Services.Abstract;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-
-namespace JobTracking.WebUI.ViewComponents;
+﻿namespace JobTracking.WebUI.ViewComponents;
 
 public class Wrapper : ViewComponent
 {
